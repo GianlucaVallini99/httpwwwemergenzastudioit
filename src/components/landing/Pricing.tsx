@@ -109,6 +109,24 @@ const Pricing = () => {
             </div>
           </div>
 
+          {/* Porta un amico */}
+          <div
+            className={`rounded-2xl bg-accent/10 border border-accent/30 p-8 md:p-10 flex flex-col md:flex-row items-center gap-6 md:gap-10 mt-6 transition-all duration-700 delay-300 ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+          >
+            <div className="w-16 h-16 rounded-2xl bg-accent/20 flex items-center justify-center flex-shrink-0">
+              <UserPlus className="w-8 h-8 text-accent" />
+            </div>
+            <div className="text-center md:text-left">
+              <h3 className="font-display font-bold text-2xl text-primary mb-2">
+                Porta 2 amici e ricevi una lezione gratis!
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Consiglia Emergenza Studio a 2 amici: quando si iscrivono, ottieni <strong>una lezione in omaggio</strong>.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

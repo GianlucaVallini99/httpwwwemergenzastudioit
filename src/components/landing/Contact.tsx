@@ -27,7 +27,7 @@ const Contact = () => {
             Pronto a migliorare i tuoi voti?
           </h2>
           <p className="text-muted-foreground text-lg">
-            Prenota una lezione di prova gratuita e senza impegno
+            Contattaci per iniziare il tuo percorso di studio
           </p>
         </div>
 
