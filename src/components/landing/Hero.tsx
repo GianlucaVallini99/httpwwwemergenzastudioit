@@ -1,4 +1,5 @@
 import { BookOpen, GraduationCap, Calculator, Globe, Lightbulb, PenTool } from "lucide-react";
+import logo from "@/assets/logo.jpg";
 import { Button } from "@/components/ui/button";
 
 const Hero = () => {
@@ -67,8 +68,8 @@ const Hero = () => {
                 </div>
               ))}
               {/* Central circle */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center shadow-2xl">
-                <GraduationCap className="w-20 h-20 text-primary-foreground" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center shadow-2xl overflow-hidden">
+                <img src={logo} alt="Emergenza Studio" className="w-36 h-36 object-cover rounded-full" />
               </div>
             </div>
           </div>
