@@ -103,7 +103,7 @@ const Contact = () => {
               <Clock className="w-6 h-6 text-secondary" />
               <div>
                 <p className="font-semibold text-primary">Orari</p>
-                <p className="text-sm text-muted-foreground">Lun-Ven 14:00-20:00 | Sab 9:00-13:00</p>
+                <p className="text-sm text-muted-foreground">Lun-Ven 9:00-12:00 / 14:00-19:00 | Sab 9:00-13:00</p>
               </div>
             </div>
           </div>
