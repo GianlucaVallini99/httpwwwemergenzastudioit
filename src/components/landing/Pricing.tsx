@@ -70,8 +70,8 @@ const Pricing = () => {
                   <Users className="w-6 h-6 text-accent" />
                 </div>
                 <div>
-                  <h3 className="font-display font-bold text-xl text-primary">Lezione in coppia</h3>
-                  <p className="text-sm text-muted-foreground">Studia con un amico e risparmia</p>
+                  <h3 className="font-display font-bold text-xl text-primary">Lezione di gruppo</h3>
+                  <p className="text-sm text-muted-foreground">Studia con i tuoi amici e risparmia</p>
                 </div>
               </div>
               <div className="space-y-3">
