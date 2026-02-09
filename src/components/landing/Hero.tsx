@@ -34,7 +34,7 @@ const Hero = () => {
                 className="rounded-full px-8 text-base shadow-lg shadow-primary/25"
                 onClick={() => scrollTo("#contatti")}
               >
-                Prenota lezione gratuita
+                Prenota la tua Prima Lezione
               </Button>
               <Button
                 size="lg"
