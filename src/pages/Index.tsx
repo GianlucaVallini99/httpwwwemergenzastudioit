@@ -3,6 +3,7 @@ import Hero from "@/components/landing/Hero";
 import SocialProof from "@/components/landing/SocialProof";
 import Services from "@/components/landing/Services";
 import WhyUs from "@/components/landing/WhyUs";
+import Pricing from "@/components/landing/Pricing";
 import HowItWorks from "@/components/landing/HowItWorks";
 import Testimonials from "@/components/landing/Testimonials";
 import Contact from "@/components/landing/Contact";
@@ -16,6 +17,7 @@ const Index = () => (
       <SocialProof />
       <Services />
       <WhyUs />
+      <Pricing />
       <HowItWorks />
       <Testimonials />
       <Contact />
