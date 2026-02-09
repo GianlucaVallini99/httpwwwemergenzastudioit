@@ -1,4 +1,5 @@
 import { Instagram } from "lucide-react";
+import logo from "@/assets/logo.jpg";
 
 const Footer = () => (
   <footer className="bg-primary text-primary-foreground py-14">
@@ -7,9 +8,7 @@ const Footer = () => (
         {/* Brand */}
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <div className="w-9 h-9 rounded-lg bg-primary-foreground/15 flex items-center justify-center">
-              <span className="font-display font-bold text-sm">ES</span>
-            </div>
+             <img src={logo} alt="Emergenza Studio" className="w-9 h-9 rounded-lg object-cover" />
             <span className="font-display font-bold">Emergenza Studio</span>
           </div>
           <p className="text-primary-foreground/70 text-sm leading-relaxed">

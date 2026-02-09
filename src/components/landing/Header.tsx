@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
+import logo from "@/assets/logo.jpg";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -35,9 +36,7 @@ const Header = () => {
       <div className="container mx-auto flex items-center justify-between py-4 px-4 md:px-6">
         {/* Logo placeholder */}
         <button onClick={() => scrollTo("#home")} className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-            <span className="text-primary-foreground font-display font-bold text-lg">ES</span>
-          </div>
+          <img src={logo} alt="Emergenza Studio" className="w-10 h-10 rounded-lg object-cover" />
           <span className="font-display font-bold text-lg text-primary hidden sm:inline">
             Emergenza Studio
           </span>
