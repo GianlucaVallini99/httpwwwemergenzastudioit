@@ -54,7 +54,7 @@ const Header = () => {
             </button>
           ))}
           <Button onClick={() => scrollTo("#contatti")} size="sm" className="rounded-full px-6">
-            Prenota una lezione gratuita
+            Prenota la tua Prima Lezione
           </Button>
         </nav>
 
@@ -78,7 +78,7 @@ const Header = () => {
                 </button>
               ))}
               <Button onClick={() => scrollTo("#contatti")} className="rounded-full mt-4">
-                Prenota una lezione gratuita
+                Prenota la tua Prima Lezione
               </Button>
             </div>
           </SheetContent>
