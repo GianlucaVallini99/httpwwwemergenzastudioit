@@ -3,7 +3,7 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const points = [
   "Tutor qualificati e appassionati",
-  "Seguiamo studenti dai 6 ai 25 anni",
+  "Seguiamo Studenti di tutte le età",
   "Lezioni individuali o piccoli gruppi (max 4 studenti)",
   "Orari flessibili, anche nel weekend",
 ];
