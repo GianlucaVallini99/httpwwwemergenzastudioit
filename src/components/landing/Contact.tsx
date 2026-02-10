@@ -1,23 +1,9 @@
-import { useState } from "react";
 import { MessageCircle, MapPin, Clock, Phone } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useToast } from "@/hooks/use-toast";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-const levels = ["Elementari", "Medie", "Superiori", "Università", "TOLC", "Medicina"];
 
 const Contact = () => {
-  const { toast } = useToast();
   const { ref, isVisible } = useScrollAnimation();
-  const [form, setForm] = useState({ name: "", phone: "", level: "" });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({ title: "Richiesta inviata!", description: "Ti ricontatteremo al più presto." });
-    setForm({ name: "", phone: "", level: "" });
-  };
 
   return (
     <section id="contatti" className="py-20 md:py-28 bg-gradient-to-br from-secondary/10 via-accent/5 to-background">
@@ -32,44 +18,11 @@ const Contact = () => {
         </div>
 
         <div
-          className={`grid md:grid-cols-2 gap-12 max-w-4xl mx-auto transition-all duration-700 ${
+          className={`max-w-lg mx-auto transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-5 bg-background rounded-2xl p-8 shadow-lg border border-border/50">
-            <Input
-              placeholder="Nome studente"
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-              required
-              className="rounded-xl h-12"
-            />
-            <Input
-              placeholder="Telefono genitore"
-              type="tel"
-              value={form.phone}
-              onChange={(e) => setForm({ ...form, phone: e.target.value })}
-              required
-              className="rounded-xl h-12"
-            />
-            <Select value={form.level} onValueChange={(v) => setForm({ ...form, level: v })}>
-              <SelectTrigger className="rounded-xl h-12">
-                <SelectValue placeholder="Livello scolastico" />
-              </SelectTrigger>
-              <SelectContent>
-                {levels.map((l) => (
-                  <SelectItem key={l} value={l}>{l}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <Button type="submit" className="w-full rounded-full h-12 text-base shadow-lg shadow-primary/20">
-              Richiedi informazioni
-            </Button>
-          </form>
-
-          {/* Info */}
-          <div className="flex flex-col justify-center gap-6">
+          <div className="flex flex-col gap-6">
             <a
               href="https://wa.me/393405106467"
               target="_blank"
