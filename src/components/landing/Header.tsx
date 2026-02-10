@@ -7,6 +7,7 @@ import logo from "@/assets/logo.jpg";
 const navLinks = [
   { label: "Home", href: "#home" },
   { label: "Servizi", href: "#servizi" },
+  { label: "Le nostre tariffe", href: "#tariffe" },
   { label: "Chi siamo", href: "#chi-siamo" },
   { label: "Contatti", href: "#contatti" },
 ];
