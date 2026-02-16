@@ -31,10 +31,10 @@ const Footer = () => (
         {/* Contatti */}
         <div>
           <h4 className="font-display font-semibold mb-4">Contatti</h4>
-          <ul className="space-y-2 text-sm text-primary-foreground/70">
-            <li>Tel: 340 510 6467</li>
-            <li>Mogliano Veneto (TV)</li>
-          </ul>
+           <ul className="space-y-2 text-sm text-primary-foreground/70">
+             <li>Tel: 340 510 6467</li>
+             <li>Via Barbiero 84, Mogliano Veneto (TV)</li>
+           </ul>
         </div>
 
         {/* Social */}

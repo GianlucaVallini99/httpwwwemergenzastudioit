@@ -46,10 +46,10 @@ const Contact = () => {
 
             <div className="flex items-center gap-4 rounded-2xl p-5">
               <MapPin className="w-6 h-6 text-secondary" />
-              <div>
-                <p className="font-semibold text-primary">Sede</p>
-                <p className="text-sm text-muted-foreground">Mogliano Veneto (TV)</p>
-              </div>
+               <div>
+                 <p className="font-semibold text-primary">Sede</p>
+                 <p className="text-sm text-muted-foreground">Via Barbiero 84, Mogliano Veneto (TV)</p>
+               </div>
             </div>
 
             <div className="flex items-center gap-4 rounded-2xl p-5">
