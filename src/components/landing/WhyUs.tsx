@@ -1,4 +1,4 @@
-import { CheckCircle, BookOpen, Brain, Users2, Clock, Award, Sparkles } from "lucide-react";
+import { CheckCircle, Clock, Award, Sparkles, BookOpen, Brain, Users2 } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Button } from "@/components/ui/button";
 
@@ -56,36 +56,56 @@ const WhyUs = () => {
             </Button>
           </div>
 
-          {/* Right grid of image placeholders — Keki style masonry */}
+          {/* Right grid — Keki style masonry with real photos */}
           <div
             className={`grid grid-cols-2 gap-4 transition-all duration-700 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
           >
             <div className="space-y-4">
-              <div className="aspect-square rounded-[20px] bg-white/10 backdrop-blur-sm flex items-center justify-center overflow-hidden">
-                <div className="text-center p-6">
-                  <BookOpen className="w-12 h-12 mx-auto mb-3 opacity-60" />
-                  <p className="font-display text-sm uppercase tracking-wider opacity-60">Studio individuale</p>
+              <div className="aspect-square rounded-[20px] overflow-hidden relative group">
+                <img
+                  src="/images/studio_individuale.png"
+                  alt="Studio individuale"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <p className="font-display text-sm uppercase tracking-wider text-white font-semibold">Studio individuale</p>
                 </div>
               </div>
-              <div className="aspect-[4/3] rounded-[20px] bg-white/15 backdrop-blur-sm flex items-center justify-center overflow-hidden">
-                <div className="text-center p-6">
-                  <Brain className="w-12 h-12 mx-auto mb-3 opacity-60" />
-                  <p className="font-display text-sm uppercase tracking-wider opacity-60">Metodo efficace</p>
+              <div className="aspect-[4/3] rounded-[20px] overflow-hidden relative group">
+                <img
+                  src="/images/metodo_efficace.png"
+                  alt="Metodo efficace"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <p className="font-display text-sm uppercase tracking-wider text-white font-semibold">Metodo efficace</p>
                 </div>
               </div>
             </div>
             <div className="space-y-4 pt-8">
-              <div className="aspect-[4/3] rounded-[20px] bg-white/15 backdrop-blur-sm flex items-center justify-center overflow-hidden">
-                <div className="text-center p-6">
-                  <Users2 className="w-12 h-12 mx-auto mb-3 opacity-60" />
-                  <p className="font-display text-sm uppercase tracking-wider opacity-60">Piccoli gruppi</p>
+              <div className="aspect-[4/3] rounded-[20px] overflow-hidden relative group">
+                <img
+                  src="/images/studio_gruppo.png"
+                  alt="Studio di gruppo"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <p className="font-display text-sm uppercase tracking-wider text-white font-semibold">Piccoli gruppi</p>
                 </div>
               </div>
-              <div className="aspect-square rounded-[20px] bg-white/10 backdrop-blur-sm flex items-center justify-center overflow-hidden">
-                <div className="text-center p-6">
-                  <Award className="w-12 h-12 mx-auto mb-3 opacity-60" />
-                  <p className="font-display text-sm uppercase tracking-wider opacity-60">Risultati garantiti</p>
+              <div className="aspect-square rounded-[20px] overflow-hidden relative group">
+                <img
+                  src="/images/risultati_garantiti.png"
+                  alt="Risultati garantiti"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <p className="font-display text-sm uppercase tracking-wider text-white font-semibold">Risultati garantiti</p>
                 </div>
               </div>
             </div>
