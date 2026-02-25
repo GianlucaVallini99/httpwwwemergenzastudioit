@@ -67,7 +67,7 @@ const Hero = () => {
               <div className="flex flex-col sm:flex-row items-start sm:items-end gap-6">
                 <div className="flex-1">
                   <p className="text-foreground/80 text-lg md:text-xl max-w-lg leading-relaxed">
-                    Centro studi a Mogliano Veneto: ripetizioni per elementari, medie e superiori. Preparazione TOLC e supporto universitario.
+                    Centro studi a Mogliano Veneto: ripetizioni per medie e superiori. Preparazione TOLC e supporto universitario.
                   </p>
                 </div>
                 <div className="flex gap-4">

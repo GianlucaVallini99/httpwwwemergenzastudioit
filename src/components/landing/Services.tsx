@@ -1,13 +1,8 @@
-import { Backpack, BookOpen, GraduationCap, University, HeartPulse, Target } from "lucide-react";
+import { BookOpen, GraduationCap, University, HeartPulse, Target } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Button } from "@/components/ui/button";
 
 const services = [
-  {
-    icon: Backpack,
-    title: "Elementari",
-    color: "from-accent/30 to-accent/10",
-  },
   {
     icon: BookOpen,
     title: "Medie",
@@ -53,7 +48,7 @@ const Services = () => {
               <span className="text-secondary">molto altro.</span>
             </h2>
             <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-              Percorsi su misura per ogni livello scolastico e universitario: dalle elementari fino alla preparazione dei test di ammissione.
+              Percorsi su misura per ogni livello scolastico e universitario: dalle medie fino alla preparazione dei test di ammissione.
             </p>
             <Button
               className="rounded-full px-10 py-6 bg-secondary hover:bg-secondary/90 text-secondary-foreground font-display uppercase tracking-wider text-base"

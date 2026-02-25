@@ -2,14 +2,12 @@ import { Users, User, Gift, UserPlus } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const individualPrices = [
-  { level: "Elementari", price: 16 },
   { level: "Medie", price: 18 },
   { level: "Superiori", price: 22 },
   { level: "Università", price: 30 },
 ];
 
 const duoPrices = [
-  { level: "Elementari", price: 12 },
   { level: "Medie", price: 14 },
   { level: "Superiori", price: 18 },
   { level: "Università", price: 23 },

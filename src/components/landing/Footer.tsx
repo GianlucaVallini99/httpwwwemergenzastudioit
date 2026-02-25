@@ -12,7 +12,7 @@ const Footer = () => (
             <span className="font-display font-bold text-lg tracking-wide">EMERGENZA STUDIO</span>
           </div>
           <p className="text-primary-foreground/60 text-sm leading-relaxed">
-            Centro studi e ripetizioni a Mogliano Veneto (TV). Dalla scuola primaria all'università.
+            Centro studi e ripetizioni a Mogliano Veneto (TV). Dalle medie all'università.
           </p>
         </div>
 
@@ -20,7 +20,7 @@ const Footer = () => (
         <div>
           <h4 className="font-display font-semibold text-sm tracking-widest mb-5">Servizi</h4>
           <ul className="space-y-2.5 text-sm text-primary-foreground/60">
-            <li>Elementari</li>
+
             <li>Medie</li>
             <li>Superiori</li>
             <li>Preparazione TOLC</li>
