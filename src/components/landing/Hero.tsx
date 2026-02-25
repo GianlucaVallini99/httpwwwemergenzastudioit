@@ -53,13 +53,12 @@ const Hero = () => {
         </div>
 
         {/* Hero image area — large lifestyle photo */}
-        <div className="w-full h-[50vh] md:h-[60vh] bg-gradient-to-br from-secondary/20 via-accent/10 to-primary/15 relative overflow-hidden">
-          {/* Decorative circles in the background */}
-          <div className="absolute inset-0 flex items-center justify-center gap-8 opacity-20">
-            <div className="w-64 h-64 rounded-full border-2 border-primary/30" />
-            <div className="w-80 h-80 rounded-full border-2 border-accent/30 -mt-20" />
-            <div className="w-48 h-48 rounded-full border-2 border-secondary/30 mt-16" />
-          </div>
+        <div className="w-full h-[50vh] md:h-[60vh] relative overflow-hidden">
+          <img
+            src="/images/hero_students.png"
+            alt="Studenti che studiano insieme a Emergenza Studio"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
 
           {/* Content overlay with key info */}
           <div className="absolute inset-0 flex items-end">

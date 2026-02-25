@@ -1,32 +1,26 @@
-import { BookOpen, GraduationCap, University, HeartPulse, Target } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Button } from "@/components/ui/button";
 
 const services = [
   {
-    icon: BookOpen,
     title: "Medie",
-    color: "from-secondary/30 to-secondary/10",
+    image: "/images/service_medie.png",
   },
   {
-    icon: GraduationCap,
     title: "Superiori",
-    color: "from-primary/20 to-primary/5",
+    image: "/images/service_superiori.png",
   },
   {
-    icon: University,
     title: "TOLC",
-    color: "from-accent/25 to-secondary/10",
+    image: "/images/service_tolc.png",
   },
   {
-    icon: HeartPulse,
     title: "Università",
-    color: "from-secondary/25 to-accent/10",
+    image: "/images/service_universita.png",
   },
   {
-    icon: Target,
     title: "Maturità",
-    color: "from-primary/15 to-accent/10",
+    image: "/images/service_maturita.png",
   },
 ];
 
@@ -63,24 +57,23 @@ const Services = () => {
             className={`grid grid-cols-2 md:grid-cols-3 gap-4 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
           >
-            {services.map(({ icon: Icon, title, color }) => (
+            {services.map(({ title, image }) => (
               <div
                 key={title}
                 className="group relative aspect-[4/5] rounded-[20px] overflow-hidden cursor-pointer"
               >
-                {/* Gradient background */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${color} transition-all duration-500 group-hover:scale-105`} />
-
-                {/* Icon centered */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6">
-                  <div className="w-20 h-20 rounded-2xl bg-white/60 backdrop-blur-sm flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <Icon className="w-10 h-10 text-primary" />
-                  </div>
-                </div>
+                {/* Photo background */}
+                <img
+                  src={image}
+                  alt={title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                {/* Dark gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
                 {/* Label at bottom — uppercase Oswald */}
                 <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <h3 className="font-display font-semibold text-lg tracking-wider text-primary">
+                  <h3 className="font-display font-semibold text-lg tracking-wider text-white">
                     {title}
                   </h3>
                 </div>
