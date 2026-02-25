@@ -28,7 +28,7 @@ const Hero = () => {
       <div className="relative w-full">
         {/* Spinning badge — Keki style */}
         <div className="absolute top-0 right-8 md:right-16 -translate-y-1/2 z-20">
-          <div className="relative w-28 h-28 md:w-36 md:h-36">
+          <div className="relative w-52 h-52 md:w-64 md:h-64">
             <svg
               className="w-full h-full animate-spin-slow"
               viewBox="0 0 200 200"
@@ -39,14 +39,14 @@ const Hero = () => {
                   d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
                 />
               </defs>
-              <text className="fill-primary" style={{ fontSize: "15px", fontFamily: "Oswald", fontWeight: 500, letterSpacing: "4px", textTransform: "uppercase" }}>
+              <text className="fill-primary" style={{ fontSize: "14px", fontFamily: "Oswald", fontWeight: 500, letterSpacing: "5px", textTransform: "uppercase" }}>
                 <textPath href="#circlePath">
                   Studia con metodo • Supera ogni esame •{" "}
                 </textPath>
               </text>
             </svg>
             {/* Center logo */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 md:w-18 md:h-18 rounded-full overflow-hidden border-2 border-primary/20">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-primary/20">
               <img src={logo} alt="Emergenza Studio" className="w-full h-full object-cover" />
             </div>
           </div>
