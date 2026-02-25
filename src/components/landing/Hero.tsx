@@ -1,4 +1,3 @@
-import { BookOpen, GraduationCap, Calculator, Globe, Lightbulb, PenTool } from "lucide-react";
 import logo from "@/assets/logo.jpg";
 import { Button } from "@/components/ui/button";
 
@@ -8,68 +7,86 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-[90vh] flex items-center overflow-hidden pt-20">
+    <section id="home" className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-24 pb-0">
       {/* Background decoration */}
-      <div className="absolute inset-0 bg-gradient-to-br from-muted via-background to-background" />
-      <div className="absolute top-20 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-72 h-72 bg-secondary/10 rounded-full blur-3xl" />
+      <div className="absolute inset-0 bg-background" />
+      <div className="absolute top-32 right-20 w-[500px] h-[500px] bg-accent/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 left-10 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-3xl" />
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left content */}
-          <div className="max-w-xl">
-            <div className="inline-flex items-center gap-2 bg-accent/10 text-accent-foreground rounded-full px-4 py-1.5 text-sm font-medium mb-6">
-              <Lightbulb className="w-4 h-4 text-accent" />
-              Centro studi a Mogliano Veneto (TV)
-            </div>
-            <h1 className="font-display font-extrabold text-4xl md:text-5xl lg:text-6xl leading-tight text-primary mb-6">
-              Studia con metodo,{" "}
-              <span className="text-secondary">supera ogni esame</span>
-            </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-              Ripetizioni per elementari, medie e superiori. Preparazione TOLC e supporto universitario a Mogliano Veneto.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Button
-                size="lg"
-                className="rounded-full px-8 text-base shadow-lg shadow-primary/25"
-                onClick={() => scrollTo("#contatti")}
-              >
-                Prenota la tua Prima Lezione
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="rounded-full px-8 text-base border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground"
-                onClick={() => scrollTo("#servizi")}
-              >
-                Scopri i nostri corsi
-              </Button>
+      <div className="container mx-auto px-4 md:px-6 relative z-10 flex-1 flex flex-col justify-center">
+        {/* Large heading — Keki style */}
+        <div className="max-w-4xl mb-12">
+          <h1 className="font-display font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] text-primary mb-0">
+            Ripetizioni e<br />
+            preparazione<br />
+            <span className="text-secondary">test a Mogliano</span>
+          </h1>
+        </div>
+      </div>
+
+      {/* Full-width image with spinning badge */}
+      <div className="relative w-full">
+        {/* Spinning badge — Keki style */}
+        <div className="absolute top-0 right-8 md:right-16 -translate-y-1/2 z-20">
+          <div className="relative w-28 h-28 md:w-36 md:h-36">
+            <svg
+              className="w-full h-full animate-spin-slow"
+              viewBox="0 0 200 200"
+            >
+              <defs>
+                <path
+                  id="circlePath"
+                  d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
+                />
+              </defs>
+              <text className="fill-primary" style={{ fontSize: "15px", fontFamily: "Oswald", fontWeight: 500, letterSpacing: "4px", textTransform: "uppercase" }}>
+                <textPath href="#circlePath">
+                  Studia con metodo • Supera ogni esame •{" "}
+                </textPath>
+              </text>
+            </svg>
+            {/* Center logo */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 md:w-18 md:h-18 rounded-full overflow-hidden border-2 border-primary/20">
+              <img src={logo} alt="Emergenza Studio" className="w-full h-full object-cover" />
             </div>
           </div>
+        </div>
 
-          {/* Right illustration */}
-          <div className="hidden lg:flex justify-center">
-            <div className="relative w-96 h-96">
-              {/* Floating icons */}
-              {[
-                { Icon: BookOpen, top: "5%", left: "10%", delay: "0s", size: "w-14 h-14" },
-                { Icon: GraduationCap, top: "10%", right: "15%", delay: "0.2s", size: "w-16 h-16" },
-                { Icon: Calculator, top: "45%", left: "0%", delay: "0.4s", size: "w-12 h-12" },
-                { Icon: Globe, bottom: "15%", right: "5%", delay: "0.6s", size: "w-14 h-14" },
-                { Icon: PenTool, bottom: "20%", left: "20%", delay: "0.8s", size: "w-12 h-12" },
-              ].map(({ Icon, delay, size, ...pos }, i) => (
-                <div
-                  key={i}
-                  className={`absolute ${size} bg-background rounded-2xl shadow-lg border border-border/50 flex items-center justify-center`}
-                  style={{ ...pos, animationDelay: delay }}
-                >
-                  <Icon className="w-7 h-7 text-accent" />
+        {/* Hero image area — large lifestyle photo */}
+        <div className="w-full h-[50vh] md:h-[60vh] bg-gradient-to-br from-secondary/20 via-accent/10 to-primary/15 relative overflow-hidden">
+          {/* Decorative circles in the background */}
+          <div className="absolute inset-0 flex items-center justify-center gap-8 opacity-20">
+            <div className="w-64 h-64 rounded-full border-2 border-primary/30" />
+            <div className="w-80 h-80 rounded-full border-2 border-accent/30 -mt-20" />
+            <div className="w-48 h-48 rounded-full border-2 border-secondary/30 mt-16" />
+          </div>
+
+          {/* Content overlay with key info */}
+          <div className="absolute inset-0 flex items-end">
+            <div className="container mx-auto px-4 md:px-6 pb-12">
+              <div className="flex flex-col sm:flex-row items-start sm:items-end gap-6">
+                <div className="flex-1">
+                  <p className="text-foreground/80 text-lg md:text-xl max-w-lg leading-relaxed">
+                    Centro studi a Mogliano Veneto: ripetizioni per elementari, medie e superiori. Preparazione TOLC e supporto universitario.
+                  </p>
                 </div>
-              ))}
-              {/* Central circle */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center shadow-2xl overflow-hidden">
-                <img src={logo} alt="Emergenza Studio" className="w-36 h-36 object-cover rounded-full" />
+                <div className="flex gap-4">
+                  <Button
+                    size="lg"
+                    className="rounded-full px-10 py-6 bg-secondary hover:bg-secondary/90 text-secondary-foreground font-display uppercase tracking-wider text-base shadow-lg shadow-secondary/25"
+                    onClick={() => scrollTo("#contatti")}
+                  >
+                    Prenota Lezione
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="rounded-full px-10 py-6 border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-display uppercase tracking-wider text-base"
+                    onClick={() => scrollTo("#servizi")}
+                  >
+                    Scopri i Corsi
+                  </Button>
+                </div>
               </div>
             </div>
           </div>

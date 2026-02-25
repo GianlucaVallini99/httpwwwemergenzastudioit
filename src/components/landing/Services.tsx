@@ -1,73 +1,97 @@
 import { Backpack, BookOpen, GraduationCap, University, HeartPulse, Target } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { Button } from "@/components/ui/button";
 
 const services = [
   {
     icon: Backpack,
     title: "Elementari",
-    desc: "Aiuto compiti e supporto personalizzato per costruire solide basi fin da piccoli",
+    color: "from-accent/30 to-accent/10",
   },
   {
     icon: BookOpen,
     title: "Medie",
-    desc: "Tutte le materie e preparazione esame terza media con il giusto metodo di studio",
+    color: "from-secondary/30 to-secondary/10",
   },
   {
     icon: GraduationCap,
     title: "Superiori",
-    desc: "Ripetizioni in tutte le materie, recupero debiti e preparazione maturità",
+    color: "from-primary/20 to-primary/5",
   },
   {
     icon: University,
-    title: "Preparazione TOLC",
-    desc: "Corsi mirati per TOLC-I, TOLC-E, TOLC-S e altri test di ammissione",
+    title: "TOLC",
+    color: "from-accent/25 to-secondary/10",
   },
   {
     icon: HeartPulse,
-    title: "Esami Universitari",
-    desc: "Ripetizioni e corsi di preparazione per esami universitari",
+    title: "Università",
+    color: "from-secondary/25 to-accent/10",
   },
   {
     icon: Target,
-    title: "Maturità e debiti",
-    desc: "Preparazione completa per affrontare l'esame di stato con sicurezza",
+    title: "Maturità",
+    color: "from-primary/15 to-accent/10",
   },
 ];
 
 const Services = () => {
   const { ref, isVisible } = useScrollAnimation();
 
+  const scrollTo = (href: string) => {
+    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <section id="servizi" className="py-20 md:py-28 bg-background">
+    <section id="servizi" className="section-spacing bg-background">
       <div className="container mx-auto px-4 md:px-6" ref={ref}>
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <h2 className="font-display font-bold text-3xl md:text-4xl text-primary mb-4">
-            Come possiamo aiutarti
-          </h2>
-          <p className="text-muted-foreground text-lg">
-            Percorsi su misura per ogni livello scolastico e universitario
-          </p>
-        </div>
-        <div
-          className={`grid sm:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
-          {services.map(({ icon: Icon, title, desc }) => (
-            <Card
-              key={title}
-              className="group border border-border/60 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 rounded-2xl"
+        <div className="grid lg:grid-cols-[1fr_2fr] gap-12 items-start">
+          {/* Left text column — Keki style */}
+          <div className="lg:sticky lg:top-32">
+            <h2 className="font-display font-bold text-3xl md:text-5xl text-primary leading-tight mb-6">
+              Ripetizioni, preparazione test e<br />
+              <span className="text-secondary">molto altro.</span>
+            </h2>
+            <p className="text-muted-foreground text-lg leading-relaxed mb-8">
+              Percorsi su misura per ogni livello scolastico e universitario: dalle elementari fino alla preparazione dei test di ammissione.
+            </p>
+            <Button
+              className="rounded-full px-10 py-6 bg-secondary hover:bg-secondary/90 text-secondary-foreground font-display uppercase tracking-wider text-base"
+              onClick={() => scrollTo("#tariffe")}
             >
-              <CardContent className="p-7">
-                <div className="w-12 h-12 rounded-xl bg-accent/15 flex items-center justify-center mb-5 group-hover:bg-accent/25 transition-colors">
-                  <Icon className="w-6 h-6 text-accent" />
+              Vai alle Tariffe
+            </Button>
+          </div>
+
+          {/* Right grid — Keki category cards */}
+          <div
+            className={`grid grid-cols-2 md:grid-cols-3 gap-4 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+              }`}
+          >
+            {services.map(({ icon: Icon, title, color }) => (
+              <div
+                key={title}
+                className="group relative aspect-[4/5] rounded-[20px] overflow-hidden cursor-pointer"
+              >
+                {/* Gradient background */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${color} transition-all duration-500 group-hover:scale-105`} />
+
+                {/* Icon centered */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6">
+                  <div className="w-20 h-20 rounded-2xl bg-white/60 backdrop-blur-sm flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <Icon className="w-10 h-10 text-primary" />
+                  </div>
                 </div>
-                <h3 className="font-display font-semibold text-xl text-primary mb-2">{title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{desc}</p>
-              </CardContent>
-            </Card>
-          ))}
+
+                {/* Label at bottom — uppercase Oswald */}
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <h3 className="font-display font-semibold text-lg tracking-wider text-primary">
+                    {title}
+                  </h3>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

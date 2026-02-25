@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import logo from "@/assets/logo.jpg";
@@ -30,16 +30,15 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/95 backdrop-blur-md shadow-md" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-background/95 backdrop-blur-md shadow-sm" : "bg-transparent"
+        }`}
     >
-      <div className="container mx-auto flex items-center justify-between py-4 px-4 md:px-6">
-        {/* Logo placeholder */}
-        <button onClick={() => scrollTo("#home")} className="flex items-center gap-2">
-          <img src={logo} alt="Emergenza Studio" className="w-10 h-10 rounded-lg object-cover" />
-          <span className="font-display font-bold text-lg text-primary hidden sm:inline">
-            Emergenza Studio
+      <div className="container mx-auto flex items-center justify-between py-5 px-4 md:px-6">
+        {/* Logo */}
+        <button onClick={() => scrollTo("#home")} className="flex items-center gap-3">
+          <img src={logo} alt="Emergenza Studio" className="w-11 h-11 rounded-xl object-cover" />
+          <span className="font-display font-bold text-xl tracking-wide text-primary hidden sm:inline">
+            EMERGENZA STUDIO
           </span>
         </button>
 
@@ -49,13 +48,16 @@ const Header = () => {
             <button
               key={link.href}
               onClick={() => scrollTo(link.href)}
-              className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+              className="font-display text-sm font-medium tracking-widest uppercase text-foreground/70 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-accent after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left pb-1"
             >
               {link.label}
             </button>
           ))}
-          <Button onClick={() => scrollTo("#contatti")} size="sm" className="rounded-full px-6">
-            Prenota la tua Prima Lezione
+          <Button
+            onClick={() => scrollTo("#contatti")}
+            className="rounded-full px-8 bg-secondary hover:bg-secondary/90 text-secondary-foreground font-display uppercase tracking-wider text-sm"
+          >
+            Prenota Lezione
           </Button>
         </nav>
 
@@ -73,13 +75,16 @@ const Header = () => {
                 <button
                   key={link.href}
                   onClick={() => scrollTo(link.href)}
-                  className="text-lg font-medium text-foreground/80 hover:text-primary transition-colors text-left"
+                  className="font-display text-lg font-medium uppercase tracking-widest text-foreground/70 hover:text-primary transition-colors text-left"
                 >
                   {link.label}
                 </button>
               ))}
-              <Button onClick={() => scrollTo("#contatti")} className="rounded-full mt-4">
-                Prenota la tua Prima Lezione
+              <Button
+                onClick={() => scrollTo("#contatti")}
+                className="rounded-full mt-4 bg-secondary hover:bg-secondary/90 font-display uppercase tracking-wider"
+              >
+                Prenota Lezione
               </Button>
             </div>
           </SheetContent>
