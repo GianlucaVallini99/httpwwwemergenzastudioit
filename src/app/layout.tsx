@@ -3,7 +3,6 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import SplashScreen from "@/components/SplashScreen";
 import { localBusinessJsonLd } from "@/lib/structured-data";
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
 
@@ -49,7 +48,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col antialiased">
-        <SplashScreen />
+
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
