@@ -36,7 +36,7 @@ export default function SplashScreen() {
     >
       {/* Logo */}
       <img
-        src="/logo.jpg"
+        src="/logo-new.png"
         alt="Emergenza Studio Logo"
         className={`w-24 h-24 md:w-32 md:h-32 rounded-full shadow-2xl mb-8 transition-all duration-700 ${
           phase === "logo" ? "opacity-0 scale-90" : "opacity-100 scale-100"
