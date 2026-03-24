@@ -46,7 +46,7 @@ export default function SplashScreen() {
     >
       {/* Logo */}
       <img
-        src="/logo-new.png"
+        src="/logo-splash.png"
         alt="Emergenza Studio Logo"
         style={{
           width: 130,

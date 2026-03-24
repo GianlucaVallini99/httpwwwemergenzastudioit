@@ -27,7 +27,7 @@ export default function Header() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
           <img
-            src="/logo-new.png"
+            src="/logo-splash.png"
             alt="Emergenza Studio Centro Ripetizioni Mogliano Veneto"
             className="w-11 h-11 rounded-xl object-cover"
             width={44}
