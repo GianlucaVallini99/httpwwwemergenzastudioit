@@ -181,7 +181,7 @@ export default function HomePage() {
             ].map((s) => (
               <div
                 key={s.title}
-                className="bg-card rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow border border-border"
+                className="bg-card rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow border border-border flex flex-col"
               >
                 <div className="w-14 h-14 rounded-xl bg-accent/10 text-accent flex items-center justify-center mb-5">
                   {s.icon}
@@ -192,12 +192,12 @@ export default function HomePage() {
                 >
                   {s.title}
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1">
                   {s.desc}
                 </p>
                 <Link
                   href={s.link}
-                  className="text-accent font-semibold text-sm hover:underline"
+                  className="text-accent font-semibold text-sm hover:underline mt-auto"
                 >
                   Scopri di più →
                 </Link>
