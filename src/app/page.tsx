@@ -102,14 +102,13 @@ export default function HomePage() {
               className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.95] text-primary mb-6"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Ripetizioni a Mogliano Veneto: il centro studi a due passi dalla
-              tua scuola
+              Ripetizioni a Mogliano Veneto
             </h1>
             <p className="text-lg md:text-xl text-foreground/70 max-w-2xl leading-relaxed">
               Emergenza Studio è il centro ripetizioni di Mogliano Veneto, a 50
               metri dal Liceo Berto e dalla scuola media. Ripetizioni
               individuali e di gruppo, tutor qualificati per tutte le materie,
-              pacchetti flessibili e fatturazione detraibile al 19%.
+              pacchetti flessibili e corsi di preparazione.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 mb-16">
@@ -120,7 +119,7 @@ export default function HomePage() {
               className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 bg-secondary text-secondary-foreground font-semibold uppercase tracking-wider text-base shadow-lg hover:bg-secondary/90 transition-colors"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Prenota una lezione di prova
+              Prenota una lezione
             </a>
             <Link
               href="/servizi"
@@ -158,7 +157,7 @@ export default function HomePage() {
               {
                 icon: <BookOpen className="w-8 h-8" />,
                 title: "Ripetizioni Individuali",
-                desc: "Lezioni uno-a-uno con un tutor dedicato, personalizzate sulle esigenze specifiche dello studente. Ideali per colmare lacune, preparare verifiche e interrogazioni, recuperare debiti formativi.",
+                desc: "Lezioni uno-a-uno con un tutor dedicato.",
                 link: "/servizi",
               },
               {
@@ -170,7 +169,7 @@ export default function HomePage() {
               {
                 icon: <GraduationCap className="w-8 h-8" />,
                 title: "Aiuto Compiti e Doposcuola",
-                desc: "Supporto quotidiano per svolgere i compiti e consolidare quanto appreso in classe. Perfetto per studenti delle elementari e medie che hanno bisogno di un metodo di studio strutturato.",
+                desc: "Supporto quotidiano per svolgere i compiti e a creare un metodo di studio.",
                 link: "/servizi",
               },
               {
