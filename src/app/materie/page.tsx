@@ -6,9 +6,9 @@ import { SITE_URL, WHATSAPP_URL } from "@/lib/constants";
 import { breadcrumbJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
-  title: "Ripetizioni Tutte le Materie – Mogliano Veneto",
+  title: "Tutte le Materie | Ripetizioni Mogliano Veneto - Emergenza Studio",
   description:
-    "Ripetizioni di matematica, fisica, inglese e tutte le materie a Mogliano Veneto. Tutor specializzati per medie, superiori e università.",
+    "Matematica, fisica, italiano, latino, greco, inglese, storia, filosofia e molto altro. Tutor specializzati per ogni materia a Mogliano Veneto.",
   alternates: { canonical: `${SITE_URL}/materie` },
 };
 

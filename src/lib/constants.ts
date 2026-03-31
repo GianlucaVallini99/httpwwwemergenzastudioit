@@ -1,6 +1,6 @@
 // ── Site-wide constants ────────────────────────────
 export const SITE_NAME = "Emergenza Studio - Centro Ripetizioni";
-export const SITE_URL = "https://emergenza.studio";
+export const SITE_URL = "https://www.emergenza.studio";
 export const PHONE = "340 510 6467";
 export const PHONE_INTL = "+393405106467";
 export const EMAIL = "emergenza.studio26@gmail.com";

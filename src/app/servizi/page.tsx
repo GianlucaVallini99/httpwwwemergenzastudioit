@@ -6,9 +6,9 @@ import { WHATSAPP_URL, SITE_URL, PRICES } from "@/lib/constants";
 import { serviceJsonLd, breadcrumbJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
-  title: "Servizi e Prezzi – Ripetizioni Mogliano Veneto",
+  title: "Servizi e Prezzi | Emergenza Studio - Ripetizioni Mogliano Veneto",
   description:
-    "Ripetizioni individuali, di gruppo e pacchetti multi-materia a Mogliano Veneto. Prezzi trasparenti da €16/h. Prenota su WhatsApp.",
+    "Ripetizioni individuali, di gruppo, doposcuola e aiuto compiti. Prezzi da €16/ora. Fattura regolare con detrazione 19%. Mogliano Veneto (TV).",
   alternates: { canonical: `${SITE_URL}/servizi` },
 };
 
