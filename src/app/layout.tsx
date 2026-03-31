@@ -19,6 +19,9 @@ export const metadata: Metadata = {
     languages: { it: SITE_URL },
   },
   robots: { index: true, follow: true },
+  verification: {
+    google: "5P7I7UEiIf2x9G6IFHoxc-BSuAX45pR2BHnH-1_8Qgs",
+  },
   other: {
     "theme-color": "#ffffff",
   },
