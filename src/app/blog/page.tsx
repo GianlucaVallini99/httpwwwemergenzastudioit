@@ -7,9 +7,9 @@ import { articles } from "@/lib/blog-data";
 import { Calendar } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Blog – Consigli di Studio",
+  title: "Blog | Consigli di Studio - Emergenza Studio Mogliano Veneto",
   description:
-    "Blog di Emergenza Studio: consigli pratici, strategie di studio e risorse utili per studenti delle medie, superiori e università.",
+    "Articoli, guide e consigli per studiare meglio, prepararsi agli esami e scegliere il giusto supporto scolastico. Dal team di Emergenza Studio.",
   alternates: { canonical: `${SITE_URL}/blog` },
 };
 

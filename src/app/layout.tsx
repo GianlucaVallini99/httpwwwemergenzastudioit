@@ -9,23 +9,28 @@ import { SITE_NAME, SITE_URL } from "@/lib/constants";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `Ripetizioni a Mogliano Veneto | ${SITE_NAME}`,
-    template: `%s | ${SITE_NAME}`,
+    default: "Ripetizioni a Mogliano Veneto | Emergenza Studio",
+    template: "%s",
   },
   description:
-    "Centro ripetizioni a Mogliano Veneto, a 50 metri dal Liceo Berto. Ripetizioni individuali e di gruppo per medie, superiori e università. Pacchetti multi-materia flessibili, fatturazione detraibile al 19%.",
+    "Centro ripetizioni a Mogliano Veneto, a 50 metri dal Liceo Berto. Tutor qualificati per tutte le materie, dalle medie all'università.",
   alternates: {
     canonical: SITE_URL,
     languages: { it: SITE_URL },
+  },
+  robots: { index: true, follow: true },
+  other: {
+    "theme-color": "#ffffff",
   },
   openGraph: {
     type: "website",
     locale: "it_IT",
     url: SITE_URL,
-    siteName: SITE_NAME,
-    title: `Ripetizioni a Mogliano Veneto | ${SITE_NAME}`,
+    siteName: "Emergenza Studio",
+    title: "Ripetizioni a Mogliano Veneto | Emergenza Studio",
     description:
-      "Centro ripetizioni a Mogliano Veneto, a 50 metri dal Liceo Berto. Ripetizioni individuali e di gruppo, tutor qualificati, pacchetti multi-materia flessibili.",
+      "Centro ripetizioni a Mogliano Veneto, a 50 metri dal Liceo Berto. Tutor qualificati per tutte le materie, dalle medie all'università.",
+    images: [`${SITE_URL}/images/hero_students.jpg`],
   },
 };
 
@@ -40,6 +45,7 @@ export default function RootLayout({
         <link rel="alternate" hrefLang="it" href={`${SITE_URL}/`} />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

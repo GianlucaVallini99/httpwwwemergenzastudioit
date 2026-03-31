@@ -12,15 +12,15 @@ import CtaSection from "@/components/CtaSection";
 export const metadata: Metadata = {
   title: "Ripetizioni a Mogliano Veneto | Emergenza Studio",
   description:
-    "Centro ripetizioni a Mogliano Veneto, a 50 metri dal Liceo Berto. Ripetizioni individuali e di gruppo per medie, superiori e università. Pacchetti multi-materia flessibili, fatturazione detraibile al 19%.",
-  alternates: { canonical: SITE_URL },
+    "Centro ripetizioni a Mogliano Veneto, a 50 metri dal Liceo Berto. Tutor qualificati per tutte le materie, dalle medie all'università. Pacchetti flessibili e fatturazione detraibile.",
+  alternates: { canonical: `${SITE_URL}/` },
 };
 
 const faqs = [
   {
     question: "Quali materie coprite?",
     answer:
-      "Tutte. Abbiamo tutor qualificati per ogni materia: matematica, fisica, italiano, latino, greco, inglese, storia, filosofia, chimica, scienze, economia e molte altre. Se hai bisogno di una materia specifica, contattaci e troveremo il tutor giusto.",
+      "Tutte. Abbiamo tutor qualificati per ogni materia: matematica, fisica, italiano, latino, greco, inglese, storia, filosofia, chimica, scienze, economia e molte altre.",
   },
   {
     question: "Quanto costa un'ora di ripetizione?",
@@ -28,24 +28,24 @@ const faqs = [
       "I prezzi partono da €16/ora per le elementari, €18/ora per le medie, €22/ora per le superiori e €30/ora per l'università. Offriamo anche pacchetti ore multi-materia con tariffe agevolate.",
   },
   {
-    question: "Posso usare il pacchetto ore per materie diverse?",
-    answer:
-      "Sì, i nostri pacchetti sono multi-materia: acquisti un monte ore e lo utilizzi per qualsiasi materia, cambiando anche di settimana in settimana.",
-  },
-  {
     question: "Le ripetizioni sono detraibili?",
     answer:
       "Sì. Tutte le lezioni sono regolarmente fatturate e le famiglie possono detrarre il 19% del costo nella dichiarazione dei redditi.",
   },
   {
-    question: "Dove si trova il centro?",
+    question: "Dove si trova Emergenza Studio?",
     answer:
-      "Siamo a Mogliano Veneto, a 50 metri dal Liceo Classico G. Berto e dalla scuola media. Lo studente può venire direttamente dopo le lezioni.",
+      "Siamo in Via Francesco Barbiero 84g, Mogliano Veneto (TV), a 50 metri dal Liceo Classico G. Berto e dalla scuola media.",
   },
   {
     question: "Come prenoto una lezione?",
     answer:
-      "Puoi scriverci su WhatsApp, chiamarci o passare direttamente al centro. Ti risponderemo il prima possibile per trovare l'orario e il tutor più adatti.",
+      "Puoi scriverci su WhatsApp al 340 510 6467, chiamarci o passare direttamente al centro. Ti risponderemo il prima possibile per trovare l'orario e il tutor più adatti.",
+  },
+  {
+    question: "Posso usare il pacchetto ore per materie diverse?",
+    answer:
+      "Sì, i nostri pacchetti sono multi-materia: acquisti un monte ore e lo utilizzi per qualsiasi materia, cambiando anche di settimana in settimana.",
   },
   {
     question: "Fate anche lezioni di gruppo?",

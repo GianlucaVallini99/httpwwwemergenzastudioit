@@ -9,9 +9,9 @@ import { Phone as PhoneIcon, Mail, MapPin, Clock } from "lucide-react";
 import { InstagramIcon, FacebookIcon } from "@/components/SocialIcons";
 
 export const metadata: Metadata = {
-  title: "Contatti e Dove Siamo – Emergenza Studio Mogliano",
+  title: "Contatti | Emergenza Studio - Via Barbiero 84g, Mogliano Veneto",
   description:
-    "Contattaci su WhatsApp o vieni a trovarci a Mogliano Veneto, a 50 metri dal Liceo Berto. Orari, mappa e prenotazioni.",
+    "Contatta Emergenza Studio per prenotare una lezione di prova. WhatsApp: 340 510 6467. Via Francesco Barbiero 84g, Mogliano Veneto (TV).",
   alternates: { canonical: `${SITE_URL}/contatti` },
 };
 

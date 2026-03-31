@@ -10,12 +10,16 @@ export function localBusinessJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": ["LocalBusiness", "EducationalOrganization"],
-    name: SITE_NAME,
+    name: "Emergenza Studio",
+    alternateName: "Emergenza Studio Centro Ripetizioni",
     description:
-      "Centro ripetizioni e preparazione test a Mogliano Veneto. Ripetizioni individuali e di gruppo per medie, superiori e università. Pacchetti multi-materia flessibili.",
+      "Centro ripetizioni e doposcuola a Mogliano Veneto. Tutor qualificati per tutte le materie, dalle medie all'università. Pacchetti flessibili, fatturazione regolare e detraibile al 19%.",
     url: SITE_URL,
+    logo: `${SITE_URL}/logo.jpg`,
+    image: `${SITE_URL}/images/hero_students.jpg`,
     telephone: PHONE_INTL,
     email: EMAIL,
+    priceRange: "€€",
     address: {
       "@type": "PostalAddress",
       streetAddress: ADDRESS_STREET,
@@ -26,8 +30,8 @@ export function localBusinessJsonLd() {
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: GEO_LAT,
-      longitude: GEO_LNG,
+      latitude: 45.5607,
+      longitude: 12.0545,
     },
     openingHoursSpecification: [
       {
@@ -49,16 +53,8 @@ export function localBusinessJsonLd() {
         closes: "13:00",
       },
     ],
-    priceRange: "€16 - €30/ora",
-    image: `${SITE_URL}/images/centro-emergenza-studio.jpg`,
     sameAs: [INSTAGRAM_URL, FACEBOOK_URL],
-    areaServed: [
-      { "@type": "City", name: "Mogliano Veneto" },
-      { "@type": "City", name: "Preganziol" },
-      { "@type": "City", name: "Casale sul Sile" },
-      { "@type": "City", name: "Marcon" },
-      { "@type": "City", name: "Quinto di Treviso" },
-    ],
+    hasMap: "https://www.google.com/maps/place/Emergenza+Studio",
   };
 }
 
