@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Ripetizioni Fisica Mogliano Veneto",
   description:
     "Ripetizioni di fisica a Mogliano Veneto per superiori e università. Approccio pratico: prima capiamo il fenomeno, poi le equazioni. Emergenza Studio.",
-  alternates: { canonical: `${SITE_URL}/materie/fisica` },
+  alternates: { canonical: `${SITE_URL}/materie/fisica/` },
 };
 
 const breadcrumbs = [

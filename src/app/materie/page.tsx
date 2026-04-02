@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Tutte le Materie | Ripetizioni Mogliano Veneto - Emergenza Studio",
   description:
     "Matematica, fisica, italiano, latino, greco, inglese, storia, filosofia e molto altro. Tutor specializzati per ogni materia a Mogliano Veneto.",
-  alternates: { canonical: `${SITE_URL}/materie` },
+  alternates: { canonical: `${SITE_URL}/materie/` },
 };
 
 const breadcrumbs = [{ label: "Materie", href: "/materie" }];

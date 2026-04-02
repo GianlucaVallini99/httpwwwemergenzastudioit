@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "Blog | Consigli di Studio - Emergenza Studio Mogliano Veneto",
   description:
     "Articoli, guide e consigli per studiare meglio, prepararsi agli esami e scegliere il giusto supporto scolastico. Dal team di Emergenza Studio.",
-  alternates: { canonical: `${SITE_URL}/blog` },
+  alternates: { canonical: `${SITE_URL}/blog/` },
 };
 
 const breadcrumbs = [{ label: "Blog", href: "/blog" }];

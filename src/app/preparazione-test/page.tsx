@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Preparazione TOLC e Test Ingresso – Mogliano Veneto",
   description:
     "Corsi di preparazione TOLC e test d'ingresso universitari a Mogliano Veneto. Lezioni mirate con simulazioni e materiale dedicato.",
-  alternates: { canonical: `${SITE_URL}/preparazione-test` },
+  alternates: { canonical: `${SITE_URL}/preparazione-test/` },
 };
 
 const breadcrumbs = [{ label: "Preparazione Test", href: "/preparazione-test" }];

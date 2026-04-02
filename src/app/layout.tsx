@@ -15,8 +15,8 @@ export const metadata: Metadata = {
   description:
     "Centro ripetizioni a Mogliano Veneto, a 50 metri dal Liceo Berto. Tutor qualificati per tutte le materie, dalle medie all'università.",
   alternates: {
-    canonical: SITE_URL,
-    languages: { it: SITE_URL },
+    canonical: `${SITE_URL}/`,
+    languages: { it: `${SITE_URL}/` },
   },
   robots: { index: true, follow: true },
   verification: {

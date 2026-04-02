@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Ripetizioni Matematica Mogliano Veneto",
   description:
     "Ripetizioni di matematica a Mogliano Veneto per medie, superiori e università. Tutor specializzati, pacchetti flessibili, fatturazione detraibile al 19%. Emergenza Studio.",
-  alternates: { canonical: `${SITE_URL}/materie/matematica` },
+  alternates: { canonical: `${SITE_URL}/materie/matematica/` },
 };
 
 const breadcrumbs = [

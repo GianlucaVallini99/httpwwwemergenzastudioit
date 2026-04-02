@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Ripetizioni Inglese Mogliano Veneto",
   description:
     "Ripetizioni di inglese a Mogliano Veneto: grammatica, conversazione, preparazione PET, FCE, IELTS. Prossimamente English Speaking Club. Emergenza Studio.",
-  alternates: { canonical: `${SITE_URL}/materie/inglese` },
+  alternates: { canonical: `${SITE_URL}/materie/inglese/` },
 };
 
 const breadcrumbs = [

@@ -25,10 +25,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/blog/debito-formativo-come-recuperare", priority: 0.5, changeFrequency: "yearly" as const },
   ];
 
-  return pages.map((p) => ({
-    url: `${BASE}${p.url}`,
-    lastModified: new Date(),
-    changeFrequency: p.changeFrequency,
-    priority: p.priority,
-  }));
+  return pages.map((p) => {
+    const trailingSlash = p.url === "/" ? "" : "/";
+    return {
+      url: `${BASE}${p.url}${trailingSlash}`,
+      lastModified: new Date(),
+      changeFrequency: p.changeFrequency,
+      priority: p.priority,
+    };
+  });
 }
