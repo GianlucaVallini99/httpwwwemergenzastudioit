@@ -137,7 +137,7 @@ export default function CorsoEstivoMatematicaPage() {
               Corso Estivo di Matematica
             </h1>
             <p className="text-xl md:text-2xl text-foreground/70 mb-3 font-medium">
-              Preparazione all&apos;università per studenti di 4ª e 5ª liceo
+              Per studenti di 4ª e 5ª liceo e universitari che preparano Analisi 1
             </p>
             <p className="text-lg text-muted-foreground max-w-3xl leading-relaxed mb-8">
               Un percorso intensivo di 6 settimane per arrivare preparato ad Analisi 1.
@@ -157,7 +157,7 @@ export default function CorsoEstivoMatematicaPage() {
                 <Users className="w-4 h-4" /> Classi piccole
               </span>
               <span className="inline-flex items-center gap-2 rounded-full bg-secondary/10 text-secondary px-4 py-2 text-sm font-medium">
-                <GraduationCap className="w-4 h-4" /> 4ª e 5ª liceo
+                <GraduationCap className="w-4 h-4" /> 4ª e 5ª liceo + universitari
               </span>
             </div>
 
@@ -226,7 +226,8 @@ export default function CorsoEstivoMatematicaPage() {
               <p className="text-muted-foreground leading-relaxed mb-6">
                 Il corso è pensato per studenti di <strong>quarta e quinta liceo</strong> di
                 qualsiasi indirizzo (scientifico, classico, linguistico, scienze umane, artistico...)
-                che vogliono arrivare all&apos;università con basi solide di matematica.
+                che vogliono arrivare all&apos;università con basi solide di matematica, e per <strong>studenti universitari</strong> che
+                devono preparare l&apos;esame di Matematica o Analisi 1.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-6">
                 Che tu sia già bravo e voglia consolidare, o che la matematica non sia il tuo
@@ -269,7 +270,7 @@ export default function CorsoEstivoMatematicaPage() {
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="font-semibold text-primary w-28 shrink-0">Per chi</span>
-                  <span className="text-muted-foreground">Studenti di 4ª e 5ª liceo</span>
+                  <span className="text-muted-foreground">Studenti di 4ª/5ª liceo e universitari</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="font-semibold text-primary w-28 shrink-0">Argomenti</span>
@@ -385,6 +386,7 @@ export default function CorsoEstivoMatematicaPage() {
                       <option value="">Seleziona la classe</option>
                       <option value="4">4ª superiore</option>
                       <option value="5">5ª superiore</option>
+                      <option value="università">Università</option>
                     </select>
                   </div>
                   <div>

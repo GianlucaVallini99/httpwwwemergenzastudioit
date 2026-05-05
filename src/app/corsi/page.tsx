@@ -14,9 +14,9 @@ const corsi = [
   {
     icon: <GraduationCap className="w-7 h-7" />,
     title: "Corso Estivo di Matematica",
-    desc: "Potenziamento di matematica in preparazione all'università. Trigonometria, limiti, derivate e integrali: gli argomenti fondamentali di Analisi 1.",
+    desc: "Potenziamento di matematica in preparazione all'università e per chi deve affrontare l'esame di Analisi 1. Trigonometria, limiti, derivate e integrali.",
     quando: "Estate 2026",
-    perChi: "Studenti di 4ª e 5ª liceo",
+    perChi: "4ª/5ª liceo e universitari",
     value: "corso-estivo-matematica",
     link: "/corsi/corso-estivo-matematica",
     highlight: true,
