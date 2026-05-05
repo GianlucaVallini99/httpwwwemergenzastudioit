@@ -37,7 +37,7 @@ export default function ContattiPage() {
             Contatti e Dove Siamo – Emergenza Studio
           </h1>
           <p className="text-lg text-muted-foreground max-w-3xl leading-relaxed mb-12">
-            Hai bisogno di ripetizioni per tuo figlio? Vuoi informazioni sui nostri servizi o sui corsi serali? Contattaci: ti rispondiamo il prima possibile.
+            Hai bisogno di ripetizioni per tuo figlio? Vuoi informazioni sui nostri servizi o sui corsi? Contattaci: ti rispondiamo il prima possibile.
           </p>
 
           <div className="grid lg:grid-cols-2 gap-12">

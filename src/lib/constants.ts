@@ -27,7 +27,7 @@ export const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Servizi", href: "/servizi" },
   { label: "Materie", href: "/materie" },
-  { label: "Corsi Serali", href: "/corsi-serali" },
+  { label: "Corsi", href: "/corsi" },
   { label: "Chi Siamo", href: "/chi-siamo" },
   { label: "Blog", href: "/blog" },
   { label: "Contatti", href: "/contatti" },

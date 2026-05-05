@@ -1,17 +1,26 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 import CtaSection from "@/components/CtaSection";
 import { WHATSAPP_URL } from "@/lib/constants";
 import { breadcrumbJsonLd, courseJsonLd } from "@/lib/structured-data";
-import { Calendar, Users, Cpu, Globe } from "lucide-react";
+import { Calendar, Users, Cpu, Globe, GraduationCap, ArrowRight } from "lucide-react";
 
-const SITE_URL = "https://emergenza.studio";
-
-const breadcrumbs = [{ label: "Corsi Serali", href: "/corsi-serali" }];
+const breadcrumbs = [{ label: "Corsi", href: "/corsi" }];
 
 const corsi = [
+  {
+    icon: <GraduationCap className="w-7 h-7" />,
+    title: "Corso Estivo di Matematica",
+    desc: "Potenziamento di matematica in preparazione all'università. Trigonometria, limiti, derivate e integrali: gli argomenti fondamentali di Analisi 1.",
+    quando: "Estate 2026",
+    perChi: "Studenti di 4ª e 5ª liceo",
+    value: "corso-estivo-matematica",
+    link: "/corsi/corso-estivo-matematica",
+    highlight: true,
+  },
   {
     icon: <Calendar className="w-7 h-7" />,
     title: "Preparazione TOLC – Corso Intensivo",
@@ -19,6 +28,8 @@ const corsi = [
     quando: "Da settembre 2026",
     perChi: "Diplomandi e maturandi",
     value: "tolc",
+    link: null,
+    highlight: false,
   },
   {
     icon: <Users className="w-7 h-7" />,
@@ -27,6 +38,8 @@ const corsi = [
     quando: "Da ottobre 2026",
     perChi: "Matricole universitarie",
     value: "semestre-filtro",
+    link: null,
+    highlight: false,
   },
   {
     icon: <Globe className="w-7 h-7" />,
@@ -35,6 +48,8 @@ const corsi = [
     quando: "Da settembre 2026",
     perChi: "Studenti e adulti di tutti i livelli",
     value: "english-speaking",
+    link: null,
+    highlight: false,
   },
   {
     icon: <Cpu className="w-7 h-7" />,
@@ -43,10 +58,12 @@ const corsi = [
     quando: "Da novembre 2026",
     perChi: "Professionisti, imprenditori, dipendenti",
     value: "ai-tools",
+    link: null,
+    highlight: false,
   },
 ];
 
-export default function CorsiSeraliPage() {
+export default function CorsiPage() {
   const [formData, setFormData] = useState({ nome: "", email: "", telefono: "", corso: "" });
   const [submitted, setSubmitted] = useState(false);
 
@@ -63,7 +80,7 @@ export default function CorsiSeraliPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(breadcrumbJsonLd([
             { name: "Home", href: "/" },
-            { name: "Corsi Serali", href: "/corsi-serali" },
+            { name: "Corsi", href: "/corsi" },
           ])),
         }}
       />
@@ -71,6 +88,7 @@ export default function CorsiSeraliPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(courseJsonLd([
+            { name: "Corso Estivo di Matematica – Preparazione Università", description: "Corso estivo di potenziamento di matematica: trigonometria, limiti, derivate e integrali per prepararsi ad Analisi 1", startDate: "2026-06-15" },
             { name: "Preparazione TOLC – Corso Intensivo", description: "Corso intensivo di 8 settimane per la preparazione ai test d'ingresso universitari", startDate: "2026-09-01" },
             { name: "Supporto Semestre Filtro", description: "10 settimane di lezioni su Analisi Matematica I e Fisica I", startDate: "2026-10-01" },
             { name: "English Speaking Club", description: "Incontri settimanali di conversazione in inglese in piccoli gruppi", startDate: "2026-09-01" },
@@ -83,10 +101,10 @@ export default function CorsiSeraliPage() {
       <section className="section-spacing pt-8">
         <div className="container-custom">
           <h1 className="text-3xl md:text-5xl font-bold text-primary mb-6" style={{ fontFamily: "var(--font-display)" }}>
-            Corsi Serali a Mogliano Veneto
+            Corsi a Mogliano Veneto
           </h1>
           <p className="text-lg text-muted-foreground max-w-3xl leading-relaxed mb-16">
-            Emergenza Studio non è solo ripetizioni. Stiamo preparando una serie di corsi serali pensati per studenti e professionisti che vogliono investire nella propria formazione, in un formato accessibile e in orario serale.
+            Emergenza Studio non è solo ripetizioni. Organizziamo corsi pensati per studenti e professionisti che vogliono investire nella propria formazione: dalla preparazione universitaria ai corsi di lingua e competenze digitali.
           </p>
 
           <h2 className="text-2xl md:text-3xl font-bold text-primary mb-8" style={{ fontFamily: "var(--font-display)" }}>
@@ -95,13 +113,27 @@ export default function CorsiSeraliPage() {
 
           <div className="grid md:grid-cols-2 gap-6 mb-16">
             {corsi.map((c) => (
-              <div key={c.value} className="bg-card rounded-2xl p-6 md:p-8 border border-border hover:shadow-md transition-shadow">
-                <div className="w-14 h-14 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center mb-5">
+              <div
+                key={c.value}
+                className={`rounded-2xl p-6 md:p-8 border transition-shadow ${
+                  c.highlight
+                    ? "bg-gradient-to-br from-accent/5 to-secondary/5 border-accent/30 shadow-md hover:shadow-lg"
+                    : "bg-card border-border hover:shadow-md"
+                }`}
+              >
+                {c.highlight && (
+                  <span className="inline-block rounded-full bg-accent text-accent-foreground text-xs font-bold uppercase tracking-wider px-3 py-1 mb-4" style={{ fontFamily: "var(--font-display)" }}>
+                    Novità — Iscrizioni aperte
+                  </span>
+                )}
+                <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-5 ${
+                  c.highlight ? "bg-accent/15 text-accent" : "bg-secondary/10 text-secondary"
+                }`}>
                   {c.icon}
                 </div>
                 <h3 className="text-xl font-bold text-primary mb-3" style={{ fontFamily: "var(--font-display)" }}>{c.title}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-4">{c.desc}</p>
-                <div className="flex flex-wrap gap-4 text-xs">
+                <div className="flex flex-wrap gap-4 text-xs mb-4">
                   <span className="inline-flex items-center gap-1 rounded-full bg-muted px-3 py-1 text-muted-foreground font-medium">
                     <Calendar className="w-3.5 h-3.5" /> {c.quando}
                   </span>
@@ -109,6 +141,14 @@ export default function CorsiSeraliPage() {
                     <Users className="w-3.5 h-3.5" /> {c.perChi}
                   </span>
                 </div>
+                {c.link && (
+                  <Link
+                    href={c.link}
+                    className="inline-flex items-center gap-2 text-accent font-semibold text-sm hover:underline mt-2"
+                  >
+                    Scopri il corso e iscriviti <ArrowRight className="w-4 h-4" />
+                  </Link>
+                )}
               </div>
             ))}
           </div>
@@ -119,7 +159,7 @@ export default function CorsiSeraliPage() {
               Iscriviti alla Waiting List
             </h2>
             <p className="text-muted-foreground text-center mb-8 leading-relaxed">
-              I corsi serali sono in fase di organizzazione. Lascia il tuo contatto per essere tra i primi a sapere quando apriremo le iscrizioni e per accedere alla tariffa early bird riservata ai primi iscritti.
+              Alcuni corsi sono ancora in fase di organizzazione. Lascia il tuo contatto per essere tra i primi a sapere quando apriremo le iscrizioni e per accedere alla tariffa early bird riservata ai primi iscritti.
             </p>
 
             {submitted ? (

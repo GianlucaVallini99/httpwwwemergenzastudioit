@@ -174,9 +174,9 @@ export default function HomePage() {
               },
               {
                 icon: <Sparkles className="w-8 h-8" />,
-                title: "Preparazione Test e Corsi Serali",
-                desc: "Corsi mirati per la preparazione ai TOLC, al semestre filtro universitario, English Speaking e molto altro. Prossimamente disponibili.",
-                link: "/corsi-serali",
+                title: "Preparazione Test e Corsi",
+                desc: "Corsi mirati per la preparazione ai TOLC, al semestre filtro universitario, corso estivo di matematica, English Speaking e molto altro.",
+                link: "/corsi",
               },
             ].map((s) => (
               <div

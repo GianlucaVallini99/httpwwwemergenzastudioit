@@ -5,6 +5,20 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: false, // Vercel optimizes images automatically
   },
+  async redirects() {
+    return [
+      {
+        source: "/corsi-serali",
+        destination: "/corsi",
+        permanent: true,
+      },
+      {
+        source: "/corsi-serali/",
+        destination: "/corsi/",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
