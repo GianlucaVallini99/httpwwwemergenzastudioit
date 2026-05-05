@@ -39,7 +39,6 @@ const vantaggi = [
   "Esercizi mirati su problemi tipo Analisi 1",
   "Materiale didattico incluso",
   "Tutor universitari con esperienza",
-  "Certificato di partecipazione",
   "Ambiente di studio dedicato e professionale",
 ];
 
@@ -275,6 +274,10 @@ export default function CorsoEstivoMatematicaPage() {
                 <li className="flex items-start gap-3">
                   <span className="font-semibold text-primary w-28 shrink-0">Argomenti</span>
                   <span className="text-muted-foreground">Trigonometria, limiti, derivate, integrali</span>
+                </li>
+                <li className="flex items-start gap-3 pt-3 mt-3 border-t border-accent/20">
+                  <span className="font-semibold text-primary w-28 shrink-0">Costo</span>
+                  <span className="text-accent font-bold text-lg">€290</span>
                 </li>
               </ul>
             </div>
