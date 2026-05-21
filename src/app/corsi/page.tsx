@@ -13,10 +13,11 @@ const breadcrumbs = [{ label: "Corsi", href: "/corsi" }];
 const corsi = [
   {
     icon: <BookOpen className="w-7 h-7" />,
-    title: "Preparazione alle Superiori",
-    desc: "Corso estivo per studenti che a settembre iniziano il liceo o un istituto tecnico. Matematica, italiano e metodo di studio: le basi per non partire in ritardo dal primo giorno.",
-    quando: "Estate 2026",
-    perChi: "Studenti che finiscono la 3ª media",
+    title: "Corso Pre-Superiori di Matematica",
+    titleDropdown: "Corso Pre-Superiori di Matematica – Giugno 2026",
+    desc: "5 settimane per arrivare al liceo scientifico senza lacune. Piccoli gruppi, docenti esperti, programma su misura per il primo anno.",
+    quando: "Giugno 2026",
+    perChi: "Studenti che iniziano il liceo scientifico",
     value: "preparazione-superiori",
     link: "/corsi/preparazione-superiori",
     highlight: true,
@@ -98,7 +99,7 @@ export default function CorsiPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(courseJsonLd([
-            { name: "Preparazione alle Superiori", description: "Corso estivo per chi inizia le superiori a settembre. Matematica, italiano e metodo di studio con tutor qualificati a Mogliano Veneto.", startDate: "2026-07-01", endDate: "2026-08-31" },
+            { name: "Corso Pre-Superiori di Matematica", description: "Corso di matematica per studenti che iniziano il liceo scientifico. 5 settimane, 20 ore totali, max 5 studenti per gruppo.", startDate: "2026-06-01", endDate: "2026-06-30" },
             { name: "Corso Estivo di Matematica – Preparazione Università", description: "Corso estivo di potenziamento di matematica: trigonometria, limiti, derivate e integrali per prepararsi ad Analisi 1", startDate: "2026-06-15" },
             { name: "Preparazione TOLC – Corso Intensivo", description: "Corso intensivo di 8 settimane per la preparazione ai test d'ingresso universitari", startDate: "2026-09-01" },
             { name: "Supporto Semestre Filtro", description: "10 settimane di lezioni su Analisi Matematica I e Fisica I", startDate: "2026-10-01" },
@@ -226,7 +227,7 @@ export default function CorsiPage() {
                   >
                     <option value="">Seleziona un corso</option>
                     {corsi.map((c) => (
-                      <option key={c.value} value={c.value}>{c.title}</option>
+                      <option key={c.value} value={c.value}>{"titleDropdown" in c && c.titleDropdown ? c.titleDropdown : c.title}</option>
                     ))}
                   </select>
                 </div>

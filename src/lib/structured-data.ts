@@ -115,7 +115,7 @@ export function serviceJsonLd() {
 
 // ── Course ──────────────────────────────────────────
 export function courseJsonLd(
-  courses: { name: string; description: string; startDate?: string; endDate?: string; location?: string }[]
+  courses: { name: string; description: string; startDate?: string; endDate?: string; location?: string; price?: string; priceCurrency?: string }[]
 ) {
   return courses.map((c) => ({
     "@context": "https://schema.org",
@@ -142,6 +142,16 @@ export function courseJsonLd(
               postalCode: ADDRESS_CAP,
               addressCountry: "IT",
             },
+          },
+        }
+      : {}),
+    ...(c.price
+      ? {
+          offers: {
+            "@type": "Offer",
+            price: c.price,
+            priceCurrency: c.priceCurrency || "EUR",
+            availability: "https://schema.org/InStock",
           },
         }
       : {}),

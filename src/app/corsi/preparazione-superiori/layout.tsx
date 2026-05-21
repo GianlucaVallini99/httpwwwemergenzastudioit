@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Corso di Preparazione alle Superiori | Emergenza Studio Mogliano Veneto",
+  title: "Corso Pre-Superiori di Matematica | Emergenza Studio Mogliano Veneto",
   description:
-    "Corso estivo per chi inizia le superiori a settembre. Matematica, italiano e metodo di studio con tutor qualificati a Mogliano Veneto. Iscrizioni aperte.",
+    "Corso di matematica per chi inizia il liceo scientifico a settembre. 5 settimane, 20 ore, max 5 studenti per gruppo. €250 per l'intero corso. Giugno 2026 a Mogliano Veneto.",
   alternates: { canonical: "https://www.emergenza.studio/corsi/preparazione-superiori/" },
   robots: { index: true, follow: true },
   openGraph: {
-    title: "Corso di Preparazione alle Superiori | Emergenza Studio",
+    title: "Corso Pre-Superiori di Matematica | Emergenza Studio",
     description:
-      "Prepara tuo figlio per il primo anno di superiori con il nostro corso estivo. Matematica, italiano e metodo di studio a Mogliano Veneto.",
+      "Corso di matematica per chi inizia il liceo scientifico a settembre. 5 settimane, 20 ore, max 5 studenti per gruppo. Giugno 2026 a Mogliano Veneto.",
     url: "https://www.emergenza.studio/corsi/preparazione-superiori/",
     images: [{ url: "/images/hero_students.jpg" }],
     type: "website",
