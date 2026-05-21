@@ -6,11 +6,21 @@ import Breadcrumb from "@/components/Breadcrumb";
 import CtaSection from "@/components/CtaSection";
 import { WHATSAPP_URL } from "@/lib/constants";
 import { breadcrumbJsonLd, courseJsonLd } from "@/lib/structured-data";
-import { Calendar, Users, Cpu, Globe, GraduationCap, ArrowRight } from "lucide-react";
+import { Calendar, Users, Cpu, Globe, GraduationCap, BookOpen, ArrowRight } from "lucide-react";
 
 const breadcrumbs = [{ label: "Corsi", href: "/corsi" }];
 
 const corsi = [
+  {
+    icon: <BookOpen className="w-7 h-7" />,
+    title: "Preparazione alle Superiori",
+    desc: "Corso estivo per studenti che a settembre iniziano il liceo o un istituto tecnico. Matematica, italiano e metodo di studio: le basi per non partire in ritardo dal primo giorno.",
+    quando: "Estate 2026",
+    perChi: "Studenti che finiscono la 3ª media",
+    value: "preparazione-superiori",
+    link: "/corsi/preparazione-superiori",
+    highlight: true,
+  },
   {
     icon: <GraduationCap className="w-7 h-7" />,
     title: "Corso Estivo di Matematica",
@@ -88,6 +98,7 @@ export default function CorsiPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(courseJsonLd([
+            { name: "Preparazione alle Superiori", description: "Corso estivo per chi inizia le superiori a settembre. Matematica, italiano e metodo di studio con tutor qualificati a Mogliano Veneto.", startDate: "2026-07-01", endDate: "2026-08-31" },
             { name: "Corso Estivo di Matematica – Preparazione Università", description: "Corso estivo di potenziamento di matematica: trigonometria, limiti, derivate e integrali per prepararsi ad Analisi 1", startDate: "2026-06-15" },
             { name: "Preparazione TOLC – Corso Intensivo", description: "Corso intensivo di 8 settimane per la preparazione ai test d'ingresso universitari", startDate: "2026-09-01" },
             { name: "Supporto Semestre Filtro", description: "10 settimane di lezioni su Analisi Matematica I e Fisica I", startDate: "2026-10-01" },

@@ -115,7 +115,7 @@ export function serviceJsonLd() {
 
 // ── Course ──────────────────────────────────────────
 export function courseJsonLd(
-  courses: { name: string; description: string; startDate?: string }[]
+  courses: { name: string; description: string; startDate?: string; endDate?: string; location?: string }[]
 ) {
   return courses.map((c) => ({
     "@context": "https://schema.org",
@@ -128,6 +128,23 @@ export function courseJsonLd(
       url: SITE_URL,
     },
     ...(c.startDate ? { startDate: c.startDate } : {}),
+    ...(c.endDate ? { endDate: c.endDate } : {}),
+    ...(c.location
+      ? {
+          location: {
+            "@type": "Place",
+            name: "Emergenza Studio",
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: ADDRESS_STREET,
+              addressLocality: ADDRESS_CITY,
+              addressRegion: ADDRESS_PROVINCE,
+              postalCode: ADDRESS_CAP,
+              addressCountry: "IT",
+            },
+          },
+        }
+      : {}),
   }));
 }
 
