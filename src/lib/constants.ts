@@ -35,7 +35,7 @@ export const NAV_LINKS = [
 
 export const PRICES = [
   { level: "Elementari", price: 16 },
-  { level: "Medie", price: 18 },
-  { level: "Superiori", price: 22 },
+  { level: "Medie", price: 19 },
+  { level: "Superiori", price: 23 },
   { level: "Università", price: 30 },
 ];

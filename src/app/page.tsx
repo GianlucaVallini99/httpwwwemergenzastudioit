@@ -25,7 +25,7 @@ const faqs = [
   {
     question: "Quanto costa un'ora di ripetizione?",
     answer:
-      "I prezzi partono da €16/ora per le elementari, €18/ora per le medie, €22/ora per le superiori e €30/ora per l'università. Offriamo anche pacchetti ore multi-materia con tariffe agevolate.",
+      "I prezzi partono da €16/ora per le elementari, €19/ora per le medie, €23/ora per le superiori e €30/ora per l'università. Offriamo anche pacchetti ore multi-materia con tariffe agevolate.",
   },
   {
     question: "Le ripetizioni sono detraibili?",
