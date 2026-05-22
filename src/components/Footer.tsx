@@ -1,138 +1,49 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin } from "lucide-react";
-import { InstagramIcon, FacebookIcon } from "@/components/SocialIcons";
+import Image from "next/image";
 import {
-  NAV_LINKS, PHONE, EMAIL, ADDRESS_FULL,
-  ORARI, PIVA, INSTAGRAM_URL, FACEBOOK_URL,
+  ADDRESS_FULL, PHONE, PHONE_INTL, EMAIL, PIVA, NAV_LINKS,
 } from "@/lib/constants";
 
 export default function Footer() {
   return (
-    <footer className="bg-primary text-primary-foreground py-16">
-      <div className="container-custom">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          {/* Brand */}
-          <div>
-            <div className="flex items-center gap-3 mb-5">
-              <img
-                src="/logo.jpg"
-                alt="Emergenza Studio"
-                className="w-10 h-10 rounded-xl object-cover"
-                width={40}
-                height={40}
-              />
-              <span
-                className="font-bold text-lg tracking-wide uppercase"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                Emergenza Studio
-              </span>
-            </div>
-            <p className="text-primary-foreground/60 text-sm leading-relaxed">
-              Centro studi e ripetizioni a Mogliano Veneto (TV). Dalle medie
-              all&apos;università.
-            </p>
-          </div>
+    <footer className="bg-navy-deep text-white/70 pt-16 pb-9 text-sm">
+      <div className="container-custom grid gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
+        <div>
+          <Link href="/" className="flex items-center gap-3 mb-3 text-white">
+            <Image src="/logo-mark.png" alt="Emergenza Studio" width={38} height={38} className="rounded-full" />
+            <span className="font-extrabold text-base">Emergenza Studio</span>
+          </Link>
+          <p className="max-w-sm text-white/65">
+            Centro ripetizioni a Mogliano Veneto. Tutor qualificati per tutte
+            le materie, dalle medie all&apos;università.
+          </p>
+        </div>
 
-          {/* Pagine */}
-          <div>
-            <h4
-              className="font-semibold text-sm tracking-widest mb-5 uppercase"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              Pagine
-            </h4>
-            <ul className="space-y-2.5 text-sm text-primary-foreground/60">
-              {NAV_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="hover:text-accent transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <Link
-                  href="/preparazione-test"
-                  className="hover:text-accent transition-colors"
-                >
-                  Preparazione Test
+        <div>
+          <h4 className="text-white text-xs tracking-[0.08em] uppercase mb-4 font-extrabold">Sito</h4>
+          <ul className="space-y-2">
+            {NAV_LINKS.map((l) => (
+              <li key={l.href}>
+                <Link href={l.href} className="hover:text-white transition-colors">
+                  {l.label}
                 </Link>
               </li>
-            </ul>
-          </div>
-
-          {/* Contatti */}
-          <div>
-            <h4
-              className="font-semibold text-sm tracking-widest mb-5 uppercase"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              Contatti
-            </h4>
-            <ul className="space-y-3 text-sm text-primary-foreground/60">
-              <li className="flex items-start gap-2">
-                <Phone className="w-4 h-4 mt-0.5 shrink-0" />
-                <a href={`tel:${PHONE}`} className="hover:text-accent transition-colors">
-                  {PHONE}
-                </a>
-              </li>
-              <li className="flex items-start gap-2">
-                <Mail className="w-4 h-4 mt-0.5 shrink-0" />
-                <a href={`mailto:${EMAIL}`} className="hover:text-accent transition-colors">
-                  {EMAIL}
-                </a>
-              </li>
-              <li className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
-                <span>{ADDRESS_FULL}</span>
-              </li>
-              <li className="text-primary-foreground/40">{ORARI}</li>
-            </ul>
-          </div>
-
-          {/* Social */}
-          <div>
-            <h4
-              className="font-semibold text-sm tracking-widest mb-5 uppercase"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              Social
-            </h4>
-            <div className="flex flex-col gap-3">
-              <a
-                href={INSTAGRAM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-primary-foreground/60 hover:text-accent transition-colors"
-              >
-                <InstagramIcon className="w-5 h-5" />
-                @emergenza_studio
-              </a>
-              <a
-                href={FACEBOOK_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-primary-foreground/60 hover:text-accent transition-colors"
-              >
-                <FacebookIcon className="w-5 h-5" />
-                Facebook
-              </a>
-            </div>
-          </div>
+            ))}
+          </ul>
         </div>
 
-        <div className="border-t border-primary-foreground/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-primary-foreground/40">
-          <p>© {new Date().getFullYear()} Emergenza Studio. Tutti i diritti riservati.</p>
-          <div className="flex gap-6">
-            <span className="hover:text-primary-foreground/60 transition-colors cursor-pointer">
-              Privacy Policy
-            </span>
-            <span>{PIVA}</span>
-          </div>
+        <div>
+          <h4 className="text-white text-xs tracking-[0.08em] uppercase mb-4 font-extrabold">Contatti</h4>
+          <ul className="space-y-2">
+            <li><a href={`tel:${PHONE_INTL}`} className="hover:text-white">{PHONE}</a></li>
+            <li><a href={`mailto:${EMAIL}`} className="hover:text-white break-all">{EMAIL}</a></li>
+            <li className="text-white/60">{ADDRESS_FULL}</li>
+            <li className="text-white/50 text-xs mt-3">{PIVA}</li>
+          </ul>
         </div>
+      </div>
+      <div className="container-custom mt-12 pt-6 border-t border-white/10 text-center text-xs text-white/50">
+        © {new Date().getFullYear()} Emergenza Studio · Tutti i diritti riservati
       </div>
     </footer>
   );

@@ -1,8 +1,8 @@
 // ── Site-wide constants ────────────────────────────
 export const SITE_NAME = "Emergenza Studio - Centro Ripetizioni";
 export const SITE_URL = "https://www.emergenza.studio";
-export const PHONE = "340 510 6467";
-export const PHONE_INTL = "+393405106467";
+export const PHONE = "353 401 7905";
+export const PHONE_INTL = "+393534017905";
 export const EMAIL = "emergenza.studio26@gmail.com";
 export const ADDRESS_STREET = "Via Francesco Barbiero 84g";
 export const ADDRESS_CITY = "Mogliano Veneto";
