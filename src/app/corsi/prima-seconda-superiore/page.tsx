@@ -26,7 +26,8 @@ const targetList = [
 const settimane = [
   {
     num: 1,
-    titolo: "Calcolo Letterale Avanzato e Scomposizioni",
+    titolo: "Calcolo Letterale e Scomposizioni",
+    fase: "ripasso",
     argomenti: [
       "Ripasso prodotti notevoli: quadrato di binomio, somma per differenza, cubo di binomio",
       "Scomposizione in fattori: raccoglimento totale e parziale, trinomio caratteristico",
@@ -37,29 +38,32 @@ const settimane = [
   },
   {
     num: 2,
-    titolo: "Frazioni Algebriche",
+    titolo: "Equazioni di Primo Grado e Problemi",
+    fase: "ripasso",
     argomenti: [
-      "Condizioni di esistenza di una frazione algebrica",
-      "Semplificazione di frazioni algebriche",
-      "Operazioni: somma, sottrazione, moltiplicazione e divisione",
-      "Espressioni con frazioni algebriche",
+      "Ripasso equazioni di primo grado intere e frazionarie",
+      "Equazioni con parentesi e raccoglimenti",
+      "Problemi applicati: tradurre un testo in equazione e risolverlo",
+      "Esercizi misti di consolidamento sul programma di prima",
     ],
-    perche: "Le frazioni algebriche compaiono in ogni capitolo successivo: equazioni, disequazioni, funzioni. Sono il filtro naturale della seconda superiore.",
+    perche: "Le equazioni tornano in ogni capitolo del liceo. Chi le padroneggia adesso affronta disequazioni e sistemi senza dover tornare indietro.",
   },
   {
     num: 3,
-    titolo: "Equazioni e Disequazioni di Primo Grado",
+    titolo: "Frazioni Algebriche e Disequazioni",
+    fase: "anticipo",
     argomenti: [
-      "Ripasso equazioni di primo grado intere e fratte",
+      "Condizioni di esistenza di una frazione algebrica",
+      "Semplificazione e operazioni con frazioni algebriche",
       "Disequazioni di primo grado: risoluzione e rappresentazione",
       "Sistemi di disequazioni di primo grado",
-      "Problemi con disequazioni: traduzione dal testo alla formalizzazione",
     ],
-    perche: "Le disequazioni sono uno degli argomenti nuovi più ostici della seconda. Arrivarci con le equazioni già solide fa tutta la differenza.",
+    perche: "Le frazioni algebriche e le disequazioni sono il primo scoglio della seconda. Arrivarci preparati significa non accumulare lacune fin da subito.",
   },
   {
     num: 4,
     titolo: "Sistemi di Equazioni Lineari",
+    fase: "anticipo",
     argomenti: [
       "Sistemi di due equazioni in due incognite: metodo di sostituzione",
       "Metodo del confronto e metodo di riduzione (addizione e sottrazione)",
@@ -70,13 +74,13 @@ const settimane = [
   },
   {
     num: 5,
-    titolo: "Radicali e Geometria nel Piano + Ripasso",
+    titolo: "Radicali e Geometria Analitica",
+    fase: "anticipo",
     argomenti: [
       "Radicali: definizione, condizioni di esistenza, proprietà fondamentali",
       "Operazioni con i radicali: semplificazione, somma, prodotto, razionalizzazione",
       "Introduzione al piano cartesiano: distanza fra due punti, punto medio",
       "Equazione della retta: forma esplicita e implicita",
-      "Ripasso generale con esercizi misti su tutto il programma",
     ],
     perche: "I radicali e la geometria analitica aprono il secondo anno. Iniziare con queste basi già chiare significa non rincorrere fin dal primo giorno.",
   },
@@ -248,46 +252,123 @@ export default function PrimaSecondaSuperioriPage() {
             Il programma settimana per settimana
           </h2>
           <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
-            20 ore di preparazione pratica. Ogni settimana un blocco fondamentale per affrontare la seconda superiore con sicurezza.
+            20 ore di preparazione pratica: 2 settimane di ripasso degli argomenti di prima e 3 settimane di anticipo sul programma di seconda.
           </p>
 
-          <div className="max-w-3xl mx-auto space-y-6">
-            {settimane.map((s) => (
-              <div
-                key={s.num}
-                className="bg-white rounded-2xl border border-border p-6 md:p-8 hover:shadow-md transition-shadow"
-              >
-                <div className="flex items-center gap-4 mb-5">
-                  <div
-                    className="w-11 h-11 rounded-full bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center font-bold text-sm shrink-0"
-                    style={{ fontFamily: "var(--font-display)" }}
-                  >
-                    {s.num}
-                  </div>
-                  <h3
-                    className="text-lg md:text-xl font-bold text-primary"
-                    style={{ fontFamily: "var(--font-display)" }}
-                  >
-                    Settimana {s.num} — {s.titolo}
-                  </h3>
-                </div>
-
-                <ul className="space-y-2.5 mb-5 ml-1">
-                  {s.argomenti.map((arg) => (
-                    <li key={arg} className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
-                      <CheckCircle className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                      <span>{arg}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="rounded-xl bg-accent/5 border border-accent/15 px-5 py-3">
-                  <p className="text-sm text-foreground/80 leading-relaxed">
-                    <span className="font-semibold text-primary">Perché conta:</span> {s.perche}
-                  </p>
-                </div>
+          <div className="max-w-3xl mx-auto">
+            {/* ── Fase 1: Ripasso ── */}
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 rounded-lg bg-secondary/15 text-secondary flex items-center justify-center font-bold text-sm shrink-0" style={{ fontFamily: "var(--font-display)" }}>1</div>
+              <div>
+                <h3 className="text-lg md:text-xl font-bold text-primary" style={{ fontFamily: "var(--font-display)" }}>
+                  Fase 1 — Ripasso Prima Superiore
+                </h3>
+                <p className="text-sm text-muted-foreground">Settimane 1–2 · Consolidare le basi prima di andare avanti</p>
               </div>
-            ))}
+            </div>
+
+            <div className="space-y-6 mb-12">
+              {settimane.filter((s) => s.fase === "ripasso").map((s) => (
+                <div
+                  key={s.num}
+                  className="bg-white rounded-2xl border border-border p-6 md:p-8 hover:shadow-md transition-shadow"
+                >
+                  <div className="flex items-center gap-4 mb-5">
+                    <div
+                      className="w-11 h-11 rounded-full bg-gradient-to-br from-primary to-secondary text-white flex items-center justify-center font-bold text-sm shrink-0"
+                      style={{ fontFamily: "var(--font-display)" }}
+                    >
+                      {s.num}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex flex-wrap items-center gap-2 mb-1">
+                        <h3
+                          className="text-lg md:text-xl font-bold text-primary"
+                          style={{ fontFamily: "var(--font-display)" }}
+                        >
+                          Settimana {s.num} — {s.titolo}
+                        </h3>
+                      </div>
+                      <span className="inline-block rounded-full bg-secondary/10 text-secondary text-xs font-bold uppercase tracking-wider px-2.5 py-0.5">
+                        Ripasso
+                      </span>
+                    </div>
+                  </div>
+
+                  <ul className="space-y-2.5 mb-5 ml-1">
+                    {s.argomenti.map((arg) => (
+                      <li key={arg} className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
+                        <CheckCircle className="w-4 h-4 text-accent shrink-0 mt-0.5" />
+                        <span>{arg}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="rounded-xl bg-accent/5 border border-accent/15 px-5 py-3">
+                    <p className="text-sm text-foreground/80 leading-relaxed">
+                      <span className="font-semibold text-primary">Perché conta:</span> {s.perche}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* ── Fase 2: Anticipo ── */}
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 rounded-lg bg-accent/15 text-accent flex items-center justify-center font-bold text-sm shrink-0" style={{ fontFamily: "var(--font-display)" }}>2</div>
+              <div>
+                <h3 className="text-lg md:text-xl font-bold text-primary" style={{ fontFamily: "var(--font-display)" }}>
+                  Fase 2 — Anticipo Seconda Superiore
+                </h3>
+                <p className="text-sm text-muted-foreground">Settimane 3–5 · Iniziare il programma di seconda con un vantaggio</p>
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              {settimane.filter((s) => s.fase === "anticipo").map((s) => (
+                <div
+                  key={s.num}
+                  className="bg-white rounded-2xl border border-border p-6 md:p-8 hover:shadow-md transition-shadow"
+                >
+                  <div className="flex items-center gap-4 mb-5">
+                    <div
+                      className="w-11 h-11 rounded-full bg-gradient-to-br from-accent to-secondary text-white flex items-center justify-center font-bold text-sm shrink-0"
+                      style={{ fontFamily: "var(--font-display)" }}
+                    >
+                      {s.num}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex flex-wrap items-center gap-2 mb-1">
+                        <h3
+                          className="text-lg md:text-xl font-bold text-primary"
+                          style={{ fontFamily: "var(--font-display)" }}
+                        >
+                          Settimana {s.num} — {s.titolo}
+                        </h3>
+                      </div>
+                      <span className="inline-block rounded-full bg-accent/10 text-accent text-xs font-bold uppercase tracking-wider px-2.5 py-0.5">
+                        Anticipo
+                      </span>
+                    </div>
+                  </div>
+
+                  <ul className="space-y-2.5 mb-5 ml-1">
+                    {s.argomenti.map((arg) => (
+                      <li key={arg} className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
+                        <CheckCircle className="w-4 h-4 text-accent shrink-0 mt-0.5" />
+                        <span>{arg}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="rounded-xl bg-accent/5 border border-accent/15 px-5 py-3">
+                    <p className="text-sm text-foreground/80 leading-relaxed">
+                      <span className="font-semibold text-primary">Perché conta:</span> {s.perche}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
