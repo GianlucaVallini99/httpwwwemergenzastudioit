@@ -61,7 +61,7 @@ export default function Hero() {
               </div>
             </div>
           </div>
-          <div className="relative aspect-square w-full max-w-[460px] ml-auto reveal in d2">
+          <div className="relative aspect-square w-full max-w-[220px] sm:max-w-[300px] md:max-w-[460px] mx-auto md:ml-auto reveal in d2">
             <Image
               src="/logo-circle.png"
               alt="Logo Emergenza Studio"
