@@ -23,6 +23,17 @@ const corsi = [
     highlight: true,
   },
   {
+    icon: <BookOpen className="w-7 h-7" />,
+    title: "Corso Prima-Seconda Superiore di Matematica",
+    titleDropdown: "Corso Prima-Seconda Superiore di Matematica – Giugno 2026",
+    desc: "5 settimane per consolidare la prima superiore e arrivare preparati alla seconda. Frazioni algebriche, disequazioni, sistemi e radicali.",
+    quando: "Giugno 2026",
+    perChi: "Studenti che hanno concluso la prima superiore",
+    value: "prima-seconda-superiore",
+    link: "/corsi/prima-seconda-superiore",
+    highlight: true,
+  },
+  {
     icon: <GraduationCap className="w-7 h-7" />,
     title: "Corso Estivo di Matematica",
     desc: "Potenziamento di matematica in preparazione all'università e per chi deve affrontare l'esame di Analisi 1. Trigonometria, limiti, derivate e integrali.",
@@ -100,6 +111,7 @@ export default function CorsiPage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(courseJsonLd([
             { name: "Corso Pre-Superiori di Matematica", description: "Corso di matematica per studenti che iniziano il liceo scientifico. 5 settimane, 20 ore totali, max 5 studenti per gruppo.", startDate: "2026-06-01", endDate: "2026-06-30" },
+            { name: "Corso Prima-Seconda Superiore di Matematica", description: "Corso di matematica per studenti che hanno concluso la prima superiore. 5 settimane, 20 ore totali, max 5 studenti per gruppo.", startDate: "2026-06-01", endDate: "2026-06-30" },
             { name: "Corso Estivo di Matematica – Preparazione Università", description: "Corso estivo di potenziamento di matematica: trigonometria, limiti, derivate e integrali per prepararsi ad Analisi 1", startDate: "2026-06-15" },
             { name: "Preparazione TOLC – Corso Intensivo", description: "Corso intensivo di 8 settimane per la preparazione ai test d'ingresso universitari", startDate: "2026-09-01" },
             { name: "Supporto Semestre Filtro", description: "10 settimane di lezioni su Analisi Matematica I e Fisica I", startDate: "2026-10-01" },
