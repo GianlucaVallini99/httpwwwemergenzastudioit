@@ -13,7 +13,7 @@ export function localBusinessJsonLd() {
     name: "Emergenza Studio",
     alternateName: "Emergenza Studio Centro Ripetizioni",
     description:
-      "Centro ripetizioni e doposcuola a Mogliano Veneto. Tutor qualificati per tutte le materie, dalle medie all'università. Pacchetti flessibili, fatturazione regolare e detraibile al 19%.",
+      "Centro ripetizioni e doposcuola a Mogliano Veneto. Tutor qualificati per tutte le materie, dalle medie all'università. Pacchetti flessibili e fatturazione regolare.",
     url: SITE_URL,
     logo: `${SITE_URL}/logo.jpg`,
     image: `${SITE_URL}/images/hero_students.jpg`,

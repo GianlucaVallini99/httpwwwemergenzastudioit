@@ -8,7 +8,7 @@ import { breadcrumbJsonLd } from "@/lib/structured-data";
 export const metadata: Metadata = {
   title: "Chi Siamo | Emergenza Studio - Centro Ripetizioni Mogliano Veneto",
   description:
-    "Emergenza Studio è il centro ripetizioni di Mogliano Veneto fondato con l'obiettivo di offrire supporto scolastico qualificato, flessibile e detraibile a studenti di ogni livello.",
+    "Emergenza Studio è il centro ripetizioni di Mogliano Veneto fondato con l'obiettivo di offrire supporto scolastico qualificato e flessibile a studenti di ogni livello.",
   alternates: { canonical: `${SITE_URL}/chi-siamo/` },
 };
 

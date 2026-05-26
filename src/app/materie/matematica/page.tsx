@@ -8,7 +8,7 @@ import { CheckCircle } from "lucide-react";
 export const metadata: Metadata = {
   title: "Ripetizioni Matematica Mogliano Veneto",
   description:
-    "Ripetizioni di matematica a Mogliano Veneto per medie, superiori e università. Tutor specializzati, pacchetti flessibili, fatturazione detraibile al 19%. Emergenza Studio.",
+    "Ripetizioni di matematica a Mogliano Veneto per medie, superiori e università. Tutor specializzati, pacchetti flessibili. Emergenza Studio.",
   alternates: { canonical: `${SITE_URL}/materie/matematica/` },
 };
 
@@ -74,7 +74,7 @@ export default function MatematicaPage() {
               "Possibilità di intensificare le lezioni prima di verifiche e interrogazioni",
               "Pacchetti ore utilizzabili anche per altre materie se una settimana non serve matematica",
               "Ambiente tranquillo e dedicato, a 50 metri dal Liceo Berto",
-              "Prezzi trasparenti e fatturazione detraibile al 19%",
+              "Prezzi trasparenti e fatturazione regolare",
             ].map((item) => (
               <li key={item} className="flex items-start gap-3 text-muted-foreground">
                 <CheckCircle className="w-5 h-5 text-accent shrink-0 mt-0.5" />

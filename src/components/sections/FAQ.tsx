@@ -2,7 +2,7 @@ import { SectionBlobs } from "@/components/Blobs";
 
 const FAQS = [
   { q: "Quali materie coprite?", a: "Tutte. Matematica, fisica, italiano, latino, greco, inglese, storia, filosofia, chimica, scienze, economia e molte altre. Se non vedi la tua materia, chiedi: probabilmente abbiamo il tutor giusto." },
-  { q: "Le ripetizioni sono detraibili?", a: "Sì. Tutte le lezioni sono regolarmente fatturate e le famiglie possono detrarre il 19% del costo nella dichiarazione dei redditi." },
+  { q: "Posso cambiare materia o tutor?", a: "Sì. Se lo studente ha bisogno di cambiare materia o preferisce un altro tutor, basta comunicarlo e organizziamo la lezione successiva con le nuove preferenze." },
   { q: "Come prenoto la prima lezione?", a: "Scrivici su WhatsApp al +39 353 401 7905, chiamaci o passa direttamente al centro. Ti rispondiamo entro 24h con orari e tutor disponibili." },
   { q: "Fate anche lezioni di gruppo?", a: "Sì. Organizziamo piccoli gruppi di 2-4 studenti dello stesso livello. È più conveniente e si impara confrontandosi con i compagni." },
 ];

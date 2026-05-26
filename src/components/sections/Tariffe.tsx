@@ -15,19 +15,16 @@ export default function Tariffe() {
         <div className="grid gap-14 lg:grid-cols-[1fr_1.05fr] items-center">
           <div className="reveal">
             <span className="text-secondary text-sm font-extrabold tracking-[0.08em] uppercase block mb-3">Le nostre tariffe</span>
-            <h2 className="text-[clamp(34px,4.2vw,52px)] mb-4">Prezzi chiari, fatturazione regolare.</h2>
+            <h2 className="text-[clamp(34px,4.2vw,52px)] mb-4">Prezzi chiari, senza sorprese.</h2>
             <p className="text-lg text-muted-foreground mb-6">
-              Tutte le lezioni sono regolarmente fatturate e le famiglie possono
-              detrarre il <strong className="text-primary">19% del costo</strong> nella
-              dichiarazione dei redditi.
+              Tutte le lezioni sono regolarmente fatturate. Nessun costo nascosto,
+              nessun vincolo di lungo periodo.
             </p>
             <ul className="space-y-3 mb-8">
               <li className="flex items-center gap-3.5 text-foreground/80 font-semibold">
                 <span className="w-2.5 h-2.5 rounded-full bg-accent" /> Cambio tutor sempre possibile
               </li>
-              <li className="flex items-center gap-3.5 text-foreground/80 font-semibold">
-                <span className="w-2.5 h-2.5 rounded-full bg-accent" /> Detraibili al 19% in dichiarazione
-              </li>
+
             </ul>
             <Link
               href="/contatti"

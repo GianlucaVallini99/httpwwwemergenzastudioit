@@ -482,7 +482,7 @@ export default function PrimaSecondaSuperioriPage() {
           <div className="max-w-3xl mx-auto">
             <div className="rounded-xl bg-accent/5 border border-accent/15 px-6 py-4 text-center">
               <p className="text-sm text-foreground/80 leading-relaxed">
-                📄 Il corso è fatturato regolarmente. Le famiglie possono detrarre il 19% nella dichiarazione dei redditi.
+                📄 Il corso è fatturato regolarmente.
               </p>
             </div>
           </div>

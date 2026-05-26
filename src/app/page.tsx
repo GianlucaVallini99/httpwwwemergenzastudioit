@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 const FAQ_DATA = [
   { question: "Quali materie coprite?",          answer: "Tutte. Matematica, fisica, italiano, latino, greco, inglese, storia, filosofia, chimica, scienze, economia e molte altre." },
-  { question: "Le ripetizioni sono detraibili?", answer: "Sì. Tutte le lezioni sono regolarmente fatturate e le famiglie possono detrarre il 19% del costo nella dichiarazione dei redditi." },
+  { question: "Posso cambiare materia o tutor?", answer: "Sì. Basta comunicarlo e organizziamo la lezione successiva con le nuove preferenze." },
   { question: "Come prenoto la prima lezione?",  answer: "Scrivici su WhatsApp al +39 353 401 7905, chiamaci o passa direttamente al centro. Ti rispondiamo entro 24h." },
   { question: "Fate anche lezioni di gruppo?",   answer: "Sì. Organizziamo piccoli gruppi di 2-4 studenti dello stesso livello." },
 ];

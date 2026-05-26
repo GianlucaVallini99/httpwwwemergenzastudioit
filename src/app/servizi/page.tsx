@@ -8,7 +8,7 @@ import { serviceJsonLd, breadcrumbJsonLd } from "@/lib/structured-data";
 export const metadata: Metadata = {
   title: "Servizi e Prezzi | Emergenza Studio - Ripetizioni Mogliano Veneto",
   description:
-    "Ripetizioni individuali, di gruppo, doposcuola e aiuto compiti. Prezzi da €16/ora. Fattura regolare con detrazione 19%. Mogliano Veneto (TV).",
+    "Ripetizioni individuali, di gruppo, doposcuola e aiuto compiti. Prezzi da €16/ora. Fattura regolare. Mogliano Veneto (TV).",
   alternates: { canonical: `${SITE_URL}/servizi/` },
 };
 
@@ -170,9 +170,7 @@ export default function ServiziPage() {
             <p className="text-sm text-muted-foreground text-center mt-4 max-w-lg mx-auto">
               I pacchetti ore multi-materia prevedono tariffe agevolate. Contattaci per un preventivo personalizzato.
             </p>
-            <p className="text-sm text-muted-foreground text-center mt-2 max-w-lg mx-auto">
-              Tutte le lezioni sono regolarmente fatturate. Le famiglie possono detrarre il 19% del costo nella dichiarazione dei redditi.
-            </p>
+
           </div>
         </div>
       </section>
