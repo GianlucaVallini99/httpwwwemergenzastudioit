@@ -77,10 +77,24 @@ export default function ChiSiamoPage() {
             Il nostro team è composto da tutor qualificati, selezionati per competenza nella materia e capacità didattica. Ogni tutor viene scelto non solo per ciò che sa, ma per come riesce a trasmetterlo.
           </p>
 
-          {/* Tutor placeholder cards */}
+          {/* Tutor cards */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {/* Gianluca Vallini — con foto */}
+            <div className="bg-card rounded-2xl p-6 border border-border text-center">
+              <div className="w-20 h-20 rounded-full mx-auto mb-4 overflow-hidden">
+                <img
+                  src="/images/gianluca_vallini.jpg"
+                  alt="Gianluca Vallini — Tutor di Matematica e Fisica"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <h3 className="text-lg font-bold text-primary mb-1" style={{ fontFamily: "var(--font-display)" }}>Gianluca Vallini</h3>
+              <p className="text-sm text-muted-foreground">Matematica, Fisica</p>
+            </div>
+
+            {/* Altri tutor (placeholder) */}
             {[
-              { name: "Tutor 1", materie: "Matematica, Fisica" },
               { name: "Tutor 2", materie: "Italiano, Latino, Greco" },
               { name: "Tutor 3", materie: "Inglese, Francese" },
             ].map((t) => (
