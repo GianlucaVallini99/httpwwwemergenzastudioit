@@ -57,7 +57,7 @@ export default function ChiSiamoPage() {
             <div className="rounded-2xl overflow-hidden aspect-video bg-muted flex items-center justify-center">
               <img
                 src="/images/studio_individuale.png"
-                alt="Postazione studio individuale Emergenza Studio Mogliano Veneto"
+                alt="Sala studio interna Emergenza Studio Mogliano Veneto — postazioni di lavoro"
                 className="w-full h-full object-cover"
                 loading="lazy"
               />
@@ -65,7 +65,7 @@ export default function ChiSiamoPage() {
             <div className="rounded-2xl overflow-hidden aspect-video bg-muted flex items-center justify-center">
               <img
                 src="/images/studio_gruppo.png"
-                alt="Studio di gruppo Emergenza Studio Mogliano Veneto"
+                alt="Ingresso Emergenza Studio Mogliano Veneto — vetrina con logo"
                 className="w-full h-full object-cover"
                 loading="lazy"
               />
