@@ -1,8 +1,10 @@
 import { WHATSAPP_URL } from "@/lib/constants";
+import { SectionBlobs } from "@/components/Blobs";
 
 export default function CtaBand() {
   return (
-    <section className="py-14">
+    <section className="relative py-14">
+      <SectionBlobs variant="b" />
       <div className="container-custom">
         <div className="relative bg-primary text-white rounded-[32px] p-12 md:p-14 overflow-hidden flex flex-col md:flex-row md:items-center md:justify-between gap-8 reveal">
           <div

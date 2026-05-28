@@ -2,9 +2,9 @@ import Link from "next/link";
 import { SectionBlobs } from "@/components/Blobs";
 
 const ROWS = [
-  { level: "Medie",      individuale: 19, gruppo: 14 },
-  { level: "Superiori",  individuale: 23, gruppo: 18 },
-  { level: "Università", individuale: 30, gruppo: 23 },
+  { level: "Medie",      individuale: 20, gruppo: 14 },
+  { level: "Superiori",  individuale: 25, gruppo: 18 },
+  { level: "Università", individuale: 33, gruppo: 23 },
 ];
 
 export default function Tariffe() {

@@ -105,9 +105,9 @@ export function serviceJsonLd() {
       name: "Pacchetti Ripetizioni",
       itemListElement: [
         { "@type": "Offer", name: "Ripetizioni Elementari", price: "16", priceCurrency: "EUR", unitText: "ora" },
-        { "@type": "Offer", name: "Ripetizioni Medie", price: "19", priceCurrency: "EUR", unitText: "ora" },
-        { "@type": "Offer", name: "Ripetizioni Superiori", price: "23", priceCurrency: "EUR", unitText: "ora" },
-        { "@type": "Offer", name: "Ripetizioni Università", price: "30", priceCurrency: "EUR", unitText: "ora" },
+        { "@type": "Offer", name: "Ripetizioni Medie", price: "20", priceCurrency: "EUR", unitText: "ora" },
+        { "@type": "Offer", name: "Ripetizioni Superiori", price: "25", priceCurrency: "EUR", unitText: "ora" },
+        { "@type": "Offer", name: "Ripetizioni Università", price: "33", priceCurrency: "EUR", unitText: "ora" },
       ],
     },
   };

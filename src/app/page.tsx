@@ -10,6 +10,7 @@ import Tariffe from "@/components/sections/Tariffe";
 import ChiSiamo from "@/components/sections/ChiSiamo";
 import Contatti from "@/components/sections/Contatti";
 import FAQ from "@/components/sections/FAQ";
+import AltriServizi from "@/components/sections/AltriServizi";
 import CtaBand from "@/components/sections/CtaBand";
 
 export const metadata: Metadata = {
@@ -39,6 +40,7 @@ export default function HomePage() {
       <Corsi />
       <Tariffe />
       <ChiSiamo />
+      <AltriServizi />
       <Contatti />
       <FAQ />
       <CtaBand />
