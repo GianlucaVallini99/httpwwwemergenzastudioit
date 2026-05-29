@@ -38,12 +38,11 @@ export default function AltriServizi() {
             Ulteriori servizi
           </span>
           <h2 className="text-[clamp(34px,4.2vw,52px)] mb-4">
-            Supporto psicologico in sede
+            Supporto psicologico
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Emergenza Studio collabora con psicologhe qualificate che ricevono
-            direttamente nei nostri spazi, per un supporto completo allo studio e
-            alla crescita personale.
+            Emergenza Studio collabora con psicologhe qualificate, per un supporto
+            completo allo studio e alla crescita personale.
           </p>
         </div>
 
