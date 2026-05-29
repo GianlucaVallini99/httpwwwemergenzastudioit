@@ -15,14 +15,16 @@ const PSICOLOGHE = [
     email: "psicologa.alicepizzato@gmail.com",
   },
   {
-    nome: "Dott.ssa [Nome Cognome]",
-    foto: null,
+    nome: "Dott.ssa Anita Cinot",
+    foto: "/images/anita_cinot.jpg",
     logo: null,
-    descrizione: "Descrizione in arrivo.",
-    esperienza: null,
+    descrizione:
+      "Psicologa dell'Età Evolutiva, iscritta all'Albo degli Psicologi del Veneto n. 6738. Laureata in Psicologia a Padova, si è specializzata in Psicologia Scolastica e Neuropsicologia, approfondendo temi come DSA, ADHD, plusdotazione e alto potenziale cognitivo. Attualmente frequenta la Scuola di Specializzazione in Psicoterapia AETOS di Mestre.",
+    esperienza:
+      "All'interno del doposcuola accompagna i ragazzi nella comprensione di sé, nel superamento degli ostacoli, nella costruzione dell'autostima e nella valorizzazione dei propri punti di forza. Presso Emergenza Studio offre consulenze psicologiche per bambini, ragazzi e famiglie e valutazioni cognitive, emotive e degli apprendimenti.",
     indirizzo: null,
-    telefono: null,
-    email: null,
+    telefono: "351-7527539",
+    email: "abcpsicologia.studio@gmail.com",
   },
 ];
 
