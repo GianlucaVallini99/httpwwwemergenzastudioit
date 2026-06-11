@@ -68,7 +68,7 @@ export default function FisicaPage() {
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
               La fisica è protagonista anche nei nostri percorsi di gruppo: supporto al semestre
-              filtro di Medicina, preparazione TOLC e recupero debiti estivo.
+              filtro di Medicina (corso serale del venerdì) e recupero debiti estivo.
             </p>
             <Link href="/corsi" className="inline-flex items-center gap-2 text-accent font-semibold hover:underline">
               Vai ai corsi →

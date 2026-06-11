@@ -6,7 +6,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import CtaSection from "@/components/CtaSection";
 import { WHATSAPP_URL } from "@/lib/constants";
 import { breadcrumbJsonLd, courseJsonLd } from "@/lib/structured-data";
-import { Calendar, Users, Cpu, Globe, GraduationCap, BookOpen, ArrowRight } from "lucide-react";
+import { Calendar, Users, Globe, GraduationCap, BookOpen, ArrowRight } from "lucide-react";
 
 const breadcrumbs = [{ label: "Corsi", href: "/corsi" }];
 
@@ -43,17 +43,6 @@ const corsi = [
     highlight: true,
   },
   {
-    icon: <BookOpen className="w-7 h-7" />,
-    title: "Corso Prima-Seconda Superiore di Matematica",
-    titleDropdown: "Corso Prima-Seconda Superiore di Matematica – Giugno 2026",
-    desc: "5 settimane per consolidare la prima superiore e arrivare preparati alla seconda. Frazioni algebriche, disequazioni, sistemi e radicali.",
-    quando: "Giugno 2026",
-    perChi: "Studenti che hanno concluso la prima superiore",
-    value: "prima-seconda-superiore",
-    link: "/corsi/prima-seconda-superiore",
-    highlight: true,
-  },
-  {
     icon: <GraduationCap className="w-7 h-7" />,
     title: "Corso Estivo di Matematica",
     desc: "Potenziamento di matematica in preparazione all'università e per chi deve affrontare l'esame di Analisi 1. Trigonometria, limiti, derivate e integrali.",
@@ -64,16 +53,6 @@ const corsi = [
     highlight: true,
   },
   {
-    icon: <Calendar className="w-7 h-7" />,
-    title: "Preparazione TOLC – Corso Intensivo",
-    desc: "Un percorso intensivo per prepararsi ai test d'ingresso universitari con lezioni serali, materiale dedicato e simulazioni settimanali. Tutte le tipologie di TOLC.",
-    quando: "Da settembre",
-    perChi: "Diplomandi e maturandi",
-    value: "tolc",
-    link: "/corsi/tolc",
-    highlight: false,
-  },
-  {
     icon: <Users className="w-7 h-7" />,
     title: "Supporto Semestre Filtro",
     desc: "Tre corsi serali separati per gli esami del semestre filtro di Medicina: chimica il lunedì, biologia il mercoledì, fisica il venerdì. 2 ore a lezione, €15/h. Iscriviti anche a una sola materia.",
@@ -81,7 +60,7 @@ const corsi = [
     perChi: "Aspiranti matricole di Medicina",
     value: "semestre-filtro",
     link: "/corsi/semestre-filtro",
-    highlight: false,
+    highlight: true,
   },
   {
     icon: <Globe className="w-7 h-7" />,
@@ -91,17 +70,7 @@ const corsi = [
     perChi: "Studenti e adulti di tutti i livelli",
     value: "english-speaking",
     link: "/corsi/english-speaking-club",
-    highlight: false,
-  },
-  {
-    icon: <Cpu className="w-7 h-7" />,
-    title: "AI & Strumenti Digitali per Professionisti",
-    desc: "Un corso pratico di 4 settimane per imparare a utilizzare l'intelligenza artificiale e gli strumenti digitali più utili nel lavoro quotidiano: dalla produttività alla comunicazione, dall'analisi dati alla creazione di contenuti.",
-    quando: "Da novembre 2026",
-    perChi: "Professionisti, imprenditori, dipendenti",
-    value: "ai-tools",
-    link: null,
-    highlight: false,
+    highlight: true,
   },
 ];
 
@@ -133,12 +102,9 @@ export default function CorsiPage() {
             { name: "Recupero Debiti Estivi", description: "Percorsi estivi di recupero dei debiti formativi, individuali o in piccoli gruppi di compagni di classe (2-4 studenti) con il debito nella stessa materia.", startDate: "2026-06-15" },
             { name: "Corso di Preparazione alla Classe Successiva", description: "6 lezioni da un'ora dal 1 al 9 settembre per ripassare gli argomenti fondamentali prima di iniziare la nuova classe.", startDate: "2026-09-01", endDate: "2026-09-09" },
             { name: "Corso Pre-Superiori di Matematica", description: "Corso di matematica per studenti che iniziano il liceo scientifico. 5 settimane, 20 ore totali, max 5 studenti per gruppo.", startDate: "2026-06-01", endDate: "2026-06-30" },
-            { name: "Corso Prima-Seconda Superiore di Matematica", description: "Corso di matematica per studenti che hanno concluso la prima superiore. 5 settimane, 20 ore totali, max 5 studenti per gruppo.", startDate: "2026-06-01", endDate: "2026-06-30" },
             { name: "Corso Estivo di Matematica – Preparazione Università", description: "Corso estivo di potenziamento di matematica: trigonometria, limiti, derivate e integrali per prepararsi ad Analisi 1", startDate: "2026-06-15" },
-            { name: "Preparazione TOLC – Corso Intensivo", description: "Corso intensivo per la preparazione ai test d'ingresso universitari TOLC, con simulazioni settimanali", startDate: "2026-09-01" },
             { name: "Supporto Semestre Filtro", description: "Lezioni di supporto su chimica, biologia e fisica per gli esami del semestre filtro di Medicina", startDate: "2026-09-01" },
             { name: "English Speaking Club", description: "Incontri settimanali di conversazione in inglese in piccoli gruppi", startDate: "2026-09-01" },
-            { name: "AI & Strumenti Digitali per Professionisti", description: "Corso pratico sull'intelligenza artificiale e strumenti digitali per il lavoro", startDate: "2026-11-01" },
           ])),
         }}
       />
@@ -202,16 +168,16 @@ export default function CorsiPage() {
           {/* Waiting List Form */}
           <div className="max-w-xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-bold text-primary mb-4 text-center" style={{ fontFamily: "var(--font-display)" }}>
-              Iscriviti alla Waiting List
+              Resta aggiornato sui corsi
             </h2>
             <p className="text-muted-foreground text-center mb-8 leading-relaxed">
-              Alcuni corsi sono ancora in fase di organizzazione. Lascia il tuo contatto per essere tra i primi a sapere quando apriremo le iscrizioni e per accedere alla tariffa early bird riservata ai primi iscritti.
+              Vuoi più informazioni su un corso o essere avvisato quando partono i prossimi gruppi? Lascia il tuo contatto: ti rispondiamo entro 24 ore.
             </p>
 
             {submitted ? (
               <div className="rounded-2xl bg-accent/10 border border-accent/20 p-8 text-center">
                 <p className="text-lg font-semibold text-accent mb-2">Grazie per l&apos;iscrizione!</p>
-                <p className="text-muted-foreground">Ti contatteremo appena saranno disponibili le date dei corsi.</p>
+                <p className="text-muted-foreground">Ti contatteremo entro 24 ore con tutte le informazioni sul corso.</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -270,7 +236,7 @@ export default function CorsiPage() {
                   className="w-full rounded-xl px-6 py-4 bg-accent text-accent-foreground font-semibold uppercase tracking-wider hover:bg-accent/90 transition-colors shadow-lg"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
-                  Iscrivimi alla waiting list
+                  Invia la richiesta
                 </button>
               </form>
             )}

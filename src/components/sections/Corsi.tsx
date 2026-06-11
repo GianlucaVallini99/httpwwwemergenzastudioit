@@ -23,15 +23,15 @@ const CORSI = [
     num: "03",
     title: "Lingue e Professione",
     lede: "Corsi serali durante l'anno per chi vuole investire sulla propria formazione, fuori dal banco di scuola.",
-    bullets: ["English Speaking Club", "AI & Strumenti Digitali", "Conversazione in piccoli gruppi"],
+    bullets: ["English Speaking Club", "Iscrizioni aperte da settembre", "Conversazione in piccoli gruppi"],
     href: "/corsi/english-speaking-club",
   },
   {
     tag: "Test ammissione",
     num: "04",
     title: "Test Università",
-    lede: "Percorsi intensivi per TOLC e semestre filtro, per superare i test d'ingresso e i primi esami universitari.",
-    bullets: ["TOLC — Corso Intensivo", "Supporto Semestre Filtro", "Chimica · Biologia · Fisica in serale"],
+    lede: "Supporto al semestre filtro di Medicina e preparazione ai test d'ingresso universitari.",
+    bullets: ["Supporto Semestre Filtro", "Chimica · Biologia · Fisica in serale", "Iscrizioni aperte da settembre"],
     href: "/preparazione-test",
   },
 ];

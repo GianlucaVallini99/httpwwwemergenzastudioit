@@ -89,8 +89,8 @@ export default function MatematicaPage() {
               Non solo ripetizioni: scopri i nostri corsi di matematica
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
-              Corsi estivi di recupero e potenziamento, preparazione alla classe successiva,
-              preparazione TOLC e supporto per Analisi 1: percorsi di gruppo strutturati a costo ridotto.
+              Corsi estivi di recupero e potenziamento, preparazione alla classe successiva
+              e supporto per Analisi 1: percorsi di gruppo strutturati a costo ridotto.
             </p>
             <Link href="/corsi" className="inline-flex items-center gap-2 text-accent font-semibold hover:underline">
               Vai ai corsi →
