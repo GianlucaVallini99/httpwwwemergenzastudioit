@@ -1,5 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import { SectionBlobs } from "@/components/Blobs";
+import { ChevronDown } from "lucide-react";
 
 const PSICOLOGHE = [
   {
@@ -28,6 +32,87 @@ const PSICOLOGHE = [
   },
 ];
 
+function PsicologaCard({ p, delay }: { p: (typeof PSICOLOGHE)[number]; delay: number }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div
+      className="group bg-card rounded-[32px] p-9 border border-border shadow-[0_30px_60px_-30px_rgba(21,50,79,0.25)] hover:-translate-y-1.5 hover:shadow-[0_40px_70px_-30px_rgba(21,50,79,0.4)] hover:border-accent/30 transition-all duration-300 reveal"
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      <div className="flex items-start gap-6 mb-6">
+        {p.foto ? (
+          <div className="relative shrink-0">
+            <Image
+              src={p.foto}
+              alt={p.nome}
+              width={100}
+              height={100}
+              className="rounded-full object-cover w-[100px] h-[100px] ring-4 ring-transparent group-hover:ring-accent/25 group-hover:scale-105 transition-all duration-300"
+            />
+          </div>
+        ) : (
+          <div className="w-[100px] h-[100px] rounded-full bg-accent/20 shrink-0 flex items-center justify-center">
+            <span className="text-3xl text-primary/40">?</span>
+          </div>
+        )}
+        <div>
+          <div className="flex items-center gap-3 mb-1">
+            <h3 className="text-xl font-black text-primary group-hover:text-secondary transition-colors">{p.nome}</h3>
+            {p.logo && (
+              <Image src={p.logo} alt="Logo" width={36} height={36} className="object-contain" />
+            )}
+          </div>
+          <p className="text-muted-foreground">{p.descrizione}</p>
+        </div>
+      </div>
+
+      {p.esperienza && (
+        <div
+          className="grid transition-[grid-template-rows] duration-500 ease-in-out"
+          style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
+        >
+          <div className="overflow-hidden">
+            <p className="text-muted-foreground mb-6">{p.esperienza}</p>
+          </div>
+        </div>
+      )}
+
+      {p.esperienza && (
+        <button
+          type="button"
+          onClick={() => setOpen(!open)}
+          aria-expanded={open}
+          className="inline-flex items-center gap-1.5 text-secondary font-extrabold text-sm hover:text-teal-deep transition-colors mb-5"
+        >
+          {open ? "Mostra meno" : "Leggi di più"}
+          <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
+        </button>
+      )}
+
+      {(p.indirizzo || p.telefono || p.email) && (
+        <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold text-foreground/80 border-t border-border pt-5">
+          {p.indirizzo && (
+            <span className="flex items-center gap-2">
+              <span className="text-secondary">&#x1F4CD;</span> {p.indirizzo}
+            </span>
+          )}
+          {p.telefono && (
+            <a href={`tel:+39${p.telefono.replace(/-/g, "")}`} className="flex items-center gap-2 hover:text-secondary transition-colors">
+              <span className="text-secondary">&#x1F4DE;</span> {p.telefono}
+            </a>
+          )}
+          {p.email && (
+            <a href={`mailto:${p.email}`} className="flex items-center gap-2 hover:text-secondary transition-colors">
+              <span className="text-secondary">&#x2709;&#xFE0F;</span> {p.email}
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function AltriServizi() {
   return (
     <section id="altri-servizi" className="section-spacing section-tint">
@@ -47,66 +132,8 @@ export default function AltriServizi() {
         </div>
 
         <div className="grid gap-10 lg:grid-cols-2">
-          {PSICOLOGHE.map((p) => (
-            <div
-              key={p.nome}
-              className="bg-card rounded-[32px] p-9 border border-border shadow-[0_30px_60px_-30px_rgba(21,50,79,0.25)] reveal"
-            >
-              <div className="flex items-start gap-6 mb-6">
-                {p.foto ? (
-                  <Image
-                    src={p.foto}
-                    alt={p.nome}
-                    width={100}
-                    height={100}
-                    className="rounded-full object-cover w-[100px] h-[100px] shrink-0"
-                  />
-                ) : (
-                  <div className="w-[100px] h-[100px] rounded-full bg-accent/20 shrink-0 flex items-center justify-center">
-                    <span className="text-3xl text-primary/40">?</span>
-                  </div>
-                )}
-                <div>
-                  <div className="flex items-center gap-3 mb-1">
-                    <h3 className="text-xl font-black text-primary">{p.nome}</h3>
-                    {p.logo && (
-                      <Image
-                        src={p.logo}
-                        alt="Logo"
-                        width={36}
-                        height={36}
-                        className="object-contain"
-                      />
-                    )}
-                  </div>
-                  <p className="text-muted-foreground">{p.descrizione}</p>
-                </div>
-              </div>
-
-              {p.esperienza && (
-                <p className="text-muted-foreground mb-6">{p.esperienza}</p>
-              )}
-
-              {(p.indirizzo || p.telefono || p.email) && (
-                <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold text-foreground/80 border-t border-border pt-5">
-                  {p.indirizzo && (
-                    <span className="flex items-center gap-2">
-                      <span className="text-secondary">&#x1F4CD;</span> {p.indirizzo}
-                    </span>
-                  )}
-                  {p.telefono && (
-                    <a href={`tel:+39${p.telefono.replace(/-/g, "")}`} className="flex items-center gap-2 hover:text-secondary transition-colors">
-                      <span className="text-secondary">&#x1F4DE;</span> {p.telefono}
-                    </a>
-                  )}
-                  {p.email && (
-                    <a href={`mailto:${p.email}`} className="flex items-center gap-2 hover:text-secondary transition-colors">
-                      <span className="text-secondary">&#x2709;&#xFE0F;</span> {p.email}
-                    </a>
-                  )}
-                </div>
-              )}
-            </div>
+          {PSICOLOGHE.map((p, i) => (
+            <PsicologaCard key={p.nome} p={p} delay={i * 120} />
           ))}
         </div>
       </div>

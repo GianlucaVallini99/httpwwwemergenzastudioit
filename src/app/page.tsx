@@ -7,6 +7,7 @@ import Hero from "@/components/sections/Hero";
 import Servizi from "@/components/sections/Servizi";
 import Corsi from "@/components/sections/Corsi";
 import Tariffe from "@/components/sections/Tariffe";
+import Detrazione from "@/components/sections/Detrazione";
 import ChiSiamo from "@/components/sections/ChiSiamo";
 import Contatti from "@/components/sections/Contatti";
 import FAQ from "@/components/sections/FAQ";
@@ -39,6 +40,7 @@ export default function HomePage() {
       <Servizi />
       <Corsi />
       <Tariffe />
+      <Detrazione />
       <ChiSiamo />
       <AltriServizi />
       <Contatti />

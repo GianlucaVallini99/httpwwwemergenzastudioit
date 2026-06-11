@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 import CtaSection from "@/components/CtaSection";
 import { SITE_URL } from "@/lib/constants";
@@ -60,6 +61,19 @@ export default function FisicaPage() {
           <p className="text-muted-foreground leading-relaxed mb-8">
             Per gli studenti universitari, lavoriamo direttamente sui problemi d&apos;esame del proprio corso, con simulazioni e correzione dettagliata.
           </p>
+
+          <div className="rounded-2xl bg-gradient-to-br from-accent/10 to-secondary/10 border border-accent/20 p-8 mb-8">
+            <h2 className="text-2xl font-bold text-primary mb-3" style={{ fontFamily: "var(--font-display)" }}>
+              Non solo ripetizioni: scopri i nostri corsi
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              La fisica è protagonista anche nei nostri percorsi di gruppo: supporto al semestre
+              filtro di Medicina, preparazione TOLC e recupero debiti estivo.
+            </p>
+            <Link href="/corsi" className="inline-flex items-center gap-2 text-accent font-semibold hover:underline">
+              Vai ai corsi →
+            </Link>
+          </div>
         </div>
       </section>
 

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 import CtaSection from "@/components/CtaSection";
-import { SITE_URL, WHATSAPP_URL } from "@/lib/constants";
+import { SITE_URL } from "@/lib/constants";
 import { breadcrumbJsonLd } from "@/lib/structured-data";
 import { CheckCircle } from "lucide-react";
 
@@ -82,6 +83,19 @@ export default function MatematicaPage() {
               </li>
             ))}
           </ul>
+
+          <div className="rounded-2xl bg-gradient-to-br from-accent/10 to-secondary/10 border border-accent/20 p-8 mb-8">
+            <h2 className="text-2xl font-bold text-primary mb-3" style={{ fontFamily: "var(--font-display)" }}>
+              Non solo ripetizioni: scopri i nostri corsi di matematica
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              Corsi estivi di recupero e potenziamento, preparazione alla classe successiva,
+              preparazione TOLC e supporto per Analisi 1: percorsi di gruppo strutturati a costo ridotto.
+            </p>
+            <Link href="/corsi" className="inline-flex items-center gap-2 text-accent font-semibold hover:underline">
+              Vai ai corsi →
+            </Link>
+          </div>
         </div>
       </section>
 

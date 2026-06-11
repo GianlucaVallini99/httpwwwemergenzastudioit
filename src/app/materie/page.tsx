@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 import CtaSection from "@/components/CtaSection";
-import { SITE_URL, WHATSAPP_URL } from "@/lib/constants";
+import { SITE_URL } from "@/lib/constants";
 import { breadcrumbJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
@@ -17,19 +17,21 @@ const breadcrumbs = [{ label: "Materie", href: "/materie" }];
 const scientifiche = [
   { name: "Matematica", slug: "matematica", desc: "La materia più richiesta. I nostri tutor di matematica lavorano con studenti dalle medie all'università, coprendo: aritmetica, algebra, geometria, analisi matematica, probabilità e statistica. Ogni lezione parte dalle difficoltà specifiche dello studente e costruisce comprensione solida, non memorizzazione di formule." },
   { name: "Fisica", slug: "fisica", desc: "Dalla meccanica alla termodinamica, dall'elettromagnetismo all'ottica. Le nostre lezioni di fisica combinano la comprensione teorica con la risoluzione pratica dei problemi, perché in fisica non basta sapere la formula: bisogna capire quando e come usarla." },
-  { name: "Chimica", slug: null, desc: "Chimica generale, organica, inorganica e biochimica. Supporto per studenti delle superiori e per la preparazione agli esami universitari." },
-  { name: "Scienze naturali e biologia", slug: null, desc: "Dalla biologia cellulare all'ecologia, dalle scienze della Terra alla genetica. Lezioni strutturate per comprendere i concetti e prepararsi a verifiche e interrogazioni." },
+  { name: "Chimica", slug: "chimica", desc: "Chimica generale, organica, inorganica e biochimica. Supporto per studenti delle superiori e per la preparazione agli esami universitari." },
+  { name: "Scienze naturali e biologia", slug: "scienze-biologia", desc: "Dalla biologia cellulare all'ecologia, dalle scienze della Terra alla genetica. Lezioni strutturate per comprendere i concetti e prepararsi a verifiche e interrogazioni." },
 ];
 
 const umanistiche = [
-  { name: "Italiano e letteratura", desc: "Grammatica, analisi del testo, storia della letteratura, preparazione temi e saggi brevi. Supporto specifico per la prima prova della maturità." },
-  { name: "Latino e greco", desc: "Traduzione, grammatica, sintassi, analisi del periodo. Approccio sistematico per costruire le competenze necessarie ad affrontare le versioni con sicurezza." },
-  { name: "Storia e filosofia", desc: "Dalla storia antica alla contemporanea, dalla filosofia greca al pensiero moderno. Lezioni che aiutano a costruire un metodo di studio per materie ad alto contenuto teorico." },
+  { name: "Italiano e letteratura", slug: "italiano", desc: "Grammatica, analisi del testo, storia della letteratura, preparazione temi e saggi brevi. Supporto specifico per la prima prova della maturità." },
+  { name: "Latino e greco", slug: "latino-greco", desc: "Traduzione, grammatica, sintassi, analisi del periodo. Approccio sistematico per costruire le competenze necessarie ad affrontare le versioni con sicurezza." },
+  { name: "Storia e filosofia", slug: "storia-filosofia", desc: "Dalla storia antica alla contemporanea, dalla filosofia greca al pensiero moderno. Lezioni che aiutano a costruire un metodo di studio per materie ad alto contenuto teorico." },
 ];
 
 const lingue = [
   { name: "Inglese", slug: "inglese", desc: "Grammatica, conversazione, preparazione certificazioni (PET, FCE, IELTS), supporto scolastico per tutti i livelli. I nostri tutor di inglese lavorano sia sulla parte scritta sia su quella orale." },
-  { name: "Francese, spagnolo, tedesco", slug: null, desc: "Supporto per tutte le lingue curriculari insegnate nelle scuole di Mogliano Veneto e dintorni." },
+  { name: "Francese", slug: "francese", desc: "Grammatica, lessico, conversazione e preparazione alle certificazioni DELF. Supporto per medie e superiori." },
+  { name: "Spagnolo", slug: "spagnolo", desc: "Grammatica, letteratura, conversazione e preparazione alle certificazioni DELE. Supporto per medie e superiori." },
+  { name: "Tedesco", slug: "tedesco", desc: "Declinazioni, sintassi, lessico e preparazione alle certificazioni Goethe. Supporto per medie e superiori." },
 ];
 
 export default function MateriePage() {
@@ -82,7 +84,12 @@ export default function MateriePage() {
             {umanistiche.map((m) => (
               <div key={m.name} className="bg-card rounded-2xl p-6 border border-border">
                 <h3 className="text-xl font-bold text-primary mb-3" style={{ fontFamily: "var(--font-display)" }}>{m.name}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{m.desc}</p>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-3">{m.desc}</p>
+                {m.slug && (
+                  <Link href={`/materie/${m.slug}`} className="text-accent font-semibold text-sm hover:underline">
+                    Scopri di più →
+                  </Link>
+                )}
               </div>
             ))}
           </div>

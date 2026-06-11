@@ -107,6 +107,19 @@ p { text-wrap: pretty; line-height: 1.55; }
   .container-custom { padding-left: 1.5rem; padding-right: 1.5rem; }
 }
 
+/* ─── Schermi grandi: scala tipografia e layout ─────────────────
+   Quasi tutte le dimensioni Tailwind sono in rem: alzando il
+   font-size di root l'intera UI si adatta ai monitor grandi
+   invece di restare piccola e schiacciata al centro. */
+@media (min-width: 1800px) {
+  html { font-size: 18px; }
+  .container-custom { max-width: 1440px; }
+}
+@media (min-width: 2300px) {
+  html { font-size: 21px; }
+  .container-custom { max-width: 1760px; }
+}
+
 .section-spacing { padding-top: 6rem; padding-bottom: 6rem; }
 @media (min-width: 768px) {
   .section-spacing { padding-top: 7rem; padding-bottom: 7rem; }

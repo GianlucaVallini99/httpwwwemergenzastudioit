@@ -39,3 +39,16 @@ export const PRICES = [
   { level: "Superiori", price: 25 },
   { level: "Università", price: 33 },
 ];
+
+// Prezzo orario individuale / di gruppo / in pacchetto (≥ PACKAGE_MIN_LESSONS lezioni)
+export const PACKAGE_MIN_LESSONS = 10;
+export const PRICING = [
+  { level: "Elementari", individuale: 16, gruppo: null, pacchetto: 13 },
+  { level: "Medie", individuale: 20, gruppo: 14, pacchetto: 16 },
+  { level: "Superiori", individuale: 25, gruppo: 18, pacchetto: 20 },
+  { level: "Università", individuale: 33, gruppo: 23, pacchetto: 28 },
+] as const;
+
+// Detrazione fiscale lezioni (19% fino al massimale annuo per studente)
+export const DETRAZIONE_ALIQUOTA = 0.19;
+export const DETRAZIONE_MASSIMALE = 800;

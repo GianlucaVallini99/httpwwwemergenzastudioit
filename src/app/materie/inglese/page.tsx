@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 import CtaSection from "@/components/CtaSection";
-import { SITE_URL, WHATSAPP_URL } from "@/lib/constants";
+import { SITE_URL } from "@/lib/constants";
 import { breadcrumbJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
@@ -65,21 +66,19 @@ export default function InglesePage() {
           {/* English Speaking Club */}
           <div className="rounded-2xl bg-gradient-to-br from-accent/10 to-secondary/10 border border-accent/20 p-8 mb-8">
             <div className="inline-block rounded-full bg-accent/20 text-accent text-xs font-bold tracking-widest uppercase px-4 py-1.5 mb-4" style={{ fontFamily: "var(--font-display)" }}>
-              Prossimamente
+              Da settembre
             </div>
-            <h2 className="text-2xl font-bold text-primary mb-3" style={{ fontFamily: "var(--font-display)" }}>English Speaking Club</h2>
+            <h2 className="text-2xl font-bold text-primary mb-3" style={{ fontFamily: "var(--font-display)" }}>English Speaking Club e corsi di gruppo</h2>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              Stiamo preparando un corso serale di conversazione in inglese, aperto a studenti e adulti, in piccoli gruppi. Un&apos;occasione informale per praticare l&apos;inglese parlato con regolarità.
+              Oltre alle ripetizioni individuali organizziamo l&apos;English Speaking Club: incontri settimanali di sola conversazione in piccoli gruppi divisi per livello, aperti a studenti e adulti.
             </p>
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/corsi/english-speaking-club"
               className="inline-flex items-center gap-2 rounded-full px-6 py-3 bg-accent text-accent-foreground font-semibold uppercase tracking-wider text-sm hover:bg-accent/90 transition-colors"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Iscriviti alla waiting list
-            </a>
+              Scopri lo Speaking Club →
+            </Link>
           </div>
         </div>
       </section>

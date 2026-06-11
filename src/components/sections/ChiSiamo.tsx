@@ -15,7 +15,11 @@ export default function ChiSiamo() {
         <div className="grid gap-14 lg:grid-cols-[1fr_1.05fr] items-center">
           <div className="reveal">
             <span className="text-secondary text-sm font-extrabold tracking-[0.08em] uppercase block mb-3">Chi siamo</span>
-            <h2 className="text-[clamp(34px,4.2vw,52px)] mb-4">Un team, non una persona sola.</h2>
+            <h2 className="text-[clamp(34px,4.2vw,52px)] mb-4">
+              <Link href="/chi-siamo" className="hover:text-secondary transition-colors">
+                Un team, non una persona sola.
+              </Link>
+            </h2>
             <p className="text-lg text-muted-foreground mb-4">
               Emergenza Studio nasce a Mogliano Veneto, a 50 metri dal Liceo Berto.
               Aiutiamo gli studenti a migliorare i voti, ma soprattutto a costruirsi
@@ -27,10 +31,10 @@ export default function ChiSiamo() {
               orari da incastrare.
             </p>
             <Link
-              href="/contatti"
+              href="/chi-siamo"
               className="inline-flex items-center gap-2.5 rounded-full px-7 py-3.5 bg-secondary text-secondary-foreground font-extrabold shadow-[0_14px_28px_-14px_rgba(29,107,107,0.6)] hover:-translate-y-0.5 transition-transform"
             >
-              Vieni a trovarci <span aria-hidden>→</span>
+              Scopri il team <span aria-hidden>→</span>
             </Link>
           </div>
 

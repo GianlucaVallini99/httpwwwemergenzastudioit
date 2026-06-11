@@ -2,9 +2,9 @@ import Link from "next/link";
 import { SectionBlobs } from "@/components/Blobs";
 
 const ROWS = [
-  { level: "Medie",      individuale: 20, gruppo: 14 },
-  { level: "Superiori",  individuale: 25, gruppo: 18 },
-  { level: "Università", individuale: 33, gruppo: 23 },
+  { level: "Medie",      individuale: 20, gruppo: 14, pacchetto: 16 },
+  { level: "Superiori",  individuale: 25, gruppo: 18, pacchetto: 20 },
+  { level: "Università", individuale: 33, gruppo: 23, pacchetto: 28 },
 ];
 
 export default function Tariffe() {
@@ -41,6 +41,7 @@ export default function Tariffe() {
                   <th className="text-left text-xs uppercase tracking-wider text-muted-foreground font-extrabold pb-3">Livello</th>
                   <th className="text-right text-xs uppercase tracking-wider text-muted-foreground font-extrabold pb-3">Individuale</th>
                   <th className="text-right text-xs uppercase tracking-wider text-muted-foreground font-extrabold pb-3">Gruppo</th>
+                  <th className="text-right text-xs uppercase tracking-wider text-muted-foreground font-extrabold pb-3">Pacchetto 10+</th>
                 </tr>
               </thead>
               <tbody>
@@ -53,12 +54,18 @@ export default function Tariffe() {
                     <td className="py-4 text-right text-secondary font-black text-[22px]">
                       €{r.gruppo}<small className="font-bold text-sm text-muted-foreground">/h</small>
                     </td>
+                    <td className="py-4 text-right text-accent font-black text-[22px]">
+                      €{r.pacchetto}<small className="font-bold text-sm text-muted-foreground">/h</small>
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
             <div className="mt-5 pt-5 border-t border-border text-sm text-muted-foreground">
-              Per le tariffe dei corsi scrivici o chiamaci al +39 353 401 7905.
+              La tariffa pacchetto vale da 10 lezioni in su.{" "}
+              <Link href="/detrazione-lezioni" className="text-accent font-bold hover:underline">
+                Calcola preventivo e detrazione →
+              </Link>
             </div>
           </div>
         </div>

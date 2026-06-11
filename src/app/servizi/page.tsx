@@ -2,8 +2,48 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 import CtaSection from "@/components/CtaSection";
-import { WHATSAPP_URL, SITE_URL, PRICES } from "@/lib/constants";
+import { WHATSAPP_URL, SITE_URL, PRICING, PACKAGE_MIN_LESSONS } from "@/lib/constants";
 import { serviceJsonLd, breadcrumbJsonLd } from "@/lib/structured-data";
+
+function PriceTable({
+  rows,
+  packageLabel = `Pacchetto (${PACKAGE_MIN_LESSONS}+ lezioni)`,
+}: {
+  rows: { level: string; single: number | null; pack?: number | null }[];
+  packageLabel?: string;
+}) {
+  const hasPack = rows.some((r) => r.pack != null);
+  return (
+    <div className="overflow-x-auto mt-6">
+      <table className="w-full max-w-lg rounded-xl overflow-hidden shadow-sm">
+        <thead>
+          <tr className="bg-primary text-primary-foreground">
+            <th className="text-left px-5 py-3 font-semibold text-sm" style={{ fontFamily: "var(--font-display)" }}>Livello</th>
+            <th className="text-right px-5 py-3 font-semibold text-sm" style={{ fontFamily: "var(--font-display)" }}>Prezzo/ora</th>
+            {hasPack && (
+              <th className="text-right px-5 py-3 font-semibold text-sm" style={{ fontFamily: "var(--font-display)" }}>{packageLabel}</th>
+            )}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r, i) => (
+            <tr key={r.level} className={i % 2 === 0 ? "bg-white" : "bg-muted/50"}>
+              <td className="px-5 py-3 font-medium text-sm">{r.level}</td>
+              <td className="px-5 py-3 text-right font-bold text-accent text-sm">
+                {r.single !== null ? `€${r.single}/ora` : "—"}
+              </td>
+              {hasPack && (
+                <td className="px-5 py-3 text-right font-bold text-secondary text-sm">
+                  {r.pack != null ? `€${r.pack}/ora` : "—"}
+                </td>
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
 export const metadata: Metadata = {
   title: "Servizi e Prezzi | Emergenza Studio - Ripetizioni Mogliano Veneto",
@@ -60,6 +100,9 @@ export default function ServiziPage() {
             <p className="text-muted-foreground leading-relaxed">
               Il tutor costruisce un percorso personalizzato partendo dal livello dello studente. Ogni lezione prevede spiegazione, esercizi guidati e verifica della comprensione. Monitoriamo i progressi e adattiamo il programma in corso d&apos;opera.
             </p>
+            <PriceTable
+              rows={PRICING.map((p) => ({ level: p.level, single: p.individuale, pack: p.pacchetto }))}
+            />
           </div>
 
           {/* Ripetizioni di Gruppo */}
@@ -77,6 +120,12 @@ export default function ServiziPage() {
             <h3 className="text-lg font-bold text-primary mb-2" style={{ fontFamily: "var(--font-display)" }}>I vantaggi</h3>
             <p className="text-muted-foreground leading-relaxed">
               Costo inferiore rispetto alle lezioni individuali, confronto tra pari, esercitazioni collaborative. Il tutor gestisce il gruppo garantendo attenzione a ciascun partecipante.
+            </p>
+            <PriceTable
+              rows={PRICING.filter((p) => p.gruppo !== null).map((p) => ({ level: p.level, single: p.gruppo }))}
+            />
+            <p className="text-sm text-muted-foreground mt-3">
+              Prezzo a studente, in gruppi di 2-4 dello stesso livello.
             </p>
           </div>
 
@@ -96,6 +145,13 @@ export default function ServiziPage() {
             <p className="text-muted-foreground leading-relaxed">
               Lo studente viene al centro dopo la scuola, svolge i compiti assistito da un tutor e ripassa le lezioni del giorno. L&apos;obiettivo non è solo &quot;fare i compiti&quot; ma costruire autonomia e metodo.
             </p>
+            <PriceTable
+              rows={PRICING.filter((p) => p.level === "Elementari" || p.level === "Medie").map((p) => ({
+                level: p.level,
+                single: p.individuale,
+                pack: p.pacchetto,
+              }))}
+            />
           </div>
 
           {/* Pacchetti Multi-Materia */}
@@ -109,6 +165,10 @@ export default function ServiziPage() {
               </p>
               <h3 className="text-lg font-bold text-primary mb-3" style={{ fontFamily: "var(--font-display)" }}>Come funzionano i pacchetti:</h3>
               <ul className="space-y-2 text-muted-foreground mb-6">
+                <li className="flex items-start gap-2">
+                  <span className="text-accent font-bold">•</span>
+                  I pacchetti multi-materia partono da un minimo di {PACKAGE_MIN_LESSONS} lezioni
+                </li>
                 <li className="flex items-start gap-2">
                   <span className="text-accent font-bold">•</span>
                   Scegli il numero di ore che vuoi acquistare
@@ -150,25 +210,32 @@ export default function ServiziPage() {
               Prezzi
             </h2>
             <div className="overflow-x-auto">
-              <table className="w-full max-w-lg mx-auto rounded-xl overflow-hidden shadow-sm">
+              <table className="w-full max-w-2xl mx-auto rounded-xl overflow-hidden shadow-sm">
                 <thead>
                   <tr className="bg-primary text-primary-foreground">
                     <th className="text-left px-6 py-4 font-semibold" style={{ fontFamily: "var(--font-display)" }}>Livello scolastico</th>
-                    <th className="text-right px-6 py-4 font-semibold" style={{ fontFamily: "var(--font-display)" }}>Prezzo/ora</th>
+                    <th className="text-right px-6 py-4 font-semibold" style={{ fontFamily: "var(--font-display)" }}>Individuale</th>
+                    <th className="text-right px-6 py-4 font-semibold" style={{ fontFamily: "var(--font-display)" }}>Gruppo</th>
+                    <th className="text-right px-6 py-4 font-semibold" style={{ fontFamily: "var(--font-display)" }}>Pacchetto ({PACKAGE_MIN_LESSONS}+ lezioni)</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {PRICES.map((p, i) => (
+                  {PRICING.map((p, i) => (
                     <tr key={p.level} className={i % 2 === 0 ? "bg-white" : "bg-muted/50"}>
                       <td className="px-6 py-4 font-medium">{p.level}</td>
-                      <td className="px-6 py-4 text-right font-bold text-accent">€{p.price}/ora</td>
+                      <td className="px-6 py-4 text-right font-bold text-accent">€{p.individuale}/ora</td>
+                      <td className="px-6 py-4 text-right font-bold text-secondary">{p.gruppo !== null ? `€${p.gruppo}/ora` : "—"}</td>
+                      <td className="px-6 py-4 text-right font-bold text-primary">€{p.pacchetto}/ora</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <p className="text-sm text-muted-foreground text-center mt-4 max-w-lg mx-auto">
-              I pacchetti ore multi-materia prevedono tariffe agevolate. Contattaci per un preventivo personalizzato.
+            <p className="text-sm text-muted-foreground text-center mt-4 max-w-2xl mx-auto">
+              I pacchetti ore multi-materia (minimo {PACKAGE_MIN_LESSONS} lezioni) prevedono tariffe agevolate.{" "}
+              <Link href="/detrazione-lezioni" className="text-accent font-semibold hover:underline">
+                Calcola il tuo preventivo e la detrazione fiscale →
+              </Link>
             </p>
 
           </div>
