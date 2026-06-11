@@ -31,7 +31,7 @@ const CORSI = [
     num: "04",
     title: "Test Università",
     lede: "Percorsi intensivi per TOLC e semestre filtro, per superare i test d'ingresso e i primi esami universitari.",
-    bullets: ["TOLC — Corso Intensivo", "Supporto Semestre Filtro", "Analisi I · Fisica I · Chimica"],
+    bullets: ["TOLC — Corso Intensivo", "Supporto Semestre Filtro", "Chimica · Biologia · Fisica in serale"],
     href: "/preparazione-test",
   },
 ];

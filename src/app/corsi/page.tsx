@@ -76,7 +76,7 @@ const corsi = [
   {
     icon: <Users className="w-7 h-7" />,
     title: "Supporto Semestre Filtro",
-    desc: "Lezioni di supporto su chimica, biologia e fisica per affrontare gli esami del semestre filtro di Medicina con un percorso strutturato.",
+    desc: "Tre corsi serali separati per gli esami del semestre filtro di Medicina: chimica il lunedì, biologia il mercoledì, fisica il venerdì. 2 ore a lezione, €15/h. Iscriviti anche a una sola materia.",
     quando: "Da settembre",
     perChi: "Aspiranti matricole di Medicina",
     value: "semestre-filtro",
