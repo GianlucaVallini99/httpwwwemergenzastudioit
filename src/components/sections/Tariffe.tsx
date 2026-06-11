@@ -2,8 +2,8 @@ import Link from "next/link";
 import { SectionBlobs } from "@/components/Blobs";
 
 const ROWS = [
-  { level: "Medie",      individuale: 20, gruppo: 14, pacchetto: 16 },
-  { level: "Superiori",  individuale: 25, gruppo: 18, pacchetto: 20 },
+  { level: "Medie",      individuale: 20, gruppo: 14, pacchetto: 18 },
+  { level: "Superiori",  individuale: 25, gruppo: 18, pacchetto: 22 },
   { level: "Università", individuale: 33, gruppo: 23, pacchetto: 28 },
 ];
 
