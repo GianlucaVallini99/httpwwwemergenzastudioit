@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Corsi e Preparazione Universitaria | Emergenza Studio Mogliano Veneto",
+  title: "Corsi di Matematica, Fisica e Inglese | Emergenza Studio Mogliano Veneto",
   description:
-    "Recupero debiti estivo, preparazione alla classe successiva, semestre filtro di Medicina, corso estivo di matematica e English Speaking Club a Mogliano Veneto. Iscrizioni aperte.",
+    "Piede Giusto per iniziare l'anno al meglio, English Speaking Club su tre livelli e Corso di Potenziamento Scolastico annuale di matematica e fisica a Mogliano Veneto. Iscrizioni online aperte.",
   alternates: { canonical: "https://www.emergenza.studio/corsi/" },
 };
 

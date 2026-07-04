@@ -3,22 +3,22 @@ import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 import { SITE_URL } from "@/lib/constants";
 import { breadcrumbJsonLd, courseJsonLd } from "@/lib/structured-data";
-import { ENGLISH_CLUB, ENGLISH_PREZZO, ENGLISH_ORE, ENGLISH_LEZIONI } from "@/lib/corsi-data";
-import { Clock, Euro, Globe, ArrowRight, CheckCircle, BookOpen } from "lucide-react";
+import { PIEDE_GIUSTO, GRUPPO_MIN, GRUPPO_MAX, MATERIALE_PIEDE_GIUSTO } from "@/lib/corsi-data";
+import { Clock, Euro, Users, ArrowRight, CheckCircle, BookOpen } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "English Speaking Club: corsi di inglese su 3 livelli | Emergenza Studio Mogliano Veneto",
+  title: "Piede Giusto: corsi di potenziamento estivo | Emergenza Studio Mogliano Veneto",
   description:
-    `Corsi di inglese a Mogliano Veneto su tre livelli: English Restart, English Progress ed English Fluency. ${ENGLISH_ORE} ore in ${ENGLISH_LEZIONI} lezioni da 2 ore, €${ENGLISH_PREZZO}, dispense incluse. Iscrizione online.`,
-  alternates: { canonical: `${SITE_URL}/corsi/english-speaking-club/` },
+    "Corsi intensivi di matematica e fisica per iniziare l'anno scolastico al meglio: cinque percorsi dalle medie alla quinta superiore, in piccoli gruppi da 4 a 6 studenti. Da €150.",
+  alternates: { canonical: `${SITE_URL}/corsi/piede-giusto/` },
 };
 
 const breadcrumbs = [
   { label: "Corsi", href: "/corsi" },
-  { label: "English Speaking Club", href: "/corsi/english-speaking-club" },
+  { label: "Piede Giusto", href: "/corsi/piede-giusto" },
 ];
 
-export default function EnglishSpeakingClubPage() {
+export default function PiedeGiustoPage() {
   return (
     <>
       <script
@@ -27,7 +27,7 @@ export default function EnglishSpeakingClubPage() {
           __html: JSON.stringify(breadcrumbJsonLd([
             { name: "Home", href: "/" },
             { name: "Corsi", href: "/corsi" },
-            { name: "English Speaking Club", href: "/corsi/english-speaking-club" },
+            { name: "Piede Giusto", href: "/corsi/piede-giusto" },
           ])),
         }}
       />
@@ -35,7 +35,7 @@ export default function EnglishSpeakingClubPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(courseJsonLd(
-            ENGLISH_CLUB.map((c) => ({
+            PIEDE_GIUSTO.map((c) => ({
               name: c.titolo,
               description: c.sottotitolo,
               price: String(c.prezzo),
@@ -50,25 +50,25 @@ export default function EnglishSpeakingClubPage() {
         <div className="container-custom">
           <div className="max-w-4xl">
             <span className="inline-block rounded-full bg-accent text-accent-foreground text-xs font-bold uppercase tracking-wider px-4 py-1.5 mb-6" style={{ fontFamily: "var(--font-display)" }}>
-              Tre livelli · Iscrizioni aperte
+              Prima dell&apos;inizio della scuola · Iscrizioni aperte
             </span>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary mb-5 leading-[1.02]" style={{ fontFamily: "var(--font-display)" }}>
-              English Speaking Club
+              Piede Giusto: potenziamento per iniziare l&apos;anno al meglio
             </h1>
             <p className="text-lg md:text-2xl text-foreground/70 mb-8 font-medium leading-snug max-w-3xl">
-              L&apos;inglese si impara usandolo. Tre corsi divisi per livello, con
-              grammatica, conversazione e listening: trovi il gruppo giusto sia che
-              tu parta da zero, sia che tu voglia perfezionare la pronuncia.
+              Corsi intensivi di matematica e fisica in piccoli gruppi: ripassi ciò
+              che serve e anticipi gli argomenti del nuovo anno, così da settembre
+              parti in vantaggio.
             </p>
-            <div className="flex flex-wrap gap-2.5 sm:gap-3">
+            <div className="flex flex-wrap gap-2.5 sm:gap-3 mb-4">
               <span className="inline-flex items-center gap-2 rounded-full bg-secondary/10 text-secondary px-4 py-2 text-sm font-medium">
-                <Euro className="w-4 h-4" /> €{ENGLISH_PREZZO} a corso
+                <Users className="w-4 h-4" /> Gruppi da {GRUPPO_MIN} a {GRUPPO_MAX} studenti
               </span>
               <span className="inline-flex items-center gap-2 rounded-full bg-secondary/10 text-secondary px-4 py-2 text-sm font-medium">
-                <Clock className="w-4 h-4" /> {ENGLISH_ORE} ore · {ENGLISH_LEZIONI} lezioni da 2h
+                <Clock className="w-4 h-4" /> Lezioni da 2 ore
               </span>
               <span className="inline-flex items-center gap-2 rounded-full bg-secondary/10 text-secondary px-4 py-2 text-sm font-medium">
-                <BookOpen className="w-4 h-4" /> Dispense ed esercizi inclusi
+                <BookOpen className="w-4 h-4" /> Materiale incluso
               </span>
             </div>
           </div>
@@ -78,35 +78,34 @@ export default function EnglishSpeakingClubPage() {
       <section className="section-spacing bg-card">
         <div className="container-custom">
           <h2 className="text-2xl md:text-4xl font-bold text-primary mb-3 text-center" style={{ fontFamily: "var(--font-display)" }}>
-            Scegli il tuo livello
+            Scegli il tuo passaggio di classe
           </h2>
           <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-10 md:mb-12 leading-relaxed">
-            Nessun test d&apos;ingresso e nessuna ansia: leggi le descrizioni e
-            scegli il corso che ti somiglia. In caso di dubbi ti consigliamo noi.
+            Cinque percorsi con programma su misura: scegli quello del tuo anno e
+            guarda nel dettaglio gli argomenti di matematica e fisica.
           </p>
-          <div className="grid gap-4 sm:gap-5 md:grid-cols-3 max-w-5xl mx-auto">
-            {ENGLISH_CLUB.map((c, i) => (
+          <div className="grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
+            {PIEDE_GIUSTO.map((c) => (
               <Link
                 key={c.slug}
-                href={`/corsi/english-speaking-club/${c.slug}`}
+                href={`/corsi/piede-giusto/${c.slug}`}
                 className="group flex flex-col rounded-2xl bg-white border border-border p-5 sm:p-6 hover:border-accent/50 hover:shadow-lg active:scale-[0.99] transition-all"
               >
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-accent/15 text-accent flex items-center justify-center">
-                    <Globe className="w-5 h-5" />
-                  </div>
-                  <span className="rounded-full bg-secondary text-secondary-foreground text-[11px] font-bold uppercase tracking-wider px-3 py-1" style={{ fontFamily: "var(--font-display)" }}>
-                    Livello {i + 1} · {c.livello}
-                  </span>
-                </div>
-                <h3 className="text-lg font-bold text-primary mb-2 leading-snug" style={{ fontFamily: "var(--font-display)" }}>
+                <h3 className="text-base sm:text-lg font-bold text-primary mb-2 leading-snug" style={{ fontFamily: "var(--font-display)" }}>
                   {c.titoloBreve}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-5">{c.sottotitolo}</p>
-                <span className="mt-auto inline-flex items-center gap-2 text-accent font-bold text-sm">
-                  Programma e iscrizione
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </span>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">{c.sottotitolo}</p>
+                <div className="mt-auto flex items-center justify-between">
+                  <div className="flex flex-wrap gap-2 text-xs font-semibold text-foreground">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2.5 py-1">
+                      <Euro className="w-3.5 h-3.5" /> {c.prezzo}
+                    </span>
+                    <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2.5 py-1">
+                      <Clock className="w-3.5 h-3.5" /> {c.ore}h · {c.lezioni} lezioni
+                    </span>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-accent shrink-0 transition-transform group-hover:translate-x-1" />
+                </div>
               </Link>
             ))}
           </div>
@@ -117,15 +116,14 @@ export default function EnglishSpeakingClubPage() {
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-2xl md:text-4xl font-bold text-primary mb-6 text-center" style={{ fontFamily: "var(--font-display)" }}>
-              Come funziona
+              Cosa è incluso
             </h2>
             <div className="bg-card rounded-2xl border border-border p-6 sm:p-8">
               <ul className="space-y-4">
                 {[
-                  `${ENGLISH_LEZIONI} incontri da 2 ore, in piccoli gruppi dello stesso livello`,
-                  "Ogni lezione mescola grammatica, conversazione e ascolto: niente ore passate solo sul libro",
-                  "Dispense riassuntive ed esercizi per lo studio individuale e di gruppo, inclusi nel prezzo",
-                  "Adatto a studenti e adulti: l'inglese parlato serve a tutti",
+                  ...MATERIALE_PIEDE_GIUSTO,
+                  `Piccoli gruppi da ${GRUPPO_MIN} a ${GRUPPO_MAX} studenti: tutti seguiti, nessuno lasciato indietro`,
+                  "Docenti che insegnano matematica e fisica ogni giorno, tutto l'anno",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3 text-foreground leading-relaxed">
                     <CheckCircle className="w-5 h-5 text-accent shrink-0 mt-0.5" />

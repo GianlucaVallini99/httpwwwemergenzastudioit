@@ -2,74 +2,91 @@
 
 import { useState } from "react";
 import { PHONE_INTL } from "@/lib/constants";
-import { Send } from "lucide-react";
-
-export type ExtraField =
-  | { type: "select"; name: string; label: string; options: string[] }
-  | { type: "multiselect"; name: string; label: string; options: string[] };
+import { INDIRIZZI_SCOLASTICI } from "@/lib/corsi-data";
+import { CheckCircle, Loader2, Send } from "lucide-react";
 
 const inputCls =
-  "w-full rounded-xl border border-border bg-white px-4 py-3 text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50";
+  "w-full rounded-xl border border-border bg-white px-4 py-3.5 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50";
+
+const EMPTY = {
+  nome: "",
+  cognome: "",
+  indirizzoResidenza: "",
+  codiceFiscale: "",
+  telefono: "",
+  indirizzoScolastico: "",
+  scuola: "",
+};
 
 export default function CourseSignupForm({
   corso,
-  extraFields = [],
-  buttonText = "Invia la richiesta di iscrizione",
+  corsoSlug,
+  conCampiScuola = false,
+  buttonText = "Invia l'iscrizione",
 }: {
   corso: string;
-  extraFields?: ExtraField[];
+  corsoSlug: string;
+  conCampiScuola?: boolean;
   buttonText?: string;
 }) {
-  const [base, setBase] = useState({ nome: "", cognome: "", telefono: "" });
-  const [extra, setExtra] = useState<Record<string, string | string[]>>(
-    Object.fromEntries(extraFields.map((f) => [f.name, f.type === "multiselect" ? [] : ""]))
-  );
-  const [submitted, setSubmitted] = useState(false);
+  const [data, setData] = useState(EMPTY);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [error, setError] = useState("");
 
-  const toggleMulti = (name: string, option: string) => {
-    setExtra((prev) => {
-      const current = (prev[name] as string[]) ?? [];
-      return {
-        ...prev,
-        [name]: current.includes(option)
-          ? current.filter((o) => o !== option)
-          : [...current, option],
-      };
-    });
-  };
+  const set = (field: keyof typeof EMPTY) => (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => setData({ ...data, [field]: e.target.value });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    for (const f of extraFields) {
-      if (f.type === "multiselect" && (extra[f.name] as string[]).length === 0) {
-        setError(`Seleziona almeno una voce per "${f.label}".`);
-        return;
-      }
-    }
-    setError("");
+  const whatsappFallbackUrl = () => {
     const lines = [
       `Iscrizione — ${corso}`,
-      `Nome: ${base.nome}`,
-      `Cognome: ${base.cognome}`,
-      `Telefono: ${base.telefono}`,
-      ...extraFields.map((f) => {
-        const v = extra[f.name];
-        return `${f.label}: ${Array.isArray(v) ? v.join(", ") : v}`;
-      }),
+      `Nome: ${data.nome}`,
+      `Cognome: ${data.cognome}`,
+      `Indirizzo di residenza: ${data.indirizzoResidenza}`,
+      `Codice fiscale: ${data.codiceFiscale.toUpperCase()}`,
+      `Telefono: ${data.telefono}`,
+      ...(conCampiScuola
+        ? [`Indirizzo scolastico: ${data.indirizzoScolastico}`, `Scuola: ${data.scuola}`]
+        : []),
     ];
-    const url = `https://wa.me/${PHONE_INTL.replace("+", "")}?text=${encodeURIComponent(lines.join("\n"))}`;
-    window.open(url, "_blank", "noopener,noreferrer");
-    setSubmitted(true);
+    return `https://wa.me/${PHONE_INTL.replace("+", "")}?text=${encodeURIComponent(lines.join("\n"))}`;
   };
 
-  if (submitted) {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const cf = data.codiceFiscale.trim().toUpperCase();
+    if (!/^[A-Z0-9]{16}$/.test(cf)) {
+      setError("Il codice fiscale deve avere 16 caratteri (lettere e numeri).");
+      return;
+    }
+    setError("");
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/iscrizioni", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ corso, corsoSlug, ...data, codiceFiscale: cf }),
+      });
+      if (!res.ok) {
+        const body = await res.json().catch(() => null);
+        throw new Error(body?.error || "Invio non riuscito");
+      }
+      setStatus("sent");
+    } catch (err) {
+      setStatus("error");
+      setError(err instanceof Error ? err.message : "Invio non riuscito");
+    }
+  };
+
+  if (status === "sent") {
     return (
-      <div className="rounded-2xl bg-accent/10 border border-accent/20 p-8 text-center">
-        <p className="text-lg font-semibold text-accent mb-2">Richiesta pronta!</p>
+      <div className="rounded-2xl bg-accent/10 border border-accent/20 p-6 sm:p-8 text-center">
+        <CheckCircle className="w-10 h-10 text-accent mx-auto mb-3" />
+        <p className="text-lg font-semibold text-accent mb-2">Iscrizione registrata!</p>
         <p className="text-muted-foreground">
-          Abbiamo aperto WhatsApp con i tuoi dati: invia il messaggio per completare
-          l&apos;iscrizione. Ti ricontatteremo entro 24 ore.
+          Abbiamo salvato la tua richiesta per <strong>{corso}</strong>. Ti
+          ricontatteremo entro 24 ore per confermare il gruppo e i dettagli di
+          pagamento.
         </p>
       </div>
     );
@@ -80,100 +97,85 @@ export default function CourseSignupForm({
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="nome" className="block text-sm font-medium text-foreground mb-1">Nome</label>
-          <input
-            type="text"
-            id="nome"
-            required
-            value={base.nome}
-            onChange={(e) => setBase({ ...base, nome: e.target.value })}
-            className={inputCls}
-            placeholder="Il tuo nome"
-          />
+          <input type="text" id="nome" required autoComplete="given-name" value={data.nome} onChange={set("nome")} className={inputCls} placeholder="Il tuo nome" />
         </div>
         <div>
           <label htmlFor="cognome" className="block text-sm font-medium text-foreground mb-1">Cognome</label>
-          <input
-            type="text"
-            id="cognome"
-            required
-            value={base.cognome}
-            onChange={(e) => setBase({ ...base, cognome: e.target.value })}
-            className={inputCls}
-            placeholder="Il tuo cognome"
-          />
+          <input type="text" id="cognome" required autoComplete="family-name" value={data.cognome} onChange={set("cognome")} className={inputCls} placeholder="Il tuo cognome" />
         </div>
       </div>
       <div>
-        <label htmlFor="telefono" className="block text-sm font-medium text-foreground mb-1">Numero di telefono</label>
-        <input
-          type="tel"
-          id="telefono"
-          required
-          value={base.telefono}
-          onChange={(e) => setBase({ ...base, telefono: e.target.value })}
-          className={inputCls}
-          placeholder="Il tuo numero"
-        />
+        <label htmlFor="indirizzoResidenza" className="block text-sm font-medium text-foreground mb-1">Indirizzo di residenza</label>
+        <input type="text" id="indirizzoResidenza" required autoComplete="street-address" value={data.indirizzoResidenza} onChange={set("indirizzoResidenza")} className={inputCls} placeholder="Via, numero civico, città" />
+      </div>
+      <div className="grid sm:grid-cols-2 gap-4">
+        <div>
+          <label htmlFor="codiceFiscale" className="block text-sm font-medium text-foreground mb-1">Codice fiscale</label>
+          <input
+            type="text"
+            id="codiceFiscale"
+            required
+            minLength={16}
+            maxLength={16}
+            value={data.codiceFiscale}
+            onChange={set("codiceFiscale")}
+            className={`${inputCls} uppercase`}
+            placeholder="RSSMRA10A01F999X"
+          />
+        </div>
+        <div>
+          <label htmlFor="telefono" className="block text-sm font-medium text-foreground mb-1">Numero di telefono</label>
+          <input type="tel" id="telefono" required autoComplete="tel" value={data.telefono} onChange={set("telefono")} className={inputCls} placeholder="Il tuo numero" />
+        </div>
       </div>
 
-      {extraFields.map((f) =>
-        f.type === "select" ? (
-          <div key={f.name}>
-            <label htmlFor={f.name} className="block text-sm font-medium text-foreground mb-1">{f.label}</label>
-            <select
-              id={f.name}
-              required
-              value={extra[f.name] as string}
-              onChange={(e) => setExtra({ ...extra, [f.name]: e.target.value })}
-              className={inputCls}
-            >
+      {conCampiScuola && (
+        <>
+          <div>
+            <label htmlFor="indirizzoScolastico" className="block text-sm font-medium text-foreground mb-1">Indirizzo scolastico</label>
+            <select id="indirizzoScolastico" required value={data.indirizzoScolastico} onChange={set("indirizzoScolastico")} className={inputCls}>
               <option value="">Seleziona…</option>
-              {f.options.map((o) => (
+              {INDIRIZZI_SCOLASTICI.map((o) => (
                 <option key={o} value={o}>{o}</option>
               ))}
             </select>
           </div>
-        ) : (
-          <fieldset key={f.name}>
-            <legend className="block text-sm font-medium text-foreground mb-2">{f.label}</legend>
-            <div className="flex flex-wrap gap-3">
-              {f.options.map((o) => {
-                const checked = (extra[f.name] as string[]).includes(o);
-                return (
-                  <label
-                    key={o}
-                    className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold cursor-pointer transition-colors ${
-                      checked
-                        ? "bg-accent text-accent-foreground border-accent"
-                        : "bg-white text-foreground border-border hover:border-accent/50"
-                    }`}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={checked}
-                      onChange={() => toggleMulti(f.name, o)}
-                      className="sr-only"
-                    />
-                    {o}
-                  </label>
-                );
-              })}
-            </div>
-          </fieldset>
-        )
+          <div>
+            <label htmlFor="scuola" className="block text-sm font-medium text-foreground mb-1">Scuola a cui sei iscritto</label>
+            <input type="text" id="scuola" required value={data.scuola} onChange={set("scuola")} className={inputCls} placeholder="Nome della scuola" />
+          </div>
+        </>
       )}
 
       {error && <p className="text-sm font-semibold text-red-600">{error}</p>}
 
       <button
         type="submit"
-        className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-6 py-4 bg-accent text-accent-foreground font-semibold uppercase tracking-wider hover:bg-accent/90 transition-colors shadow-lg"
+        disabled={status === "sending"}
+        className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-6 py-4 bg-accent text-accent-foreground font-semibold uppercase tracking-wider hover:bg-accent/90 transition-colors shadow-lg disabled:opacity-60"
         style={{ fontFamily: "var(--font-display)" }}
       >
-        <Send className="w-5 h-5" /> {buttonText}
+        {status === "sending" ? (
+          <><Loader2 className="w-5 h-5 animate-spin" /> Invio in corso…</>
+        ) : (
+          <><Send className="w-5 h-5" /> {buttonText}</>
+        )}
       </button>
+
+      {status === "error" && (
+        <a
+          href={whatsappFallbackUrl()}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 border-2 border-accent text-accent font-semibold hover:bg-accent/10 transition-colors"
+        >
+          In alternativa, invia l&apos;iscrizione su WhatsApp
+        </a>
+      )}
+
       <p className="text-xs text-muted-foreground text-center">
-        Premendo il pulsante si apre WhatsApp con il messaggio di iscrizione già compilato.
+        I dati vengono usati solo per gestire l&apos;iscrizione al corso e non
+        vengono condivisi con terzi.
       </p>
     </form>
   );

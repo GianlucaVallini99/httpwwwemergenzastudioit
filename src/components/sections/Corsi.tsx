@@ -3,36 +3,28 @@ import { SectionBlobs } from "@/components/Blobs";
 
 const CORSI = [
   {
-    tag: "Estate",
+    tag: "Prima della scuola",
     num: "01",
-    title: "Recupero Debiti",
-    lede: "Corsi estivi per recuperare i debiti formativi: da giugno, in piccoli gruppi di compagni di classe o individualmente.",
-    bullets: ["Gruppi di 2-4 compagni di classe", "Tutte le materie", "Da €15/h in gruppo"],
-    href: "/corsi/recupero-debiti",
+    title: "Piede Giusto",
+    lede: "Potenziamento intensivo di matematica e fisica per iniziare l'anno al meglio: un percorso per ogni passaggio di classe.",
+    bullets: ["5 percorsi: dalle medie alla quinta", "Gruppi da 4 a 6 studenti", "Da €150 · materiale incluso"],
+    href: "/corsi/piede-giusto",
   },
   {
-    tag: "Settembre",
+    tag: "Tutti i livelli",
     num: "02",
-    title: "Potenziamento Superiori",
-    lede: "Corsi di preparazione alla classe successiva: 6 lezioni a inizio settembre per ripartire senza lacune.",
-    bullets: ["Dal 1 al 9 settembre", "6 lezioni da un'ora", "Per tutte le classi delle superiori"],
-    href: "/corsi/preparazione-classe-successiva",
+    title: "English Speaking Club",
+    lede: "Tre corsi di inglese divisi per livello: grammatica, conversazione e listening in 10 lezioni da 2 ore.",
+    bullets: ["English Restart · Progress · Fluency", "20 ore · €300", "Dispense ed esercizi inclusi"],
+    href: "/corsi/english-speaking-club",
   },
   {
     tag: "Anno scolastico",
     num: "03",
-    title: "Lingue e Professione",
-    lede: "Corsi serali durante l'anno per chi vuole investire sulla propria formazione, fuori dal banco di scuola.",
-    bullets: ["English Speaking Club", "Iscrizioni aperte da settembre", "Conversazione in piccoli gruppi"],
-    href: "/corsi/english-speaking-club",
-  },
-  {
-    tag: "Test ammissione",
-    num: "04",
-    title: "Test Università",
-    lede: "Supporto al semestre filtro di Medicina e preparazione ai test d'ingresso universitari.",
-    bullets: ["Supporto Semestre Filtro", "Chimica · Biologia · Fisica in serale", "Iscrizioni aperte da settembre"],
-    href: "/preparazione-test",
+    title: "Potenziamento Scolastico",
+    lede: "Matematica e fisica ogni settimana, per tutto l'anno: vivi la scuola senza la paura delle verifiche.",
+    bullets: ["32 settimane · 64 ore", "€15/h in 4 rate da €240", "Esercizi e simulazioni di verifica"],
+    href: "/corsi/potenziamento-scolastico",
   },
 ];
 
@@ -45,11 +37,11 @@ export default function Corsi() {
           <span className="text-secondary text-sm font-extrabold tracking-[0.08em] uppercase block mb-3 reveal">I nostri corsi</span>
           <h2 className="text-[clamp(34px,4.4vw,54px)] mb-4 reveal d1">Percorsi strutturati per ogni momento dell&apos;anno</h2>
           <p className="text-lg text-muted-foreground reveal d2">
-            Quattro famiglie di corsi che si alternano nel calendario scolastico. Puoi
+            Tre famiglie di corsi con programma definito e iscrizione online. Puoi
             combinarle con le ripetizioni individuali.
           </p>
         </div>
-        <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {CORSI.map((c, i) => (
             <Link
               key={c.num}
