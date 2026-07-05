@@ -6,7 +6,7 @@ import { INDIRIZZI_SCOLASTICI } from "@/lib/corsi-data";
 import { CheckCircle, Loader2, Send } from "lucide-react";
 
 const inputCls =
-  "w-full rounded-xl border border-border bg-white px-4 py-3.5 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50";
+  "w-full rounded-2xl border border-border bg-muted/60 px-4 py-3.5 text-base font-semibold text-foreground placeholder:font-medium placeholder:text-muted-foreground/60 transition-all duration-300 focus:outline-none focus:bg-white focus:border-accent/40 focus:ring-4 focus:ring-accent/15";
 
 const EMPTY = {
   nome: "",
@@ -80,9 +80,11 @@ export default function CourseSignupForm({
 
   if (status === "sent") {
     return (
-      <div className="rounded-2xl bg-accent/10 border border-accent/20 p-6 sm:p-8 text-center">
-        <CheckCircle className="w-10 h-10 text-accent mx-auto mb-3" />
-        <p className="text-lg font-semibold text-accent mb-2">Iscrizione registrata!</p>
+      <div className="rounded-3xl bg-accent/10 border border-accent/20 p-6 sm:p-8 text-center">
+        <span className="inline-flex w-14 h-14 rounded-full bg-accent/15 text-accent items-center justify-center mb-4">
+          <CheckCircle className="w-7 h-7" />
+        </span>
+        <p className="text-lg font-extrabold text-accent mb-2" style={{ fontFamily: "var(--font-display)" }}>Iscrizione registrata</p>
         <p className="text-muted-foreground">
           Abbiamo salvato la tua richiesta per <strong>{corso}</strong>. Ti
           ricontatteremo entro 24 ore per confermare il gruppo e i dettagli di
@@ -152,7 +154,7 @@ export default function CourseSignupForm({
       <button
         type="submit"
         disabled={status === "sending"}
-        className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-6 py-4 bg-accent text-accent-foreground font-semibold uppercase tracking-wider hover:bg-accent/90 transition-colors shadow-lg disabled:opacity-60"
+        className="w-full inline-flex items-center justify-center gap-2 rounded-full px-6 py-4 bg-accent text-accent-foreground font-extrabold uppercase tracking-wider text-sm shadow-[0_18px_35px_-18px_rgba(45,138,138,.8)] transition-all duration-500 ease-[cubic-bezier(.32,.72,0,1)] hover:bg-teal-deep hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-60 disabled:hover:translate-y-0"
         style={{ fontFamily: "var(--font-display)" }}
       >
         {status === "sending" ? (
@@ -167,7 +169,7 @@ export default function CourseSignupForm({
           href={whatsappFallbackUrl()}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 border-2 border-accent text-accent font-semibold hover:bg-accent/10 transition-colors"
+          className="w-full inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 border-2 border-accent text-accent font-bold transition-all duration-300 hover:bg-accent/10 active:scale-[0.98]"
         >
           In alternativa, invia l&apos;iscrizione su WhatsApp
         </a>

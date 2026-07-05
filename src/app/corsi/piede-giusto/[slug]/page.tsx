@@ -3,10 +3,13 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 import CourseSignupForm from "@/components/CourseSignupForm";
+import RevealMount from "@/components/RevealMount";
+import { SectionBlobs } from "@/components/Blobs";
+import { StatPills, ProgramCard, TintedList, FormShell, EASE } from "@/components/CorsoUI";
 import { SITE_URL } from "@/lib/constants";
 import { breadcrumbJsonLd, courseJsonLd } from "@/lib/structured-data";
 import { PIEDE_GIUSTO, GRUPPO_MIN, GRUPPO_MAX, MATERIALE_PIEDE_GIUSTO } from "@/lib/corsi-data";
-import { Clock, Euro, Users, CheckCircle, Sigma, Atom, ArrowLeft } from "lucide-react";
+import { Clock, Euro, Users, ArrowLeft, ArrowRight } from "lucide-react";
 
 export async function generateStaticParams() {
   return PIEDE_GIUSTO.map((c) => ({ slug: c.slug }));
@@ -66,99 +69,82 @@ export default async function PiedeGiustoDettaglio({
           }])),
         }}
       />
+      <RevealMount />
       <Breadcrumb items={breadcrumbs} />
 
       <section className="pt-8 pb-12 md:pb-16">
+        <SectionBlobs variant="a" />
         <div className="container-custom">
           <div className="max-w-4xl">
-            <span className="inline-block rounded-full bg-accent text-accent-foreground text-xs font-bold uppercase tracking-wider px-4 py-1.5 mb-6" style={{ fontFamily: "var(--font-display)" }}>
+            <span className="inline-block rounded-full bg-accent text-accent-foreground text-[11px] font-extrabold uppercase tracking-[0.14em] px-4 py-1.5 mb-6 reveal">
               Piede Giusto · Iscrizioni aperte
             </span>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary mb-5 leading-[1.05]" style={{ fontFamily: "var(--font-display)" }}>
+            <h1 className="text-[clamp(32px,5vw,54px)] mb-5 reveal d1">
               {corso.titolo}
             </h1>
-            <p className="text-lg md:text-xl text-foreground/70 mb-8 font-medium leading-snug max-w-3xl">
+            <p className="text-lg md:text-xl text-foreground/70 mb-8 font-semibold leading-snug max-w-3xl reveal d2">
               {corso.sottotitolo}
             </p>
-            <div className="grid grid-cols-3 gap-2.5 sm:flex sm:flex-wrap sm:gap-3 max-w-md sm:max-w-none">
-              {[
-                { icon: <Euro className="w-5 h-5" />, big: `€${corso.prezzo}`, small: "totali" },
-                { icon: <Clock className="w-5 h-5" />, big: `${corso.ore} ore`, small: `${corso.lezioni} lezioni da 2h` },
-                { icon: <Users className="w-5 h-5" />, big: `${GRUPPO_MIN}–${GRUPPO_MAX}`, small: "studenti per gruppo" },
-              ].map((s) => (
-                <div key={s.big} className="rounded-2xl bg-secondary/10 text-secondary px-3 py-3 sm:px-5 text-center sm:text-left sm:flex sm:items-center sm:gap-3">
-                  <span className="hidden sm:block">{s.icon}</span>
-                  <div>
-                    <div className="font-bold text-base sm:text-lg leading-tight" style={{ fontFamily: "var(--font-display)" }}>{s.big}</div>
-                    <div className="text-[11px] sm:text-xs font-medium opacity-80">{s.small}</div>
-                  </div>
-                </div>
-              ))}
+            <div className="reveal d2">
+              <StatPills
+                stats={[
+                  { icon: <Euro className="w-4 h-4" />, big: `€${corso.prezzo}`, small: "totali" },
+                  { icon: <Clock className="w-4 h-4" />, big: `${corso.ore} ore`, small: `${corso.lezioni} lezioni da 2h` },
+                  { icon: <Users className="w-4 h-4" />, big: `${GRUPPO_MIN}–${GRUPPO_MAX}`, small: "studenti per gruppo" },
+                ]}
+              />
             </div>
+            <a
+              href="#iscrizione"
+              className={`inline-flex items-center gap-2.5 mt-8 rounded-full bg-primary text-primary-foreground px-6 py-3.5 text-sm font-extrabold uppercase tracking-wider shadow-[0_18px_35px_-18px_rgba(21,50,79,.7)] ${EASE} hover:-translate-y-0.5 hover:bg-navy-deep active:scale-[0.98] reveal d3`}
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              Vai all&apos;iscrizione
+              <span className="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center">
+                <ArrowRight className="w-4 h-4" />
+              </span>
+            </a>
           </div>
         </div>
       </section>
 
-      <section className="section-spacing bg-card">
+      <section className="section-spacing section-tint !py-16 md:!py-24">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl md:text-4xl font-bold text-primary mb-3 text-center" style={{ fontFamily: "var(--font-display)" }}>
-              Il programma
-            </h2>
-            <p className="text-muted-foreground text-center mb-8 md:mb-10 leading-relaxed">
+            <h2 className="text-2xl md:text-4xl mb-3 text-center reveal">Il programma</h2>
+            <p className="text-muted-foreground text-center mb-8 md:mb-10 leading-relaxed reveal d1">
               Gli argomenti che affronterai lezione dopo lezione, scelti per farti
               arrivare preparato al nuovo anno.
             </p>
-            <div className="grid gap-4 sm:gap-6 sm:grid-cols-2">
-              {corso.materie?.map((m) => (
-                <div key={m.nome} className="bg-white rounded-2xl border border-border p-5 sm:p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-accent/15 text-accent flex items-center justify-center">
-                      {m.nome === "Matematica" ? <Sigma className="w-5 h-5" /> : <Atom className="w-5 h-5" />}
-                    </div>
-                    <h3 className="text-lg font-bold text-primary" style={{ fontFamily: "var(--font-display)" }}>{m.nome}</h3>
-                  </div>
-                  <ul className="space-y-2.5">
-                    {m.programma.map((arg) => (
-                      <li key={arg} className="flex items-start gap-2.5 text-sm text-foreground leading-relaxed">
-                        <CheckCircle className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                        <span>{arg}</span>
-                      </li>
-                    ))}
-                  </ul>
+            <div className="grid gap-4 sm:gap-5 sm:grid-cols-2 mb-5">
+              {corso.materie?.map((m, i) => (
+                <div key={m.nome} className={`reveal d${i + 1}`}>
+                  <ProgramCard nome={m.nome} items={m.programma} />
                 </div>
               ))}
             </div>
-            <div className="mt-6 rounded-2xl bg-secondary/10 border border-secondary/20 p-5 sm:p-6">
-              <h3 className="text-base font-bold text-primary mb-3" style={{ fontFamily: "var(--font-display)" }}>
-                Materiale fornito
-              </h3>
-              <ul className="space-y-2">
-                {MATERIALE_PIEDE_GIUSTO.map((m) => (
-                  <li key={m} className="flex items-start gap-2.5 text-sm text-foreground leading-relaxed">
-                    <CheckCircle className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
-                    <span>{m}</span>
-                  </li>
-                ))}
-              </ul>
+            <div className="reveal d2">
+              <TintedList title="Materiale fornito" items={MATERIALE_PIEDE_GIUSTO} />
             </div>
           </div>
         </div>
       </section>
 
-      <section id="iscrizione" className="section-spacing">
+      <section id="iscrizione" className="py-16 md:py-24">
         <div className="container-custom">
           <div className="max-w-xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold text-primary mb-4 text-center" style={{ fontFamily: "var(--font-display)" }}>
-              Iscriviti al corso
-            </h2>
-            <p className="text-muted-foreground text-center mb-8 leading-relaxed">
+            <h2 className="text-2xl md:text-3xl mb-4 text-center reveal">Iscriviti al corso</h2>
+            <p className="text-muted-foreground text-center mb-8 leading-relaxed reveal d1">
               Compila il form: registriamo subito la tua iscrizione e ti
               ricontattiamo entro 24 ore per confermare gruppo e calendario.
             </p>
-            <CourseSignupForm corso={corso.titolo} corsoSlug={`piede-giusto/${corso.slug}`} conCampiScuola />
+            <div className="reveal d2">
+              <FormShell>
+                <CourseSignupForm corso={corso.titolo} corsoSlug={`piede-giusto/${corso.slug}`} conCampiScuola />
+              </FormShell>
+            </div>
             <p className="text-center mt-8">
-              <Link href="/corsi/piede-giusto" className="inline-flex items-center gap-2 text-sm text-accent font-semibold hover:underline">
+              <Link href="/corsi/piede-giusto" className="inline-flex items-center gap-2 text-sm text-secondary font-extrabold hover:underline">
                 <ArrowLeft className="w-4 h-4" /> Tutti i corsi Piede Giusto
               </Link>
             </p>
