@@ -6,8 +6,9 @@ import { SectionBlobs } from "@/components/Blobs";
 import { StatPills, TintedList, FormShell, EASE } from "@/components/CorsoUI";
 import { SITE_URL } from "@/lib/constants";
 import { breadcrumbJsonLd, courseJsonLd } from "@/lib/structured-data";
-import { POTENZIAMENTO } from "@/lib/corsi-data";
-import { Clock, Euro, CalendarDays, ArrowRight, Sigma, Atom, ShieldCheck } from "lucide-react";
+import Link from "next/link";
+import { POTENZIAMENTO, POTENZIAMENTO_CLASSI, GRUPPO_MIN, GRUPPO_MAX } from "@/lib/corsi-data";
+import { Clock, Euro, Users, CalendarDays, ArrowRight, Sigma, Atom, ShieldCheck } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Corso di Potenziamento Scolastico annuale | Emergenza Studio Mogliano Veneto",
@@ -42,12 +43,20 @@ export default function PotenziamentoScolasticoPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(courseJsonLd([{
-            name: POTENZIAMENTO.titolo,
-            description: POTENZIAMENTO.sottotitolo,
-            price: String(POTENZIAMENTO.prezzoTotale),
-            location: "Via Francesco Barbiero 84g, Mogliano Veneto",
-          }])),
+          __html: JSON.stringify(courseJsonLd([
+            {
+              name: POTENZIAMENTO.titolo,
+              description: POTENZIAMENTO.sottotitolo,
+              price: String(POTENZIAMENTO.prezzoTotale),
+              location: "Via Francesco Barbiero 84g, Mogliano Veneto",
+            },
+            ...POTENZIAMENTO_CLASSI.map((c) => ({
+              name: `Potenziamento Scolastico — ${c.classe}`,
+              description: c.sottotitolo,
+              price: String(POTENZIAMENTO.prezzoTotale),
+              location: "Via Francesco Barbiero 84g, Mogliano Veneto",
+            })),
+          ])),
         }}
       />
       <RevealMount />
@@ -78,15 +87,53 @@ export default function PotenziamentoScolasticoPage() {
               />
             </div>
             <a
-              href="#iscrizione"
+              href="#classi"
               className={`inline-flex items-center gap-2.5 mt-8 rounded-full bg-primary text-primary-foreground px-6 py-3.5 text-sm font-extrabold uppercase tracking-wider shadow-[0_18px_35px_-18px_rgba(21,50,79,.7)] ${EASE} hover:-translate-y-0.5 hover:bg-navy-deep active:scale-[0.98] reveal d3`}
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Vai all&apos;iscrizione
+              Scegli la tua classe
               <span className="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center">
                 <ArrowRight className="w-4 h-4" />
               </span>
             </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="classi" className="py-16 md:py-24">
+        <div className="container-custom">
+          <h2 className="text-2xl md:text-4xl mb-3 text-center reveal">
+            Un percorso per ogni classe
+          </h2>
+          <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-10 md:mb-12 leading-relaxed reveal d1">
+            Il corso segue il programma della tua classe, dalla prima alla quinta
+            superiore: scegli il tuo anno e guarda il programma completo di
+            matematica e fisica, poi iscriviti direttamente online.
+          </p>
+          <div className="grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
+            {POTENZIAMENTO_CLASSI.map((c, i) => (
+              <Link
+                key={c.slug}
+                href={`/corsi/potenziamento-scolastico/${c.slug}`}
+                className={`group relative flex flex-col rounded-[26px] bg-white border border-border p-5 sm:p-6 overflow-hidden ${EASE} hover:-translate-y-1 hover:shadow-[0_30px_50px_-30px_rgba(21,50,79,.35)] active:scale-[0.99] reveal d${(i % 3) + 1}`}
+              >
+                <span aria-hidden className="absolute -top-1 right-4 text-[56px] leading-none font-black tracking-tight select-none" style={{ color: "rgba(45,138,138,.12)" }}>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="text-base sm:text-lg mb-2 leading-snug pr-10">
+                  {c.classe}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">{c.sottotitolo}</p>
+                <div className="mt-auto flex items-center justify-between gap-3">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2.5 py-1 text-xs font-bold text-foreground">
+                    <Users className="w-3.5 h-3.5" /> {GRUPPO_MIN}–{GRUPPO_MAX} per gruppo
+                  </span>
+                  <span className={`w-8 h-8 rounded-full bg-accent/12 text-accent flex items-center justify-center shrink-0 ${EASE} group-hover:bg-accent group-hover:text-accent-foreground group-hover:translate-x-1`}>
+                    <ArrowRight className="w-4 h-4" />
+                  </span>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

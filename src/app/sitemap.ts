@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { PIEDE_GIUSTO, ENGLISH_CLUB } from "@/lib/corsi-data";
+import { PIEDE_GIUSTO, ENGLISH_CLUB, POTENZIAMENTO_CLASSI } from "@/lib/corsi-data";
 
 export const dynamic = "force-static";
 
@@ -37,6 +37,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly" as const,
     })),
     { url: "/corsi/potenziamento-scolastico", priority: 0.9, changeFrequency: "weekly" as const },
+    ...POTENZIAMENTO_CLASSI.map((c) => ({
+      url: `/corsi/potenziamento-scolastico/${c.slug}`,
+      priority: 0.9,
+      changeFrequency: "weekly" as const,
+    })),
     { url: "/chi-siamo", priority: 0.6, changeFrequency: "monthly" as const },
     { url: "/contatti", priority: 0.6, changeFrequency: "monthly" as const },
     { url: "/blog", priority: 0.7, changeFrequency: "weekly" as const },

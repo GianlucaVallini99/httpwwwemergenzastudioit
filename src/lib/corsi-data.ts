@@ -265,6 +265,46 @@ export const POTENZIAMENTO = {
   ],
 };
 
+// Le 5 classi del Potenziamento Scolastico: il programma annuale di ogni
+// classe coincide con gli argomenti del corrispondente percorso Piede Giusto.
+export const POTENZIAMENTO_CLASSI = [
+  {
+    slug: "prima-superiore",
+    classe: "Prima Superiore",
+    sottotitolo:
+      "Il primo anno delle superiori senza lacune: dalle basi dell'algebra alle prime grandezze fisiche, con esercizi e simulazioni di verifica ogni settimana.",
+    materie: PIEDE_GIUSTO[0].materie!,
+  },
+  {
+    slug: "seconda-superiore",
+    classe: "Seconda Superiore",
+    sottotitolo:
+      "Dalle equazioni di secondo grado alla retta, dalla dinamica alla fluidostatica: un appuntamento fisso per non rincorrere mai il programma.",
+    materie: PIEDE_GIUSTO[1].materie!,
+  },
+  {
+    slug: "terza-superiore",
+    classe: "Terza Superiore",
+    sottotitolo:
+      "Il triennio cambia passo: geometria analitica completa e la fisica di energia, urti e gravitazione, allenate verifica dopo verifica.",
+    materie: PIEDE_GIUSTO[2].materie!,
+  },
+  {
+    slug: "quarta-superiore",
+    classe: "Quarta Superiore",
+    sottotitolo:
+      "Esponenziali, trigonometria e probabilità in matematica; onde, ottica ed elettrostatica in fisica: l'anno più denso, affrontato con costanza.",
+    materie: PIEDE_GIUSTO[3].materie!,
+  },
+  {
+    slug: "quinta-superiore",
+    classe: "Quinta Superiore",
+    sottotitolo:
+      "L'anno della maturità: limiti, derivate e integrali in matematica, elettromagnetismo e fisica moderna in fisica, fino alla prova d'esame.",
+    materie: PIEDE_GIUSTO[4].materie!,
+  },
+] as const;
+
 // Opzioni comuni dei form di iscrizione
 export const INDIRIZZI_SCOLASTICI = [
   "Scuola media",

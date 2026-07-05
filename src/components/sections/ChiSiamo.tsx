@@ -2,7 +2,7 @@ import Link from "next/link";
 import { SectionBlobs } from "@/components/Blobs";
 
 const STATS = [
-  { n: "50+", l: "Studenti seguiti" },
+  { n: "100+", l: "Studenti aiutati" },
   { n: "15+", l: "Materie" },
   { n: "4.9★", l: "Recensioni Google" },
 ];

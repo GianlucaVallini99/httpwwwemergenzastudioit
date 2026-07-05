@@ -48,8 +48,8 @@ export default function Hero() {
             </div>
             <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm text-muted-foreground font-semibold reveal in d4">
               <div>
-                <strong className="block text-2xl text-primary font-extrabold">50+</strong>
-                studenti seguiti
+                <strong className="block text-2xl text-primary font-extrabold">100+</strong>
+                studenti aiutati
               </div>
               <div>
                 <strong className="block text-2xl text-primary font-extrabold">15+</strong>
