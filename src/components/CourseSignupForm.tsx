@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { PHONE_INTL } from "@/lib/constants";
-import { INDIRIZZI_SCOLASTICI } from "@/lib/corsi-data";
+import { INDIRIZZI_SCOLASTICI, MATERIA_ENTRAMBE, MATERIE_SINGOLE } from "@/lib/corsi-data";
 import { CheckCircle, Loader2, Send, Sigma, Atom, BookOpen } from "lucide-react";
 
 const inputCls =
@@ -43,9 +43,24 @@ export default function CourseSignupForm({
   const [error, setError] = useState("");
 
   const hasMaterie = !!materie && materie.length > 0;
-  // Nome del corso comprensivo della materia scelta (Matematica e Fisica
-  // sono corsi separati): finisce nel gestionale e nel messaggio WhatsApp.
-  const corsoCompleto = hasMaterie && materia ? `${corso} — ${materia}` : corso;
+  const isEntrambe = hasMaterie && materia === MATERIA_ENTRAMBE;
+  // Corsi a cui iscriversi. "Entrambe" genera due iscrizioni separate, una per
+  // materia: nel gestionale risultano come due righe distinte.
+  const corsiSelezionati = !hasMaterie
+    ? [corso]
+    : isEntrambe
+      ? MATERIE_SINGOLE.map((m) => `${corso} — ${m}`)
+      : materia
+        ? [`${corso} — ${materia}`]
+        : [];
+  // Etichetta leggibile per messaggio di conferma e WhatsApp.
+  const corsoLabel = !hasMaterie
+    ? corso
+    : isEntrambe
+      ? `i corsi di ${MATERIE_SINGOLE.join(" e ")} (${corso})`
+      : materia
+        ? `${corso} — ${materia}`
+        : corso;
 
   const set = (field: keyof typeof EMPTY) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -53,8 +68,8 @@ export default function CourseSignupForm({
 
   const whatsappFallbackUrl = () => {
     const lines = [
-      `Iscrizione — ${corsoCompleto}`,
-      ...(hasMaterie ? [`Materia: ${materia}`] : []),
+      `Iscrizione — ${corsoLabel}`,
+      ...(hasMaterie ? [`Materia: ${isEntrambe ? MATERIE_SINGOLE.join(" + ") : materia}`] : []),
       `Nome: ${data.nome}`,
       `Cognome: ${data.cognome}`,
       `Indirizzo di residenza: ${data.indirizzoResidenza}`,
@@ -81,13 +96,19 @@ export default function CourseSignupForm({
     setError("");
     setStatus("sending");
     try {
-      const res = await fetch("/api/iscrizioni", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ corso: corsoCompleto, corsoSlug, ...data, codiceFiscale: cf }),
-      });
-      if (!res.ok) {
-        const body = await res.json().catch(() => null);
+      // Un POST per ogni corso selezionato (due se si sceglie "Entrambe").
+      const results = await Promise.all(
+        corsiSelezionati.map((c) =>
+          fetch("/api/iscrizioni", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ corso: c, corsoSlug, ...data, codiceFiscale: cf }),
+          })
+        )
+      );
+      const fallita = results.find((r) => !r.ok);
+      if (fallita) {
+        const body = await fallita.json().catch(() => null);
         throw new Error(body?.error || "Invio non riuscito");
       }
       setStatus("sent");
@@ -105,7 +126,8 @@ export default function CourseSignupForm({
         </span>
         <p className="text-lg font-extrabold text-accent mb-2" style={{ fontFamily: "var(--font-display)" }}>Iscrizione registrata</p>
         <p className="text-muted-foreground">
-          Abbiamo salvato la tua richiesta per <strong>{corsoCompleto}</strong>. Ti
+          Abbiamo salvato la tua richiesta per <strong>{corsoLabel}</strong>.{" "}
+          {isEntrambe ? "Sono due iscrizioni distinte, una per materia. " : ""}Ti
           ricontatteremo entro 24 ore per confermare il gruppo e i dettagli di
           pagamento.
         </p>

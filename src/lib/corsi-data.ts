@@ -307,7 +307,11 @@ export const POTENZIAMENTO_CLASSI = [
 
 // Matematica e Fisica sono due corsi separati: lo studente sceglie quale
 // seguire (o entrambi, pagando due iscrizioni distinte).
-export const MATERIE_SCELTA = ["Matematica", "Fisica", "Entrambe le materie"];
+export const MATERIE_SINGOLE = ["Matematica", "Fisica"];
+export const MATERIA_ENTRAMBE = "Entrambe le materie";
+// Scegliendo "Entrambe" vengono registrate due iscrizioni separate, una per
+// materia, così nel gestionale risultano come due righe distinte.
+export const MATERIE_SCELTA = [...MATERIE_SINGOLE, MATERIA_ENTRAMBE];
 
 // Opzioni comuni dei form di iscrizione
 export const INDIRIZZI_SCOLASTICI = [
