@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
-import CourseSignupForm from "@/components/CourseSignupForm";
 import RevealMount from "@/components/RevealMount";
 import { SectionBlobs } from "@/components/Blobs";
-import { StatPills, TintedList, FormShell, EASE } from "@/components/CorsoUI";
+import { StatPills, TintedList, EASE } from "@/components/CorsoUI";
 import { SITE_URL } from "@/lib/constants";
 import { breadcrumbJsonLd, courseJsonLd } from "@/lib/structured-data";
-import Link from "next/link";
 import { POTENZIAMENTO, POTENZIAMENTO_CLASSI, GRUPPO_MIN, GRUPPO_MAX } from "@/lib/corsi-data";
 import { Clock, Euro, Users, CalendarDays, ArrowRight, Sigma, Atom, ShieldCheck } from "lucide-react";
 
@@ -143,17 +142,22 @@ export default function PotenziamentoScolasticoPage() {
           <div className="max-w-3xl mx-auto">
             <h2 className="text-2xl md:text-4xl mb-3 text-center reveal">Come funziona</h2>
             <p className="text-muted-foreground text-center mb-8 md:mb-10 leading-relaxed reveal d1">
-              Un appuntamento fisso di {POTENZIAMENTO.oreSettimana} ore a settimana
-              per {POTENZIAMENTO.settimane} settimane, in parallelo al programma
-              della tua classe: ripassi la teoria, ti alleni con gli esercizi e
-              simuli le verifiche prima di affrontarle a scuola.
+              <strong className="text-secondary">Matematica e Fisica sono due corsi
+              annuali separati:</strong> puoi seguirne uno o entrambi. Ognuno è un
+              appuntamento fisso di {POTENZIAMENTO.oreSettimana} ore a settimana per{" "}
+              {POTENZIAMENTO.settimane} settimane, in parallelo al programma della tua
+              classe: ripassi la teoria, ti alleni con gli esercizi e simuli le
+              verifiche prima di affrontarle a scuola.
             </p>
             <div className="grid gap-4 sm:grid-cols-2 mb-5">
               {MATERIE_DETTAGLIO.map((m, i) => (
                 <div key={m.nome} className={`bg-white rounded-[26px] border border-border p-5 sm:p-6 ${EASE} hover:shadow-[0_24px_40px_-28px_rgba(21,50,79,.4)] hover:-translate-y-0.5 reveal d${i + 1}`}>
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-full bg-accent/12 text-accent flex items-center justify-center">{m.icon}</div>
-                    <h3 className="text-lg">{m.nome}</h3>
+                    <div className="w-11 h-11 rounded-full bg-accent/12 text-accent flex items-center justify-center shrink-0">{m.icon}</div>
+                    <div>
+                      <span className="block text-[10px] font-extrabold uppercase tracking-[0.16em] text-secondary">Corso di</span>
+                      <h3 className="text-lg leading-tight">{m.nome}</h3>
+                    </div>
                   </div>
                   <p className="text-sm text-muted-foreground leading-relaxed">{m.testo}</p>
                 </div>
@@ -167,10 +171,10 @@ export default function PotenziamentoScolasticoPage() {
                 <ShieldCheck className="w-5 h-5" />
               </span>
               <p className="text-sm text-foreground leading-relaxed [font-variant-numeric:tabular-nums]">
-                <strong>Pagamento in {POTENZIAMENTO.rate} rate da €{POTENZIAMENTO.importoRata}:</strong>{" "}
-                il corso costa €{POTENZIAMENTO.prezzoOra} all&apos;ora per un totale
-                di €{POTENZIAMENTO.prezzoTotale}, suddiviso in {POTENZIAMENTO.rate}{" "}
-                rate distribuite lungo l&apos;anno scolastico.
+                <strong>€{POTENZIAMENTO.prezzoOra}/h per materia, {POTENZIAMENTO.rate} rate da €{POTENZIAMENTO.importoRata}:</strong>{" "}
+                ogni corso costa €{POTENZIAMENTO.prezzoTotale} ({POTENZIAMENTO.oreTotali}{" "}
+                ore), suddiviso in {POTENZIAMENTO.rate} rate lungo l&apos;anno. Chi
+                sceglie sia matematica sia fisica si iscrive a due corsi distinti.
               </p>
             </div>
           </div>
@@ -179,22 +183,23 @@ export default function PotenziamentoScolasticoPage() {
 
       <section id="iscrizione" className="py-16 md:py-24">
         <div className="container-custom">
-          <div className="max-w-xl mx-auto">
-            <h2 className="text-2xl md:text-3xl mb-4 text-center reveal">Iscriviti al corso</h2>
-            <p className="text-muted-foreground text-center mb-8 leading-relaxed reveal d1">
-              Compila il form: registriamo subito la tua iscrizione e ti
-              ricontattiamo entro 24 ore per confermare orario e partenza del
-              gruppo.
+          <div className="max-w-xl mx-auto text-center rounded-[30px] bg-secondary/8 border border-secondary/15 p-6 sm:p-10 reveal">
+            <h2 className="text-2xl md:text-3xl mb-4">Pronto a iscriverti?</h2>
+            <p className="text-muted-foreground mb-8 leading-relaxed">
+              L&apos;iscrizione parte dalla tua classe: scegli l&apos;anno, poi indica
+              se vuoi il corso di matematica, quello di fisica o entrambi. Registriamo
+              tutto subito e ti ricontattiamo entro 24 ore.
             </p>
-            <div className="reveal d2">
-              <FormShell>
-                <CourseSignupForm
-                  corso={POTENZIAMENTO.titolo}
-                  corsoSlug={POTENZIAMENTO.slug}
-                  conCampiScuola
-                />
-              </FormShell>
-            </div>
+            <a
+              href="#classi"
+              className={`inline-flex items-center gap-2.5 rounded-full bg-accent text-accent-foreground px-7 py-4 text-sm font-extrabold uppercase tracking-wider shadow-[0_18px_35px_-18px_rgba(45,138,138,.8)] ${EASE} hover:-translate-y-0.5 hover:bg-teal-deep active:scale-[0.98]`}
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              Scegli la tua classe
+              <span className="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center">
+                <ArrowRight className="w-4 h-4" />
+              </span>
+            </a>
           </div>
         </div>
       </section>

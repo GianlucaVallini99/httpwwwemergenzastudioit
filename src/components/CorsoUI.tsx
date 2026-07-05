@@ -52,6 +52,47 @@ export function ProgramCard({ nome, items }: { nome: string; items: string[] }) 
   );
 }
 
+// Come ProgramCard ma con eyebrow "Corso di" e badge prezzo/durata: rende
+// esplicito che ogni materia è un corso separato con il suo costo.
+export function SubjectCourseCard({
+  nome,
+  items,
+  meta,
+}: {
+  nome: string;
+  items: string[];
+  meta?: string;
+}) {
+  return (
+    <div className={`flex flex-col bg-white rounded-[26px] border border-border p-5 sm:p-6 ${EASE} hover:shadow-[0_24px_40px_-28px_rgba(21,50,79,.4)] hover:-translate-y-0.5`}>
+      <div className="flex items-start justify-between gap-3 mb-4">
+        <div className="flex items-center gap-3">
+          <div className="w-11 h-11 rounded-full bg-accent/12 text-accent flex items-center justify-center shrink-0">
+            {nome === "Matematica" ? <Sigma className="w-5 h-5" /> : <Atom className="w-5 h-5" />}
+          </div>
+          <div>
+            <span className="block text-[10px] font-extrabold uppercase tracking-[0.16em] text-secondary">Corso di</span>
+            <h3 className="text-lg leading-tight">{nome}</h3>
+          </div>
+        </div>
+        {meta && (
+          <span className="shrink-0 rounded-full bg-secondary/10 text-secondary px-3 py-1.5 text-xs font-bold [font-variant-numeric:tabular-nums]">
+            {meta}
+          </span>
+        )}
+      </div>
+      <ul className="space-y-2.5">
+        {items.map((arg) => (
+          <li key={arg} className="flex items-start gap-2.5 text-sm text-foreground leading-relaxed">
+            <CheckCircle className="w-4 h-4 text-accent shrink-0 mt-0.5" />
+            <span>{arg}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 // Elenco puntato in card tinta (materiale fornito, punti chiave)
 export function TintedList({ title, items }: { title?: string; items: string[] }) {
   return (

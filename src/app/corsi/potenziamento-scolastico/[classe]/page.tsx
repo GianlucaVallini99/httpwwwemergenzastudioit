@@ -5,7 +5,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import CourseSignupForm from "@/components/CourseSignupForm";
 import RevealMount from "@/components/RevealMount";
 import { SectionBlobs } from "@/components/Blobs";
-import { StatPills, ProgramCard, TintedList, FormShell, EASE } from "@/components/CorsoUI";
+import { StatPills, SubjectCourseCard, TintedList, FormShell, EASE } from "@/components/CorsoUI";
 import { SITE_URL } from "@/lib/constants";
 import { breadcrumbJsonLd, courseJsonLd } from "@/lib/structured-data";
 import {
@@ -14,6 +14,7 @@ import {
   GRUPPO_MIN,
   GRUPPO_MAX,
   MATERIALE_PIEDE_GIUSTO,
+  MATERIE_SCELTA,
 } from "@/lib/corsi-data";
 import { Clock, Euro, Users, ArrowLeft, ArrowRight, CalendarDays } from "lucide-react";
 
@@ -31,7 +32,7 @@ export async function generateMetadata({
   if (!corso) return {};
   return {
     title: `Potenziamento Scolastico ${corso.classe} | Emergenza Studio Mogliano Veneto`,
-    description: `Corso annuale di matematica e fisica per la ${corso.classe}: ${POTENZIAMENTO.settimane} settimane, ${POTENZIAMENTO.oreTotali} ore, gruppi da ${GRUPPO_MIN} a ${GRUPPO_MAX} studenti, €${POTENZIAMENTO.prezzoOra}/h in ${POTENZIAMENTO.rate} rate. Iscrizione online.`,
+    description: `Corsi annuali separati di matematica e fisica per la ${corso.classe}: ${POTENZIAMENTO.settimane} settimane, ${POTENZIAMENTO.oreTotali} ore per materia, gruppi da ${GRUPPO_MIN} a ${GRUPPO_MAX} studenti, €${POTENZIAMENTO.prezzoOra}/h in ${POTENZIAMENTO.rate} rate. Iscrizione online.`,
     alternates: { canonical: `${SITE_URL}/corsi/potenziamento-scolastico/${corso.slug}/` },
   };
 }
@@ -68,12 +69,14 @@ export default async function PotenziamentoClasse({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(courseJsonLd([{
-            name: titolo,
-            description: corso.sottotitolo,
-            price: String(POTENZIAMENTO.prezzoTotale),
-            location: "Via Francesco Barbiero 84g, Mogliano Veneto",
-          }])),
+          __html: JSON.stringify(courseJsonLd(
+            corso.materie.map((m) => ({
+              name: `${titolo} — ${m.nome}`,
+              description: `Corso annuale di ${m.nome.toLowerCase()} per la ${corso.classe}: ${corso.sottotitolo}`,
+              price: String(POTENZIAMENTO.prezzoTotale),
+              location: "Via Francesco Barbiero 84g, Mogliano Veneto",
+            }))
+          )),
         }}
       />
       <RevealMount />
@@ -89,14 +92,20 @@ export default async function PotenziamentoClasse({
             <h1 className="text-[clamp(32px,5vw,54px)] mb-5 reveal d1">
               {titolo}
             </h1>
-            <p className="text-lg md:text-xl text-foreground/70 mb-8 font-semibold leading-snug max-w-3xl reveal d2">
+            <p className="text-lg md:text-xl text-foreground/70 mb-4 font-semibold leading-snug max-w-3xl reveal d2">
               {corso.sottotitolo}
+            </p>
+            <p className="text-base text-foreground/60 mb-8 leading-relaxed max-w-3xl reveal d2">
+              <strong className="text-secondary">Matematica e Fisica sono due corsi
+              annuali separati:</strong> puoi seguirne uno o entrambi. Ognuno dura{" "}
+              {POTENZIAMENTO.oreTotali} ore e costa €{POTENZIAMENTO.prezzoTotale}{" "}
+              (€{POTENZIAMENTO.prezzoOra}/h in {POTENZIAMENTO.rate} rate).
             </p>
             <div className="reveal d2">
               <StatPills
                 stats={[
-                  { icon: <Euro className="w-4 h-4" />, big: `€${POTENZIAMENTO.prezzoOra}/h`, small: `${POTENZIAMENTO.rate} rate da €${POTENZIAMENTO.importoRata}` },
-                  { icon: <Clock className="w-4 h-4" />, big: `${POTENZIAMENTO.oreTotali} ore`, small: `${POTENZIAMENTO.oreSettimana} ore a settimana` },
+                  { icon: <Euro className="w-4 h-4" />, big: `€${POTENZIAMENTO.prezzoOra}/h`, small: `a materia · ${POTENZIAMENTO.rate} rate da €${POTENZIAMENTO.importoRata}` },
+                  { icon: <Clock className="w-4 h-4" />, big: `${POTENZIAMENTO.oreTotali} ore`, small: `per materia · ${POTENZIAMENTO.oreSettimana}h a settimana` },
                   { icon: <Users className="w-4 h-4" />, big: `${GRUPPO_MIN}–${GRUPPO_MAX}`, small: "studenti per gruppo" },
                 ]}
               />
@@ -119,30 +128,34 @@ export default async function PotenziamentoClasse({
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-2xl md:text-4xl mb-3 text-center reveal">
-              Il programma dell&apos;anno
+              Due corsi, due programmi
             </h2>
             <p className="text-muted-foreground text-center mb-8 md:mb-10 leading-relaxed reveal d1">
-              Segui in parallelo il programma della tua classe:{" "}
-              {POTENZIAMENTO.settimane} settimane, {POTENZIAMENTO.oreSettimana} ore
-              a settimana, con esercizi e simulazioni prima di ogni verifica.
+              Matematica e Fisica seguono in parallelo il programma della tua classe,
+              ciascuna con {POTENZIAMENTO.oreSettimana} ore a settimana per{" "}
+              {POTENZIAMENTO.settimane} settimane. Scegli una materia o entrambe.
             </p>
             <div className="grid gap-4 sm:gap-5 sm:grid-cols-2 mb-5">
               {corso.materie.map((m, i) => (
                 <div key={m.nome} className={`reveal d${i + 1}`}>
-                  <ProgramCard nome={m.nome} items={[...m.programma]} />
+                  <SubjectCourseCard
+                    nome={m.nome}
+                    items={[...m.programma]}
+                    meta={`€${POTENZIAMENTO.prezzoTotale} · ${POTENZIAMENTO.oreTotali}h`}
+                  />
                 </div>
               ))}
             </div>
             <div className="reveal d2">
-              <TintedList title="Materiale fornito" items={MATERIALE_PIEDE_GIUSTO} />
+              <TintedList title="Materiale fornito (in ogni corso)" items={MATERIALE_PIEDE_GIUSTO} />
             </div>
             <div className="mt-5 rounded-[26px] bg-white border border-border p-5 sm:p-6 flex items-start gap-3 reveal d3">
               <span className="w-10 h-10 rounded-full bg-accent/12 text-accent flex items-center justify-center shrink-0">
                 <CalendarDays className="w-5 h-5" />
               </span>
               <p className="text-sm text-foreground leading-relaxed [font-variant-numeric:tabular-nums]">
-                <strong>€{POTENZIAMENTO.prezzoOra} all&apos;ora, {POTENZIAMENTO.oreTotali} ore totali:</strong>{" "}
-                {`€${POTENZIAMENTO.prezzoTotale} pagabili in ${POTENZIAMENTO.rate} rate da €${POTENZIAMENTO.importoRata} distribuite lungo l'anno scolastico.`}
+                <strong>€{POTENZIAMENTO.prezzoOra} all&apos;ora, {POTENZIAMENTO.oreTotali} ore per materia:</strong>{" "}
+                {`ogni corso costa €${POTENZIAMENTO.prezzoTotale}, pagabili in ${POTENZIAMENTO.rate} rate da €${POTENZIAMENTO.importoRata} distribuite lungo l'anno. Chi sceglie entrambe le materie si iscrive a due corsi.`}
               </p>
             </div>
           </div>
@@ -156,9 +169,9 @@ export default async function PotenziamentoClasse({
               Iscriviti per la {corso.classe}
             </h2>
             <p className="text-muted-foreground text-center mb-8 leading-relaxed reveal d1">
-              Compila il form: registriamo subito la tua iscrizione e ti
-              ricontattiamo entro 24 ore per confermare orario e partenza del
-              gruppo.
+              Scegli la materia, compila il form e registriamo subito la tua
+              iscrizione: ti ricontattiamo entro 24 ore per confermare orario e
+              partenza del gruppo.
             </p>
             <div className="reveal d2">
               <FormShell>
@@ -166,6 +179,7 @@ export default async function PotenziamentoClasse({
                   corso={titolo}
                   corsoSlug={`potenziamento-scolastico/${corso.slug}`}
                   conCampiScuola
+                  materie={MATERIE_SCELTA}
                 />
               </FormShell>
             </div>

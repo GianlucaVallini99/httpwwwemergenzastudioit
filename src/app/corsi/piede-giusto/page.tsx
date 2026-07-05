@@ -60,10 +60,15 @@ export default function PiedeGiustoPage() {
             <h1 className="text-[clamp(34px,5.5vw,60px)] mb-5 reveal d1">
               Piede Giusto: potenziamento per iniziare l&apos;anno al meglio
             </h1>
-            <p className="text-lg md:text-2xl text-foreground/70 mb-8 font-semibold leading-snug max-w-3xl reveal d2">
+            <p className="text-lg md:text-2xl text-foreground/70 mb-4 font-semibold leading-snug max-w-3xl reveal d2">
               Corsi intensivi di matematica e fisica in piccoli gruppi: ripassi ciò
               che serve e anticipi gli argomenti del nuovo anno, così da settembre
               parti in vantaggio.
+            </p>
+            <p className="text-base text-foreground/60 mb-8 leading-relaxed max-w-3xl reveal d2">
+              Matematica e Fisica sono <strong className="text-secondary">due corsi
+              separati</strong>: scegli quello che ti serve, o entrambi. Ogni corso ha
+              il suo prezzo.
             </p>
             <div className="flex flex-wrap gap-2.5 sm:gap-3 mb-4 reveal d3">
               <span className="inline-flex items-center gap-2 rounded-full bg-secondary/10 text-secondary px-4 py-2 text-sm font-bold">
@@ -87,7 +92,7 @@ export default function PiedeGiustoPage() {
           </h2>
           <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-10 md:mb-12 leading-relaxed reveal d1">
             Cinque percorsi con programma su misura: scegli quello del tuo anno e
-            guarda nel dettaglio gli argomenti di matematica e fisica.
+            guarda nel dettaglio i due corsi separati di matematica e fisica.
           </p>
           <div className="grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
             {PIEDE_GIUSTO.map((c, i) => (

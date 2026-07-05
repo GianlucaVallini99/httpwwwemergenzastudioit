@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { PHONE_INTL } from "@/lib/constants";
 import { INDIRIZZI_SCOLASTICI } from "@/lib/corsi-data";
-import { CheckCircle, Loader2, Send } from "lucide-react";
+import { CheckCircle, Loader2, Send, Sigma, Atom, BookOpen } from "lucide-react";
 
 const inputCls =
   "w-full rounded-2xl border border-border bg-muted/60 px-4 py-3.5 text-base font-semibold text-foreground placeholder:font-medium placeholder:text-muted-foreground/60 transition-all duration-300 focus:outline-none focus:bg-white focus:border-accent/40 focus:ring-4 focus:ring-accent/15";
@@ -18,20 +18,34 @@ const EMPTY = {
   scuola: "",
 };
 
+function materiaIcon(m: string) {
+  if (m === "Matematica") return <Sigma className="w-4 h-4" />;
+  if (m === "Fisica") return <Atom className="w-4 h-4" />;
+  return <BookOpen className="w-4 h-4" />;
+}
+
 export default function CourseSignupForm({
   corso,
   corsoSlug,
   conCampiScuola = false,
+  materie,
   buttonText = "Invia l'iscrizione",
 }: {
   corso: string;
   corsoSlug: string;
   conCampiScuola?: boolean;
+  materie?: string[];
   buttonText?: string;
 }) {
   const [data, setData] = useState(EMPTY);
+  const [materia, setMateria] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [error, setError] = useState("");
+
+  const hasMaterie = !!materie && materie.length > 0;
+  // Nome del corso comprensivo della materia scelta (Matematica e Fisica
+  // sono corsi separati): finisce nel gestionale e nel messaggio WhatsApp.
+  const corsoCompleto = hasMaterie && materia ? `${corso} — ${materia}` : corso;
 
   const set = (field: keyof typeof EMPTY) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -39,7 +53,8 @@ export default function CourseSignupForm({
 
   const whatsappFallbackUrl = () => {
     const lines = [
-      `Iscrizione — ${corso}`,
+      `Iscrizione — ${corsoCompleto}`,
+      ...(hasMaterie ? [`Materia: ${materia}`] : []),
       `Nome: ${data.nome}`,
       `Cognome: ${data.cognome}`,
       `Indirizzo di residenza: ${data.indirizzoResidenza}`,
@@ -54,6 +69,10 @@ export default function CourseSignupForm({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (hasMaterie && !materia) {
+      setError("Scegli la materia del corso a cui vuoi iscriverti.");
+      return;
+    }
     const cf = data.codiceFiscale.trim().toUpperCase();
     if (!/^[A-Z0-9]{16}$/.test(cf)) {
       setError("Il codice fiscale deve avere 16 caratteri (lettere e numeri).");
@@ -65,7 +84,7 @@ export default function CourseSignupForm({
       const res = await fetch("/api/iscrizioni", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ corso, corsoSlug, ...data, codiceFiscale: cf }),
+        body: JSON.stringify({ corso: corsoCompleto, corsoSlug, ...data, codiceFiscale: cf }),
       });
       if (!res.ok) {
         const body = await res.json().catch(() => null);
@@ -86,7 +105,7 @@ export default function CourseSignupForm({
         </span>
         <p className="text-lg font-extrabold text-accent mb-2" style={{ fontFamily: "var(--font-display)" }}>Iscrizione registrata</p>
         <p className="text-muted-foreground">
-          Abbiamo salvato la tua richiesta per <strong>{corso}</strong>. Ti
+          Abbiamo salvato la tua richiesta per <strong>{corsoCompleto}</strong>. Ti
           ricontatteremo entro 24 ore per confermare il gruppo e i dettagli di
           pagamento.
         </p>
@@ -96,6 +115,38 @@ export default function CourseSignupForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      {hasMaterie && (
+        <fieldset>
+          <legend className="block text-sm font-medium text-foreground mb-2">
+            Quale corso vuoi seguire?
+          </legend>
+          <div className="grid sm:grid-cols-3 gap-2.5">
+            {materie!.map((m) => {
+              const active = materia === m;
+              return (
+                <button
+                  key={m}
+                  type="button"
+                  onClick={() => setMateria(m)}
+                  aria-pressed={active}
+                  className={`inline-flex items-center justify-center gap-2 rounded-2xl border px-4 py-3 text-sm font-bold transition-all duration-300 ${
+                    active
+                      ? "bg-accent text-accent-foreground border-accent shadow-[0_14px_28px_-16px_rgba(45,138,138,.8)]"
+                      : "bg-muted/60 text-foreground border-border hover:border-accent/40"
+                  }`}
+                >
+                  {materiaIcon(m)} {m}
+                </button>
+              );
+            })}
+          </div>
+          <p className="text-xs text-muted-foreground mt-2">
+            Matematica e Fisica sono due corsi separati: scegli quello che ti
+            interessa (o entrambi).
+          </p>
+        </fieldset>
+      )}
+
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="nome" className="block text-sm font-medium text-foreground mb-1">Nome</label>

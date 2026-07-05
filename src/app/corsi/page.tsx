@@ -111,7 +111,7 @@ export default function CorsiPage() {
                 </Link>
               </h2>
               <p className="text-muted-foreground text-[15px] leading-relaxed mb-5 max-w-xl">
-                Matematica e fisica intensive per arrivare al primo giorno già
+                Corsi separati di matematica e fisica per arrivare al primo giorno già
                 preparato. Un percorso per ogni passaggio di classe:
               </p>
               <ul className="grid sm:grid-cols-2 gap-2 mb-6">
@@ -132,7 +132,7 @@ export default function CorsiPage() {
               </ul>
               <div className="mt-auto flex flex-wrap items-center justify-between gap-4">
                 <div className="flex flex-wrap gap-2">
-                  <Chip icon={<Euro className="w-3.5 h-3.5" />} label="Da €150" />
+                  <Chip icon={<Euro className="w-3.5 h-3.5" />} label="Da €150 a materia" />
                   <Chip icon={<Clock className="w-3.5 h-3.5" />} label="10–12 ore" />
                   <Chip icon={<BookOpen className="w-3.5 h-3.5" />} label="Materiale incluso" />
                 </div>
@@ -203,16 +203,16 @@ export default function CorsiPage() {
                 Corso di Potenziamento Scolastico
               </h2>
               <p className="text-white/75 text-[15px] leading-relaxed max-w-xl">
-                Matematica e fisica ogni settimana, in parallelo al programma della
-                tua classe: teoria, esercizi e simulazioni di verifica per vivere
-                la scuola senza la paura delle interrogazioni.
+                Due corsi annuali separati, matematica e fisica, in parallelo al
+                programma della tua classe: teoria, esercizi e simulazioni di verifica
+                per vivere la scuola senza la paura delle interrogazioni.
               </p>
             </div>
             <div className="shrink-0 flex flex-col gap-4 md:items-end">
               <div className="flex flex-wrap gap-2">
                 {[
                   { icon: <CalendarDays className="w-3.5 h-3.5" />, label: `${POTENZIAMENTO.settimane} settimane` },
-                  { icon: <Clock className="w-3.5 h-3.5" />, label: `${POTENZIAMENTO.oreTotali} ore` },
+                  { icon: <Clock className="w-3.5 h-3.5" />, label: `${POTENZIAMENTO.oreTotali} ore a materia` },
                   { icon: <Euro className="w-3.5 h-3.5" />, label: `15/h · 4 rate da €240` },
                 ].map((s) => (
                   <span key={s.label} className="inline-flex items-center gap-1.5 rounded-full bg-white/10 ring-1 ring-white/15 px-3 py-1.5 text-xs font-bold text-white">

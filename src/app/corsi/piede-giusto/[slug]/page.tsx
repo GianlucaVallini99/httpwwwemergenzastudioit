@@ -5,10 +5,10 @@ import Breadcrumb from "@/components/Breadcrumb";
 import CourseSignupForm from "@/components/CourseSignupForm";
 import RevealMount from "@/components/RevealMount";
 import { SectionBlobs } from "@/components/Blobs";
-import { StatPills, ProgramCard, TintedList, FormShell, EASE } from "@/components/CorsoUI";
+import { StatPills, SubjectCourseCard, TintedList, FormShell, EASE } from "@/components/CorsoUI";
 import { SITE_URL } from "@/lib/constants";
 import { breadcrumbJsonLd, courseJsonLd } from "@/lib/structured-data";
-import { PIEDE_GIUSTO, GRUPPO_MIN, GRUPPO_MAX, MATERIALE_PIEDE_GIUSTO } from "@/lib/corsi-data";
+import { PIEDE_GIUSTO, GRUPPO_MIN, GRUPPO_MAX, MATERIALE_PIEDE_GIUSTO, MATERIE_SCELTA } from "@/lib/corsi-data";
 import { Clock, Euro, Users, ArrowLeft, ArrowRight } from "lucide-react";
 
 export async function generateStaticParams() {
@@ -25,7 +25,7 @@ export async function generateMetadata({
   if (!corso) return {};
   return {
     title: `${corso.titolo} | Emergenza Studio Mogliano Veneto`,
-    description: `${corso.sottotitolo} ${corso.ore} ore di matematica e fisica in ${corso.lezioni} lezioni da 2 ore, gruppi da ${GRUPPO_MIN} a ${GRUPPO_MAX} studenti, €${corso.prezzo}. Iscrizione online.`,
+    description: `${corso.sottotitolo} Due corsi separati, matematica e fisica, ${corso.ore} ore ciascuno in ${corso.lezioni} lezioni da 2 ore, gruppi da ${GRUPPO_MIN} a ${GRUPPO_MAX} studenti, €${corso.prezzo} a materia. Iscrizione online.`,
     alternates: { canonical: `${SITE_URL}/corsi/piede-giusto/${corso.slug}/` },
   };
 }
@@ -61,12 +61,14 @@ export default async function PiedeGiustoDettaglio({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(courseJsonLd([{
-            name: corso.titolo,
-            description: corso.sottotitolo,
-            price: String(corso.prezzo),
-            location: "Via Francesco Barbiero 84g, Mogliano Veneto",
-          }])),
+          __html: JSON.stringify(courseJsonLd(
+            (corso.materie ?? []).map((m) => ({
+              name: `${corso.titolo} — ${m.nome}`,
+              description: `Corso di ${m.nome.toLowerCase()}: ${corso.sottotitolo}`,
+              price: String(corso.prezzo),
+              location: "Via Francesco Barbiero 84g, Mogliano Veneto",
+            }))
+          )),
         }}
       />
       <RevealMount />
@@ -82,13 +84,18 @@ export default async function PiedeGiustoDettaglio({
             <h1 className="text-[clamp(32px,5vw,54px)] mb-5 reveal d1">
               {corso.titolo}
             </h1>
-            <p className="text-lg md:text-xl text-foreground/70 mb-8 font-semibold leading-snug max-w-3xl reveal d2">
+            <p className="text-lg md:text-xl text-foreground/70 mb-4 font-semibold leading-snug max-w-3xl reveal d2">
               {corso.sottotitolo}
+            </p>
+            <p className="text-base text-foreground/60 mb-8 leading-relaxed max-w-3xl reveal d2">
+              <strong className="text-secondary">Matematica e Fisica sono due corsi
+              separati:</strong> puoi iscriverti solo a matematica, solo a fisica o a
+              entrambi. Ogni corso ha il suo programma e costa €{corso.prezzo}.
             </p>
             <div className="reveal d2">
               <StatPills
                 stats={[
-                  { icon: <Euro className="w-4 h-4" />, big: `€${corso.prezzo}`, small: "totali" },
+                  { icon: <Euro className="w-4 h-4" />, big: `€${corso.prezzo}`, small: "a materia" },
                   { icon: <Clock className="w-4 h-4" />, big: `${corso.ore} ore`, small: `${corso.lezioni} lezioni da 2h` },
                   { icon: <Users className="w-4 h-4" />, big: `${GRUPPO_MIN}–${GRUPPO_MAX}`, small: "studenti per gruppo" },
                 ]}
@@ -111,20 +118,25 @@ export default async function PiedeGiustoDettaglio({
       <section className="section-spacing section-tint !py-16 md:!py-24">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl md:text-4xl mb-3 text-center reveal">Il programma</h2>
+            <h2 className="text-2xl md:text-4xl mb-3 text-center reveal">Due corsi, due programmi</h2>
             <p className="text-muted-foreground text-center mb-8 md:mb-10 leading-relaxed reveal d1">
-              Gli argomenti che affronterai lezione dopo lezione, scelti per farti
-              arrivare preparato al nuovo anno.
+              Matematica e Fisica sono percorsi distinti, ciascuno di {corso.ore} ore
+              in {corso.lezioni} lezioni da 2 ore a €{corso.prezzo}. Scegli quello che
+              ti serve — o entrambi.
             </p>
             <div className="grid gap-4 sm:gap-5 sm:grid-cols-2 mb-5">
               {corso.materie?.map((m, i) => (
                 <div key={m.nome} className={`reveal d${i + 1}`}>
-                  <ProgramCard nome={m.nome} items={m.programma} />
+                  <SubjectCourseCard
+                    nome={m.nome}
+                    items={[...m.programma]}
+                    meta={`€${corso.prezzo} · ${corso.ore}h`}
+                  />
                 </div>
               ))}
             </div>
             <div className="reveal d2">
-              <TintedList title="Materiale fornito" items={MATERIALE_PIEDE_GIUSTO} />
+              <TintedList title="Materiale fornito (in ogni corso)" items={MATERIALE_PIEDE_GIUSTO} />
             </div>
           </div>
         </div>
@@ -135,12 +147,18 @@ export default async function PiedeGiustoDettaglio({
           <div className="max-w-xl mx-auto">
             <h2 className="text-2xl md:text-3xl mb-4 text-center reveal">Iscriviti al corso</h2>
             <p className="text-muted-foreground text-center mb-8 leading-relaxed reveal d1">
-              Compila il form: registriamo subito la tua iscrizione e ti
-              ricontattiamo entro 24 ore per confermare gruppo e calendario.
+              Scegli la materia, compila il form e registriamo subito la tua
+              iscrizione: ti ricontattiamo entro 24 ore per confermare gruppo e
+              calendario.
             </p>
             <div className="reveal d2">
               <FormShell>
-                <CourseSignupForm corso={corso.titolo} corsoSlug={`piede-giusto/${corso.slug}`} conCampiScuola />
+                <CourseSignupForm
+                  corso={corso.titolo}
+                  corsoSlug={`piede-giusto/${corso.slug}`}
+                  conCampiScuola
+                  materie={MATERIE_SCELTA}
+                />
               </FormShell>
             </div>
             <p className="text-center mt-8">

@@ -6,8 +6,8 @@ const CORSI = [
     tag: "Prima della scuola",
     num: "01",
     title: "Piede Giusto",
-    lede: "Potenziamento intensivo di matematica e fisica per iniziare l'anno al meglio: un percorso per ogni passaggio di classe.",
-    bullets: ["5 percorsi: dalle medie alla quinta", "Gruppi da 4 a 6 studenti", "Da €150 · materiale incluso"],
+    lede: "Corsi separati di matematica e fisica per iniziare l'anno al meglio: un percorso per ogni passaggio di classe.",
+    bullets: ["5 percorsi: dalle medie alla quinta", "Matematica e Fisica separate", "Da €150 a materia"],
     href: "/corsi/piede-giusto",
   },
   {
@@ -22,8 +22,8 @@ const CORSI = [
     tag: "Anno scolastico",
     num: "03",
     title: "Potenziamento Scolastico",
-    lede: "Matematica e fisica ogni settimana, per tutto l'anno: vivi la scuola senza la paura delle verifiche.",
-    bullets: ["32 settimane · 64 ore", "€15/h in 4 rate da €240", "Esercizi e simulazioni di verifica"],
+    lede: "Corsi annuali separati di matematica e fisica: vivi la scuola senza la paura delle verifiche.",
+    bullets: ["Matematica e Fisica separate", "32 settimane · 64 ore a materia", "€15/h in 4 rate da €240"],
     href: "/corsi/potenziamento-scolastico",
   },
 ];
