@@ -157,6 +157,10 @@ export default async function PiedeGiustoDettaglio({
                   corso={corso.titolo}
                   corsoSlug={`piede-giusto/${corso.slug}`}
                   conCampiScuola
+                  conDatiGenitore
+                  conClasseSettembre
+                  conPreferenzaOrario
+                  classeSettembreDefault={corso.classeSettembre ?? ""}
                   materie={MATERIE_SCELTA}
                 />
               </FormShell>

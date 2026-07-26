@@ -2,11 +2,19 @@
 
 import { useState } from "react";
 import { PHONE_INTL } from "@/lib/constants";
-import { INDIRIZZI_SCOLASTICI, MATERIA_ENTRAMBE, MATERIE_SINGOLE } from "@/lib/corsi-data";
-import { CheckCircle, Loader2, Send, Sigma, Atom, BookOpen } from "lucide-react";
+import {
+  CLASSI_SETTEMBRE,
+  INDIRIZZI_SCOLASTICI,
+  MATERIA_ENTRAMBE,
+  MATERIE_SINGOLE,
+  PREFERENZE_ORARIO,
+} from "@/lib/corsi-data";
+import { CheckCircle, Loader2, Send, Sigma, Atom, BookOpen, Sunrise, Sunset, Clock } from "lucide-react";
 
 const inputCls =
   "w-full rounded-2xl border border-border bg-muted/60 px-4 py-3.5 text-base font-semibold text-foreground placeholder:font-medium placeholder:text-muted-foreground/60 transition-all duration-300 focus:outline-none focus:bg-white focus:border-accent/40 focus:ring-4 focus:ring-accent/15";
+
+const labelCls = "block text-sm font-medium text-foreground mb-1";
 
 const EMPTY = {
   nome: "",
@@ -14,8 +22,13 @@ const EMPTY = {
   indirizzoResidenza: "",
   codiceFiscale: "",
   telefono: "",
+  nomeGenitore: "",
+  cognomeGenitore: "",
+  telefonoGenitore: "",
   indirizzoScolastico: "",
   scuola: "",
+  classeSettembre: "",
+  preferenzaOrario: "",
 };
 
 function materiaIcon(m: string) {
@@ -24,34 +37,49 @@ function materiaIcon(m: string) {
   return <BookOpen className="w-4 h-4" />;
 }
 
+function orarioIcon(o: string) {
+  if (o === "Mattina") return <Sunrise className="w-4 h-4" />;
+  if (o === "Pomeriggio") return <Sunset className="w-4 h-4" />;
+  return <Clock className="w-4 h-4" />;
+}
+
 export default function CourseSignupForm({
   corso,
   corsoSlug,
   conCampiScuola = false,
+  conDatiGenitore = false,
+  conClasseSettembre = false,
+  conPreferenzaOrario = false,
+  classeSettembreDefault = "",
   materie,
   buttonText = "Invia l'iscrizione",
 }: {
   corso: string;
   corsoSlug: string;
   conCampiScuola?: boolean;
+  conDatiGenitore?: boolean;
+  conClasseSettembre?: boolean;
+  conPreferenzaOrario?: boolean;
+  classeSettembreDefault?: string;
   materie?: string[];
   buttonText?: string;
 }) {
-  const [data, setData] = useState(EMPTY);
+  const [data, setData] = useState({ ...EMPTY, classeSettembre: classeSettembreDefault });
   const [materia, setMateria] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [error, setError] = useState("");
 
   const hasMaterie = !!materie && materie.length > 0;
   const isEntrambe = hasMaterie && materia === MATERIA_ENTRAMBE;
-  // Corsi a cui iscriversi. "Entrambe" genera due iscrizioni separate, una per
-  // materia: nel gestionale risultano come due righe distinte.
-  const corsiSelezionati = !hasMaterie
-    ? [corso]
+  // Iscrizioni da registrare. "Entrambe" ne genera due separate, una per
+  // materia: nel gestionale risultano come due righe distinte. La materia viene
+  // inviata anche come campo a sé, così il gestionale può filtrarci sopra.
+  const iscrizioni = !hasMaterie
+    ? [{ corso, materia: "" }]
     : isEntrambe
-      ? MATERIE_SINGOLE.map((m) => `${corso} — ${m}`)
+      ? MATERIE_SINGOLE.map((m) => ({ corso: `${corso} — ${m}`, materia: m }))
       : materia
-        ? [`${corso} — ${materia}`]
+        ? [{ corso: `${corso} — ${materia}`, materia }]
         : [];
   // Etichetta leggibile per messaggio di conferma e WhatsApp.
   const corsoLabel = !hasMaterie
@@ -74,10 +102,18 @@ export default function CourseSignupForm({
       `Cognome: ${data.cognome}`,
       `Indirizzo di residenza: ${data.indirizzoResidenza}`,
       `Codice fiscale: ${data.codiceFiscale.toUpperCase()}`,
-      `Telefono: ${data.telefono}`,
+      `Telefono studente: ${data.telefono}`,
+      ...(conDatiGenitore && (data.nomeGenitore || data.cognomeGenitore)
+        ? [`Genitore: ${data.nomeGenitore} ${data.cognomeGenitore}`.trim()]
+        : []),
+      ...(conDatiGenitore && data.telefonoGenitore
+        ? [`Telefono genitore: ${data.telefonoGenitore}`]
+        : []),
       ...(conCampiScuola
         ? [`Indirizzo scolastico: ${data.indirizzoScolastico}`, `Scuola: ${data.scuola}`]
         : []),
+      ...(conClasseSettembre ? [`Classe da settembre: ${data.classeSettembre}`] : []),
+      ...(conPreferenzaOrario ? [`Preferenza orario: ${data.preferenzaOrario}`] : []),
     ];
     return `https://wa.me/${PHONE_INTL.replace("+", "")}?text=${encodeURIComponent(lines.join("\n"))}`;
   };
@@ -86,6 +122,10 @@ export default function CourseSignupForm({
     e.preventDefault();
     if (hasMaterie && !materia) {
       setError("Scegli la materia del corso a cui vuoi iscriverti.");
+      return;
+    }
+    if (conPreferenzaOrario && !data.preferenzaOrario) {
+      setError("Indica la tua preferenza di orario.");
       return;
     }
     const cf = data.codiceFiscale.trim().toUpperCase();
@@ -98,11 +138,17 @@ export default function CourseSignupForm({
     try {
       // Un POST per ogni corso selezionato (due se si sceglie "Entrambe").
       const results = await Promise.all(
-        corsiSelezionati.map((c) =>
+        iscrizioni.map((i) =>
           fetch("/api/iscrizioni", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ corso: c, corsoSlug, ...data, codiceFiscale: cf }),
+            body: JSON.stringify({
+              ...data,
+              corso: i.corso,
+              materia: i.materia,
+              corsoSlug,
+              codiceFiscale: cf,
+            }),
           })
         )
       );
@@ -139,7 +185,7 @@ export default function CourseSignupForm({
     <form onSubmit={handleSubmit} className="space-y-4">
       {hasMaterie && (
         <fieldset>
-          <legend className="block text-sm font-medium text-foreground mb-2">
+          <legend className={`${labelCls} mb-2`}>
             Quale corso vuoi seguire?
           </legend>
           <div className="grid sm:grid-cols-3 gap-2.5">
@@ -169,23 +215,26 @@ export default function CourseSignupForm({
         </fieldset>
       )}
 
+      {/* ── Dati dello studente ── */}
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="nome" className="block text-sm font-medium text-foreground mb-1">Nome</label>
-          <input type="text" id="nome" required autoComplete="given-name" value={data.nome} onChange={set("nome")} className={inputCls} placeholder="Il tuo nome" />
+          <label htmlFor="nome" className={labelCls}>{conDatiGenitore ? "Nome studente" : "Nome"}</label>
+          <input type="text" id="nome" required autoComplete="given-name" value={data.nome} onChange={set("nome")} className={inputCls} placeholder={conDatiGenitore ? "Nome dello studente" : "Il tuo nome"} />
         </div>
         <div>
-          <label htmlFor="cognome" className="block text-sm font-medium text-foreground mb-1">Cognome</label>
-          <input type="text" id="cognome" required autoComplete="family-name" value={data.cognome} onChange={set("cognome")} className={inputCls} placeholder="Il tuo cognome" />
+          <label htmlFor="cognome" className={labelCls}>{conDatiGenitore ? "Cognome studente" : "Cognome"}</label>
+          <input type="text" id="cognome" required autoComplete="family-name" value={data.cognome} onChange={set("cognome")} className={inputCls} placeholder={conDatiGenitore ? "Cognome dello studente" : "Il tuo cognome"} />
         </div>
       </div>
       <div>
-        <label htmlFor="indirizzoResidenza" className="block text-sm font-medium text-foreground mb-1">Indirizzo di residenza</label>
+        <label htmlFor="indirizzoResidenza" className={labelCls}>Indirizzo di residenza</label>
         <input type="text" id="indirizzoResidenza" required autoComplete="street-address" value={data.indirizzoResidenza} onChange={set("indirizzoResidenza")} className={inputCls} placeholder="Via, numero civico, città" />
       </div>
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="codiceFiscale" className="block text-sm font-medium text-foreground mb-1">Codice fiscale</label>
+          <label htmlFor="codiceFiscale" className={labelCls}>
+            {conDatiGenitore ? "Codice fiscale studente" : "Codice fiscale"}
+          </label>
           <input
             type="text"
             id="codiceFiscale"
@@ -199,15 +248,50 @@ export default function CourseSignupForm({
           />
         </div>
         <div>
-          <label htmlFor="telefono" className="block text-sm font-medium text-foreground mb-1">Numero di telefono</label>
-          <input type="tel" id="telefono" required autoComplete="tel" value={data.telefono} onChange={set("telefono")} className={inputCls} placeholder="Il tuo numero" />
+          <label htmlFor="telefono" className={labelCls}>
+            {conDatiGenitore ? "Telefono studente" : "Numero di telefono"}
+          </label>
+          <input type="tel" id="telefono" required autoComplete="tel" value={data.telefono} onChange={set("telefono")} className={inputCls} placeholder={conDatiGenitore ? "Numero dello studente" : "Il tuo numero"} />
         </div>
       </div>
 
+      {/* ── Dati del genitore (facoltativi) ── */}
+      {conDatiGenitore && (
+        <fieldset className="rounded-2xl border border-border bg-muted/30 p-4 space-y-4">
+          <legend className="px-2 text-sm font-bold text-foreground">
+            Genitore <span className="font-medium text-muted-foreground">(facoltativo)</span>
+          </legend>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="nomeGenitore" className={labelCls}>Nome genitore</label>
+              <input type="text" id="nomeGenitore" value={data.nomeGenitore} onChange={set("nomeGenitore")} className={inputCls} placeholder="Nome del genitore" />
+            </div>
+            <div>
+              <label htmlFor="cognomeGenitore" className={labelCls}>Cognome genitore</label>
+              <input type="text" id="cognomeGenitore" value={data.cognomeGenitore} onChange={set("cognomeGenitore")} className={inputCls} placeholder="Cognome del genitore" />
+            </div>
+          </div>
+          <div>
+            <label htmlFor="telefonoGenitore" className={labelCls}>Telefono genitore</label>
+            <input type="tel" id="telefonoGenitore" value={data.telefonoGenitore} onChange={set("telefonoGenitore")} className={inputCls} placeholder="Numero del genitore" />
+          </div>
+          <p className="text-xs text-muted-foreground">
+            Se lo studente è minorenne ti consigliamo di lasciarci anche un
+            contatto del genitore: è il numero che chiamiamo per confermare
+            gruppo e calendario.
+          </p>
+        </fieldset>
+      )}
+
+      {/* ── Scuola ── */}
       {conCampiScuola && (
         <>
           <div>
-            <label htmlFor="indirizzoScolastico" className="block text-sm font-medium text-foreground mb-1">Indirizzo scolastico</label>
+            <label htmlFor="scuola" className={labelCls}>Nome scuola</label>
+            <input type="text" id="scuola" required value={data.scuola} onChange={set("scuola")} className={inputCls} placeholder="Nome della scuola" />
+          </div>
+          <div>
+            <label htmlFor="indirizzoScolastico" className={labelCls}>Indirizzo scolastico</label>
             <select id="indirizzoScolastico" required value={data.indirizzoScolastico} onChange={set("indirizzoScolastico")} className={inputCls}>
               <option value="">Seleziona…</option>
               {INDIRIZZI_SCOLASTICI.map((o) => (
@@ -215,11 +299,49 @@ export default function CourseSignupForm({
               ))}
             </select>
           </div>
-          <div>
-            <label htmlFor="scuola" className="block text-sm font-medium text-foreground mb-1">Scuola a cui sei iscritto</label>
-            <input type="text" id="scuola" required value={data.scuola} onChange={set("scuola")} className={inputCls} placeholder="Nome della scuola" />
-          </div>
         </>
+      )}
+
+      {conClasseSettembre && (
+        <div>
+          <label htmlFor="classeSettembre" className={labelCls}>Classe che inizi a settembre</label>
+          <select id="classeSettembre" required value={data.classeSettembre} onChange={set("classeSettembre")} className={inputCls}>
+            <option value="">Seleziona…</option>
+            {CLASSI_SETTEMBRE.map((o) => (
+              <option key={o} value={o}>{o}</option>
+            ))}
+          </select>
+        </div>
+      )}
+
+      {/* ── Preferenza di orario ── */}
+      {conPreferenzaOrario && (
+        <fieldset>
+          <legend className={`${labelCls} mb-2`}>Preferenza per gli orari</legend>
+          <div className="grid sm:grid-cols-3 gap-2.5">
+            {PREFERENZE_ORARIO.map((o) => {
+              const active = data.preferenzaOrario === o;
+              return (
+                <button
+                  key={o}
+                  type="button"
+                  onClick={() => setData({ ...data, preferenzaOrario: o })}
+                  aria-pressed={active}
+                  className={`inline-flex items-center justify-center gap-2 rounded-2xl border px-4 py-3 text-sm font-bold transition-all duration-300 ${
+                    active
+                      ? "bg-accent text-accent-foreground border-accent shadow-[0_14px_28px_-16px_rgba(45,138,138,.8)]"
+                      : "bg-muted/60 text-foreground border-border hover:border-accent/40"
+                  }`}
+                >
+                  {orarioIcon(o)} {o}
+                </button>
+              );
+            })}
+          </div>
+          <p className="text-xs text-muted-foreground mt-2">
+            Ci serve per formare i gruppi: più flessibilità dai, prima partiamo.
+          </p>
+        </fieldset>
       )}
 
       {error && <p className="text-sm font-semibold text-red-600">{error}</p>}

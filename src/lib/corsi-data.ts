@@ -17,6 +17,9 @@ export type SottoCorso = {
   materie?: Materia[];
   contenuti?: string[];
   livello?: string;
+  // Classe che lo studente inizia a settembre: preseleziona il campo nel form
+  // di iscrizione (il percorso Piede Giusto la determina già).
+  classeSettembre?: string;
 };
 
 export const GRUPPO_MIN = 4;
@@ -38,6 +41,7 @@ export const PIEDE_GIUSTO: SottoCorso[] = [
     prezzo: 150,
     ore: 10,
     lezioni: 5,
+    classeSettembre: "Prima superiore",
     materie: [
       {
         nome: "Matematica",
@@ -69,6 +73,7 @@ export const PIEDE_GIUSTO: SottoCorso[] = [
     prezzo: 150,
     ore: 10,
     lezioni: 5,
+    classeSettembre: "Seconda superiore",
     materie: [
       {
         nome: "Matematica",
@@ -101,6 +106,7 @@ export const PIEDE_GIUSTO: SottoCorso[] = [
     prezzo: 180,
     ore: 12,
     lezioni: 6,
+    classeSettembre: "Terza superiore",
     materie: [
       {
         nome: "Matematica",
@@ -132,6 +138,7 @@ export const PIEDE_GIUSTO: SottoCorso[] = [
     prezzo: 180,
     ore: 12,
     lezioni: 6,
+    classeSettembre: "Quarta superiore",
     materie: [
       {
         nome: "Matematica",
@@ -162,6 +169,7 @@ export const PIEDE_GIUSTO: SottoCorso[] = [
     prezzo: 180,
     ore: 12,
     lezioni: 6,
+    classeSettembre: "Quinta superiore",
     materie: [
       {
         nome: "Matematica",
@@ -312,6 +320,18 @@ export const MATERIA_ENTRAMBE = "Entrambe le materie";
 // Scegliendo "Entrambe" vengono registrate due iscrizioni separate, una per
 // materia, così nel gestionale risultano come due righe distinte.
 export const MATERIE_SCELTA = [...MATERIE_SINGOLE, MATERIA_ENTRAMBE];
+
+// Classe che lo studente inizierà a settembre.
+export const CLASSI_SETTEMBRE = [
+  "Prima superiore",
+  "Seconda superiore",
+  "Terza superiore",
+  "Quarta superiore",
+  "Quinta superiore",
+];
+
+// Fascia oraria preferita per le lezioni del corso.
+export const PREFERENZE_ORARIO = ["Mattina", "Pomeriggio", "Entrambi"];
 
 // Opzioni comuni dei form di iscrizione
 export const INDIRIZZI_SCOLASTICI = [

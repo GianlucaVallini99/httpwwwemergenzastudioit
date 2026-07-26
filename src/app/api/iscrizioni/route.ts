@@ -8,13 +8,19 @@ const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 type Payload = {
   corso?: string;
   corsoSlug?: string;
+  materia?: string;
   nome?: string;
   cognome?: string;
   indirizzoResidenza?: string;
   codiceFiscale?: string;
   telefono?: string;
+  nomeGenitore?: string;
+  cognomeGenitore?: string;
+  telefonoGenitore?: string;
   indirizzoScolastico?: string;
   scuola?: string;
+  classeSettembre?: string;
+  preferenzaOrario?: string;
 };
 
 const CF_REGEX = /^[A-Z0-9]{16}$/i;
@@ -53,13 +59,21 @@ export async function POST(request: Request) {
   const row = {
     corso,
     corso_slug: clean(body.corsoSlug, 100) || null,
+    // Materia in colonna propria (oltre che nel nome del corso): serve al
+    // filtro per materia della pagina "Iscrizioni Corsi" del gestionale.
+    materia: clean(body.materia, 30) || null,
     nome,
     cognome,
     indirizzo_residenza: indirizzoResidenza,
     codice_fiscale: codiceFiscale,
     telefono,
+    nome_genitore: clean(body.nomeGenitore, 100) || null,
+    cognome_genitore: clean(body.cognomeGenitore, 100) || null,
+    telefono_genitore: clean(body.telefonoGenitore, 30) || null,
     indirizzo_scolastico: clean(body.indirizzoScolastico, 150) || null,
     scuola: clean(body.scuola, 200) || null,
+    classe_settembre: clean(body.classeSettembre, 50) || null,
+    preferenza_orario: clean(body.preferenzaOrario, 30) || null,
   };
 
   const res = await fetch(`${SUPABASE_URL}/rest/v1/iscrizioni_corsi`, {
