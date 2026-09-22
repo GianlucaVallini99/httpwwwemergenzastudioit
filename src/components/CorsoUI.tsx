@@ -1,5 +1,7 @@
 // Elementi grafici condivisi dalle pagine corso — server components.
-import { CheckCircle, Sigma, Atom } from "lucide-react";
+import Link from "next/link";
+import { CheckCircle, Sigma, Atom, CalendarClock, ArrowRight } from "lucide-react";
+import { WHATSAPP_URL } from "@/lib/constants";
 
 export const EASE = "transition-all duration-500 ease-[cubic-bezier(.32,.72,0,1)]";
 
@@ -116,6 +118,59 @@ export function FormShell({ children }: { children: React.ReactNode }) {
     <div className="rounded-[30px] bg-secondary/8 p-2">
       <div className="rounded-[24px] bg-white border border-border p-5 sm:p-7 shadow-[0_35px_60px_-40px_rgba(21,50,79,.45)]">
         {children}
+      </div>
+    </div>
+  );
+}
+
+// Avviso che prende il posto del form quando le iscrizioni a un corso sono
+// chiuse: la pagina resta consultabile, ma invece del modulo si vedono la data
+// di riapertura e le alternative attive.
+export function IscrizioniChiuse({
+  titolo,
+  testo,
+  alternativa,
+  azione,
+}: {
+  titolo: string;
+  testo: string;
+  alternativa?: string;
+  azione?: { href: string; label: string };
+}) {
+  return (
+    <div className="rounded-[30px] bg-muted p-2">
+      <div className="rounded-[24px] bg-white border border-border p-6 sm:p-8 text-center">
+        <span className="inline-flex w-12 h-12 rounded-full bg-secondary/10 text-secondary items-center justify-center mb-5">
+          <CalendarClock className="w-5 h-5" />
+        </span>
+        <h3 className="text-xl sm:text-2xl mb-3">{titolo}</h3>
+        <p className="text-[15px] text-muted-foreground leading-relaxed mb-4">{testo}</p>
+        {alternativa && (
+          <p className="text-[15px] text-muted-foreground leading-relaxed mb-6">{alternativa}</p>
+        )}
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          {azione && (
+            <Link
+              href={azione.href}
+              className={`inline-flex items-center justify-center gap-2.5 rounded-full bg-primary text-primary-foreground px-6 py-3.5 text-sm font-extrabold uppercase tracking-wider shadow-[0_18px_35px_-18px_rgba(21,50,79,.7)] ${EASE} hover:-translate-y-0.5 hover:bg-navy-deep active:scale-[0.98]`}
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              {azione.label}
+              <span className="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center">
+                <ArrowRight className="w-4 h-4" />
+              </span>
+            </Link>
+          )}
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`inline-flex items-center justify-center rounded-full border border-border bg-white px-6 py-3.5 text-sm font-extrabold uppercase tracking-wider text-primary ${EASE} hover:-translate-y-0.5 hover:bg-muted active:scale-[0.98]`}
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            Scrivici su WhatsApp
+          </a>
+        </div>
       </div>
     </div>
   );

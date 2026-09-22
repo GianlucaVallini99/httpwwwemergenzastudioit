@@ -115,7 +115,7 @@ export function serviceJsonLd() {
 
 // ── Course ──────────────────────────────────────────
 export function courseJsonLd(
-  courses: { name: string; description: string; startDate?: string; endDate?: string; location?: string; price?: string; priceCurrency?: string }[]
+  courses: { name: string; description: string; startDate?: string; endDate?: string; location?: string; price?: string; priceCurrency?: string; availability?: "InStock" | "OutOfStock" }[]
 ) {
   return courses.map((c) => ({
     "@context": "https://schema.org",
@@ -151,7 +151,9 @@ export function courseJsonLd(
             "@type": "Offer",
             price: c.price,
             priceCurrency: c.priceCurrency || "EUR",
-            availability: "https://schema.org/InStock",
+            // Corsi a iscrizioni chiuse (es. Piede Giusto fuori stagione):
+            // la pagina resta online ma l'offerta non è acquistabile.
+            availability: `https://schema.org/${c.availability || "InStock"}`,
           },
         }
       : {}),

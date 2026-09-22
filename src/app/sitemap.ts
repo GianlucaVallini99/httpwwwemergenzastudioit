@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { PIEDE_GIUSTO, ENGLISH_CLUB, POTENZIAMENTO_CLASSI } from "@/lib/corsi-data";
+import { PIEDE_GIUSTO, SEMPRE_DRITTO_CLASSI } from "@/lib/corsi-data";
 
 export const dynamic = "force-static";
 
@@ -24,23 +24,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/materie/tedesco", priority: 0.8, changeFrequency: "monthly" as const },
     { url: "/preparazione-test", priority: 0.8, changeFrequency: "monthly" as const },
     { url: "/corsi", priority: 0.8, changeFrequency: "monthly" as const },
-    { url: "/corsi/piede-giusto", priority: 0.9, changeFrequency: "weekly" as const },
+    { url: "/corsi/sempre-dritto", priority: 0.9, changeFrequency: "weekly" as const },
+    ...SEMPRE_DRITTO_CLASSI.map((c) => ({
+      url: `/corsi/sempre-dritto/${c.slug}`,
+      priority: 0.9,
+      changeFrequency: "weekly" as const,
+    })),
+    // Piede Giusto è fuori stagione: pagine online ma ferme fino a giugno.
+    { url: "/corsi/piede-giusto", priority: 0.7, changeFrequency: "monthly" as const },
     ...PIEDE_GIUSTO.map((c) => ({
       url: `/corsi/piede-giusto/${c.slug}`,
-      priority: 0.9,
-      changeFrequency: "weekly" as const,
-    })),
-    { url: "/corsi/english-speaking-club", priority: 0.9, changeFrequency: "weekly" as const },
-    ...ENGLISH_CLUB.map((c) => ({
-      url: `/corsi/english-speaking-club/${c.slug}`,
-      priority: 0.9,
-      changeFrequency: "weekly" as const,
-    })),
-    { url: "/corsi/potenziamento-scolastico", priority: 0.9, changeFrequency: "weekly" as const },
-    ...POTENZIAMENTO_CLASSI.map((c) => ({
-      url: `/corsi/potenziamento-scolastico/${c.slug}`,
-      priority: 0.9,
-      changeFrequency: "weekly" as const,
+      priority: 0.7,
+      changeFrequency: "monthly" as const,
     })),
     { url: "/chi-siamo", priority: 0.6, changeFrequency: "monthly" as const },
     { url: "/contatti", priority: 0.6, changeFrequency: "monthly" as const },

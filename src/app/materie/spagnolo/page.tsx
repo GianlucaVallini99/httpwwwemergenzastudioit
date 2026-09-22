@@ -89,7 +89,7 @@ export default function SpagnoloPage() {
               Non solo ripetizioni: scopri i nostri corsi
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
-              Oltre alle lezioni individuali organizziamo corsi di gruppo durante tutto l&apos;anno: dall&apos;English Speaking Club ai corsi di recupero estivi.
+              Oltre alle lezioni individuali organizziamo corsi di gruppo durante tutto l&apos;anno: da Sempre Dritto, il corso annuale di matematica, ai percorsi di potenziamento estivi.
             </p>
             <Link href="/corsi" className="inline-flex items-center gap-2 text-accent font-semibold hover:underline">
               Vai ai corsi →

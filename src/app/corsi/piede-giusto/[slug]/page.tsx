@@ -5,10 +5,20 @@ import Breadcrumb from "@/components/Breadcrumb";
 import CourseSignupForm from "@/components/CourseSignupForm";
 import RevealMount from "@/components/RevealMount";
 import { SectionBlobs } from "@/components/Blobs";
-import { StatPills, SubjectCourseCard, TintedList, FormShell, EASE } from "@/components/CorsoUI";
+import { StatPills, SubjectCourseCard, TintedList, FormShell, IscrizioniChiuse, EASE } from "@/components/CorsoUI";
 import { SITE_URL } from "@/lib/constants";
 import { breadcrumbJsonLd, courseJsonLd } from "@/lib/structured-data";
-import { PIEDE_GIUSTO, GRUPPO_MIN, GRUPPO_MAX, MATERIALE_PIEDE_GIUSTO, MATERIE_SCELTA } from "@/lib/corsi-data";
+import {
+  PIEDE_GIUSTO,
+  GRUPPO_MIN,
+  GRUPPO_MAX,
+  MATERIALE_PIEDE_GIUSTO,
+  MATERIE_SCELTA,
+  CORSO_CONCLUSO_CLS,
+  PIEDE_GIUSTO_ISCRIZIONI_APERTE,
+  PIEDE_GIUSTO_CHIUSURA,
+  SEMPRE_DRITTO_PER_PIEDE_GIUSTO,
+} from "@/lib/corsi-data";
 import { Clock, Euro, Users, ArrowLeft, ArrowRight } from "lucide-react";
 
 export async function generateStaticParams() {
@@ -25,7 +35,11 @@ export async function generateMetadata({
   if (!corso) return {};
   return {
     title: `${corso.titolo} | Emergenza Studio Mogliano Veneto`,
-    description: `${corso.sottotitolo} Due corsi separati, matematica e fisica, ${corso.ore} ore ciascuno in ${corso.lezioni} lezioni da 2 ore, gruppi da ${GRUPPO_MIN} a ${GRUPPO_MAX} studenti, €${corso.prezzo} a materia. Iscrizione online.`,
+    description: `${corso.sottotitolo} Due corsi separati, matematica e fisica, ${corso.ore} ore ciascuno in ${corso.lezioni} lezioni da 2 ore, gruppi da ${GRUPPO_MIN} a ${GRUPPO_MAX} studenti, €${corso.prezzo} a materia. ${
+      PIEDE_GIUSTO_ISCRIZIONI_APERTE
+        ? "Iscrizione online."
+        : `Edizione conclusa: si riparte a ${PIEDE_GIUSTO_CHIUSURA.riapertura}.`
+    }`,
     alternates: { canonical: `${SITE_URL}/corsi/piede-giusto/${corso.slug}/` },
   };
 }
@@ -66,6 +80,7 @@ export default async function PiedeGiustoDettaglio({
               name: `${corso.titolo} — ${m.nome}`,
               description: `Corso di ${m.nome.toLowerCase()}: ${corso.sottotitolo}`,
               price: String(corso.prezzo),
+              availability: PIEDE_GIUSTO_ISCRIZIONI_APERTE ? "InStock" as const : "OutOfStock" as const,
               location: "Via Francesco Barbiero 84g, Mogliano Veneto",
             }))
           )),
@@ -78,8 +93,14 @@ export default async function PiedeGiustoDettaglio({
         <SectionBlobs variant="a" />
         <div className="container-custom">
           <div className="max-w-4xl">
-            <span className="inline-block rounded-full bg-accent text-accent-foreground text-[11px] font-extrabold uppercase tracking-[0.14em] px-4 py-1.5 mb-6 reveal">
-              Piede Giusto · Iscrizioni aperte
+            <span
+              className={`inline-block rounded-full text-[11px] font-extrabold uppercase tracking-[0.14em] px-4 py-1.5 mb-6 reveal ${
+                PIEDE_GIUSTO_ISCRIZIONI_APERTE
+                  ? "bg-accent text-accent-foreground"
+                  : "bg-muted text-muted-foreground border border-border"
+              }`}
+            >
+              Piede Giusto · {PIEDE_GIUSTO_ISCRIZIONI_APERTE ? "Iscrizioni aperte" : PIEDE_GIUSTO_CHIUSURA.badge}
             </span>
             <h1 className="text-[clamp(32px,5vw,54px)] mb-5 reveal d1">
               {corso.titolo}
@@ -106,7 +127,7 @@ export default async function PiedeGiustoDettaglio({
               className={`inline-flex items-center gap-2.5 mt-8 rounded-full bg-primary text-primary-foreground px-6 py-3.5 text-sm font-extrabold uppercase tracking-wider shadow-[0_18px_35px_-18px_rgba(21,50,79,.7)] ${EASE} hover:-translate-y-0.5 hover:bg-navy-deep active:scale-[0.98] reveal d3`}
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Vai all&apos;iscrizione
+              {PIEDE_GIUSTO_ISCRIZIONI_APERTE ? "Vai all'iscrizione" : "Come iscriversi"}
               <span className="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center">
                 <ArrowRight className="w-4 h-4" />
               </span>
@@ -117,7 +138,7 @@ export default async function PiedeGiustoDettaglio({
 
       <section className="section-spacing section-tint !py-16 md:!py-24">
         <div className="container-custom">
-          <div className="max-w-3xl mx-auto">
+          <div className={`max-w-3xl mx-auto ${EASE} ${PIEDE_GIUSTO_ISCRIZIONI_APERTE ? "" : CORSO_CONCLUSO_CLS}`}>
             <h2 className="text-2xl md:text-4xl mb-3 text-center reveal">Due corsi, due programmi</h2>
             <p className="text-muted-foreground text-center mb-8 md:mb-10 leading-relaxed reveal d1">
               Matematica e Fisica sono percorsi distinti, ciascuno di {corso.ore} ore
@@ -145,26 +166,44 @@ export default async function PiedeGiustoDettaglio({
       <section id="iscrizione" className="py-16 md:py-24">
         <div className="container-custom">
           <div className="max-w-xl mx-auto">
-            <h2 className="text-2xl md:text-3xl mb-4 text-center reveal">Iscriviti al corso</h2>
-            <p className="text-muted-foreground text-center mb-8 leading-relaxed reveal d1">
-              Scegli la materia, compila il form e registriamo subito la tua
-              iscrizione: ti ricontattiamo entro 24 ore per confermare gruppo e
-              calendario.
-            </p>
-            <div className="reveal d2">
-              <FormShell>
-                <CourseSignupForm
-                  corso={corso.titolo}
-                  corsoSlug={`piede-giusto/${corso.slug}`}
-                  conCampiScuola
-                  conDatiGenitore
-                  conClasseSettembre
-                  conPreferenzaOrario
-                  classeSettembreDefault={corso.classeSettembre ?? ""}
-                  materie={MATERIE_SCELTA}
+            <h2 className="text-2xl md:text-3xl mb-4 text-center reveal">
+              {PIEDE_GIUSTO_ISCRIZIONI_APERTE ? "Iscriviti al corso" : "Corso concluso"}
+            </h2>
+            {PIEDE_GIUSTO_ISCRIZIONI_APERTE ? (
+              <>
+                <p className="text-muted-foreground text-center mb-8 leading-relaxed reveal d1">
+                  Scegli la materia, compila il form e registriamo subito la tua
+                  iscrizione: ti ricontattiamo entro 24 ore per confermare gruppo e
+                  calendario.
+                </p>
+                <div className="reveal d2">
+                  <FormShell>
+                    <CourseSignupForm
+                      corso={corso.titolo}
+                      corsoSlug={`piede-giusto/${corso.slug}`}
+                      conCampiScuola
+                      conDatiGenitore
+                      conClasseSettembre
+                      conPreferenzaOrario
+                      classeSettembreDefault={corso.classeSettembre ?? ""}
+                      materie={MATERIE_SCELTA}
+                    />
+                  </FormShell>
+                </div>
+              </>
+            ) : (
+              <div className="reveal d1">
+                <IscrizioniChiuse
+                  titolo={PIEDE_GIUSTO_CHIUSURA.titolo}
+                  testo={PIEDE_GIUSTO_CHIUSURA.testo}
+                  alternativa={PIEDE_GIUSTO_CHIUSURA.alternativa}
+                  azione={{
+                    href: `/corsi/sempre-dritto/${SEMPRE_DRITTO_PER_PIEDE_GIUSTO[corso.slug]}`,
+                    label: "Scopri Sempre Dritto",
+                  }}
                 />
-              </FormShell>
-            </div>
+              </div>
+            )}
             <p className="text-center mt-8">
               <Link href="/corsi/piede-giusto" className="inline-flex items-center gap-2 text-sm text-secondary font-extrabold hover:underline">
                 <ArrowLeft className="w-4 h-4" /> Tutti i corsi Piede Giusto

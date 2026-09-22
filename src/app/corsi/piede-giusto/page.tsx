@@ -3,16 +3,27 @@ import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 import RevealMount from "@/components/RevealMount";
 import { SectionBlobs } from "@/components/Blobs";
-import { TintedList, EASE } from "@/components/CorsoUI";
+import { TintedList, IscrizioniChiuse, EASE } from "@/components/CorsoUI";
 import { SITE_URL } from "@/lib/constants";
 import { breadcrumbJsonLd, courseJsonLd } from "@/lib/structured-data";
-import { PIEDE_GIUSTO, GRUPPO_MIN, GRUPPO_MAX, MATERIALE_PIEDE_GIUSTO } from "@/lib/corsi-data";
+import {
+  PIEDE_GIUSTO,
+  GRUPPO_MIN,
+  GRUPPO_MAX,
+  MATERIALE_PIEDE_GIUSTO,
+  CORSO_CONCLUSO_CLS,
+  PIEDE_GIUSTO_ISCRIZIONI_APERTE,
+  PIEDE_GIUSTO_CHIUSURA,
+} from "@/lib/corsi-data";
 import { Clock, Euro, Users, ArrowRight, BookOpen } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Piede Giusto: corsi di potenziamento estivo | Emergenza Studio Mogliano Veneto",
-  description:
-    "Corsi intensivi di matematica e fisica per iniziare l'anno scolastico al meglio: cinque percorsi dalle medie alla quinta superiore, in piccoli gruppi da 4 a 6 studenti. Da €150.",
+  description: `Corsi intensivi di matematica e fisica per iniziare l'anno scolastico al meglio: cinque percorsi dalle medie alla quinta superiore, in piccoli gruppi da ${GRUPPO_MIN} a ${GRUPPO_MAX} studenti. Da €150. ${
+    PIEDE_GIUSTO_ISCRIZIONI_APERTE
+      ? "Iscrizioni aperte."
+      : `Edizione conclusa: si riparte a ${PIEDE_GIUSTO_CHIUSURA.riapertura}.`
+  }`,
   alternates: { canonical: `${SITE_URL}/corsi/piede-giusto/` },
 };
 
@@ -42,6 +53,7 @@ export default function PiedeGiustoPage() {
               name: c.titolo,
               description: c.sottotitolo,
               price: String(c.prezzo),
+              availability: PIEDE_GIUSTO_ISCRIZIONI_APERTE ? "InStock" as const : "OutOfStock" as const,
               location: "Via Francesco Barbiero 84g, Mogliano Veneto",
             }))
           )),
@@ -54,8 +66,15 @@ export default function PiedeGiustoPage() {
         <SectionBlobs variant="a" />
         <div className="container-custom">
           <div className="max-w-4xl">
-            <span className="inline-block rounded-full bg-accent text-accent-foreground text-[11px] font-extrabold uppercase tracking-[0.14em] px-4 py-1.5 mb-6 reveal">
-              Prima dell&apos;inizio della scuola · Iscrizioni aperte
+            <span
+              className={`inline-block rounded-full text-[11px] font-extrabold uppercase tracking-[0.14em] px-4 py-1.5 mb-6 reveal ${
+                PIEDE_GIUSTO_ISCRIZIONI_APERTE
+                  ? "bg-accent text-accent-foreground"
+                  : "bg-muted text-muted-foreground border border-border"
+              }`}
+            >
+              Prima dell&apos;inizio della scuola ·{" "}
+              {PIEDE_GIUSTO_ISCRIZIONI_APERTE ? "Iscrizioni aperte" : PIEDE_GIUSTO_CHIUSURA.badge}
             </span>
             <h1 className="text-[clamp(34px,5.5vw,60px)] mb-5 reveal d1">
               Piede Giusto: potenziamento per iniziare l&apos;anno al meglio
@@ -87,6 +106,19 @@ export default function PiedeGiustoPage() {
 
       <section className="section-spacing section-tint !py-16 md:!py-24">
         <div className="container-custom">
+          {!PIEDE_GIUSTO_ISCRIZIONI_APERTE && (
+            <div className="max-w-2xl mx-auto mb-12 md:mb-16 reveal">
+              <IscrizioniChiuse
+                titolo={PIEDE_GIUSTO_CHIUSURA.titolo}
+                testo={PIEDE_GIUSTO_CHIUSURA.testo}
+                alternativa={PIEDE_GIUSTO_CHIUSURA.alternativa}
+                azione={{
+                  href: "/corsi/sempre-dritto",
+                  label: "Scopri Sempre Dritto",
+                }}
+              />
+            </div>
+          )}
           <h2 className="text-2xl md:text-4xl mb-3 text-center reveal">
             Scegli il tuo passaggio di classe
           </h2>
@@ -94,7 +126,7 @@ export default function PiedeGiustoPage() {
             Cinque percorsi con programma su misura: scegli quello del tuo anno e
             guarda nel dettaglio i due corsi separati di matematica e fisica.
           </p>
-          <div className="grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
+          <div className={`grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto ${EASE} ${PIEDE_GIUSTO_ISCRIZIONI_APERTE ? "" : CORSO_CONCLUSO_CLS}`}>
             {PIEDE_GIUSTO.map((c, i) => (
               <Link
                 key={c.slug}

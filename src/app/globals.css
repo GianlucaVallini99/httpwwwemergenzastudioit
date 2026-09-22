@@ -152,6 +152,22 @@ section > .container-custom { position: relative; z-index: 1; }
 .reveal.d3 { transition-delay: .24s; }
 .reveal.d4 { transition-delay: .32s; }
 
+/* ─── Corsi conclusi ─────────────────────────────────────────── */
+/* Restano consultabili ma in sordina, così non competono con i corsi
+   attivi. Serve una classe dedicata: le utility opacity-* di Tailwind
+   perderebbero contro .reveal.in, che impone opacity: 1. */
+.corso-concluso,
+.reveal.in.corso-concluso {
+  opacity: .5;
+  filter: saturate(.3);
+  transition: opacity .5s ease, filter .5s ease, transform .8s cubic-bezier(.2,.8,.2,1);
+}
+.corso-concluso:hover,
+.reveal.in.corso-concluso:hover {
+  opacity: 1;
+  filter: none;
+}
+
 /* ─── Blob layer ─────────────────────────────────────────────── */
 .blob-layer {
   position: absolute;

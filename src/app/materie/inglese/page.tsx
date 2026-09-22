@@ -8,7 +8,7 @@ import { breadcrumbJsonLd } from "@/lib/structured-data";
 export const metadata: Metadata = {
   title: "Ripetizioni Inglese Mogliano Veneto",
   description:
-    "Ripetizioni di inglese a Mogliano Veneto: grammatica, conversazione, preparazione PET, FCE, IELTS. Prossimamente English Speaking Club. Emergenza Studio.",
+    "Ripetizioni di inglese a Mogliano Veneto: grammatica, conversazione, preparazione PET, FCE, IELTS. Lezioni individuali e in piccolo gruppo. Emergenza Studio.",
   alternates: { canonical: `${SITE_URL}/materie/inglese/` },
 };
 
@@ -63,21 +63,18 @@ export default function InglesePage() {
             Preparazione esami di lingua inglese e supporto per la comprensione di testi accademici in inglese.
           </p>
 
-          {/* English Speaking Club */}
+          {/* Lezioni in piccolo gruppo */}
           <div className="rounded-2xl bg-gradient-to-br from-accent/10 to-secondary/10 border border-accent/20 p-8 mb-8">
-            <div className="inline-block rounded-full bg-accent/20 text-accent text-xs font-bold tracking-widest uppercase px-4 py-1.5 mb-4" style={{ fontFamily: "var(--font-display)" }}>
-              Da settembre
-            </div>
-            <h2 className="text-2xl font-bold text-primary mb-3" style={{ fontFamily: "var(--font-display)" }}>English Speaking Club e corsi di gruppo</h2>
+            <h2 className="text-2xl font-bold text-primary mb-3" style={{ fontFamily: "var(--font-display)" }}>Anche in piccolo gruppo</h2>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              Oltre alle ripetizioni individuali organizziamo l&apos;English Speaking Club: incontri settimanali di sola conversazione in piccoli gruppi divisi per livello, aperti a studenti e adulti.
+              L&apos;inglese si può seguire anche in gruppo con uno o due compagni dello stesso livello: stesso tutor, stesso programma, costo orario più basso. Scrivici e organizziamo il gruppo.
             </p>
             <Link
-              href="/corsi/english-speaking-club"
+              href="/corsi"
               className="inline-flex items-center gap-2 rounded-full px-6 py-3 bg-accent text-accent-foreground font-semibold uppercase tracking-wider text-sm hover:bg-accent/90 transition-colors"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Scopri lo Speaking Club →
+              Guarda tutti i corsi →
             </Link>
           </div>
         </div>

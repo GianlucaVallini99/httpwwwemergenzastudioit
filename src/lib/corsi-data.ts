@@ -25,6 +25,28 @@ export type SottoCorso = {
 export const GRUPPO_MIN = 4;
 export const GRUPPO_MAX = 6;
 
+// Piede Giusto è un corso estivo: si tiene prima dell'inizio della scuola.
+// L'edizione è conclusa, quindi le pagine restano online (tornano utili
+// l'estate prossima) ma sono mostrate "spente": card opache, badge di corso
+// concluso e nessun form. Per riaprirle basta rimettere il flag a true.
+export const PIEDE_GIUSTO_ISCRIZIONI_APERTE: boolean = false;
+
+// Trattamento grafico dei corsi conclusi: card in sordina, così restano
+// consultabili senza competere con i corsi attivi.
+// La regola sta in globals.css: le utility opacity-* di Tailwind perderebbero
+// contro .reveal.in, che sulle card rivelate impone opacity: 1.
+export const CORSO_CONCLUSO_CLS = "corso-concluso";
+
+export const PIEDE_GIUSTO_CHIUSURA = {
+  badge: "Edizione conclusa",
+  titolo: "Il Piede Giusto di quest'anno è concluso",
+  testo:
+    "L'edizione 2026 si è chiusa: il Piede Giusto si tiene nelle settimane prima dell'inizio della scuola. Le pagine restano online per consultare i programmi; riapriamo le iscrizioni a giugno 2027.",
+  alternativa:
+    "Adesso che la scuola è iniziata il corso attivo è Sempre Dritto: due ore di matematica a settimana, da ottobre a maggio, sugli stessi argomenti.",
+  riapertura: "giugno 2027",
+};
+
 export const MATERIALE_PIEDE_GIUSTO = [
   "Riassunti schematizzati degli argomenti trattati",
   "Esercizi con soluzioni per allenarti anche a casa",
@@ -194,124 +216,163 @@ export const PIEDE_GIUSTO: SottoCorso[] = [
   },
 ];
 
-// ── English Speaking Club ───────────────────────────
-export const ENGLISH_PREZZO = 300;
-export const ENGLISH_ORE = 20;
-export const ENGLISH_LEZIONI = 10;
-
-export const ENGLISH_CLUB: SottoCorso[] = [
-  {
-    slug: "english-restart",
-    titolo: "English Restart – Riparti dalle basi",
-    titoloBreve: "English Restart",
-    livello: "Principiante",
-    sottotitolo:
-      "Per chi parte da zero o quasi: la grammatica essenziale e le prime conversazioni, senza ansia e senza fretta.",
-    prezzo: ENGLISH_PREZZO,
-    ore: ENGLISH_ORE,
-    lezioni: ENGLISH_LEZIONI,
-    contenuti: [
-      "Grammatica di base spiegata in modo semplice",
-      "Conversazione di base sulle situazioni di tutti i giorni",
-      "Dispense riassuntive ed esercizi per lo studio individuale e di gruppo",
-    ],
-  },
-  {
-    slug: "english-progress",
-    titolo: "English Progress – Consolida e conversa",
-    titoloBreve: "English Progress",
-    livello: "Intermedio",
-    sottotitolo:
-      "Per chi ha già le basi e vuole fare il salto: più grammatica, più conversazione e orecchio allenato.",
-    prezzo: ENGLISH_PREZZO,
-    ore: ENGLISH_ORE,
-    lezioni: ENGLISH_LEZIONI,
-    contenuti: [
-      "Grammatica più avanzata",
-      "Conversazione e modi di dire",
-      "Potenziamento del listening",
-      "Dispense riassuntive ed esercizi per lo studio individuale e di gruppo",
-    ],
-  },
-  {
-    slug: "english-fluency",
-    titolo: "English Fluency – Parla con sicurezza",
-    titoloBreve: "English Fluency",
-    livello: "Avanzato",
-    sottotitolo:
-      "Per chi vuole scioltezza vera: conversazioni su temi di attualità, pronuncia curata e listening intensivo.",
-    prezzo: ENGLISH_PREZZO,
-    ore: ENGLISH_ORE,
-    lezioni: ENGLISH_LEZIONI,
-    contenuti: [
-      "Ripasso breve di grammatica",
-      "Conversazioni su argomenti di attualità",
-      "Focus sulla pronuncia",
-      "Potenziamento del listening",
-      "Dispense riassuntive ed esercizi per lo studio individuale e di gruppo",
-    ],
-  },
-];
-
-// ── Potenziamento Scolastico ────────────────────────
-export const POTENZIAMENTO = {
-  slug: "potenziamento-scolastico",
-  titolo: "Corso di Potenziamento Scolastico",
+// ── Sempre Dritto ───────────────────────────────────
+// Il corso annuale di matematica: parte il 12 ottobre e arriva all'ultima
+// settimana di maggio, 2 ore a settimana. Le settimane effettive sono circa 30
+// (tolte le vacanze di Natale e di Pasqua): da lì escono ore totali e prezzo.
+export const SEMPRE_DRITTO = {
+  slug: "sempre-dritto",
+  titolo: "Sempre Dritto",
   sottotitolo:
-    "Il corso annuale di matematica e fisica per vivere la scuola senza la paura delle verifiche.",
-  prezzoOra: 15,
-  prezzoTotale: 960,
-  rate: 4,
-  importoRata: 240,
-  settimane: 32,
+    "Il corso di matematica che ti accompagna per tutto l'anno: due ore a settimana in piccolo gruppo, da ottobre a maggio.",
+  materia: "Matematica",
+  inizio: "12 ottobre 2026",
+  inizioISO: "2026-10-12",
+  fine: "ultima settimana di maggio 2027",
+  fineISO: "2027-05-28",
   oreSettimana: 2,
-  oreTotali: 64,
-  materie: ["Matematica", "Fisica"],
+  settimane: 30,
+  oreTotali: 60,
+  // €13,50 l'ora invece dei €25 della lezione individuale delle superiori.
+  prezzoOra: "13,50",
+  prezzoOraIndividuale: 25,
+  scontoPercentuale: 46,
+  prezzoTotale: 810,
+  rate: 4,
+  importoRata: "202,50",
+  gruppoMin: 3,
+  gruppoMax: 6,
   materiale: [
-    "Schemi, riassunti e consigli per lo svolgimento degli esercizi",
-    "Esercizi e simulazioni di verifica",
+    "Dispense di teoria schematizzate, argomento per argomento",
+    "Eserciziari con soluzioni per allenarti tra una lezione e l'altra",
+    "Simulazioni di verifica sul modello di quelle della tua classe",
+  ],
+  puntiChiave: [
+    "Un gruppo per ogni classe, dalla prima alla quinta superiore",
+    "Gruppi formati per indirizzo scolastico, quando i numeri lo permettono",
+    "Due ore fisse a settimana: la matematica non si accumula più",
+    "Materiale didattico aggiuntivo incluso nel prezzo",
   ],
 };
 
-// Le 5 classi del Potenziamento Scolastico: il programma annuale di ogni
-// classe coincide con gli argomenti del corrispondente percorso Piede Giusto.
-export const POTENZIAMENTO_CLASSI = [
+// I cinque gruppi di Sempre Dritto: il programma annuale di ogni classe
+// coincide con gli argomenti di matematica del corrispondente Piede Giusto.
+export const SEMPRE_DRITTO_CLASSI = [
   {
     slug: "prima-superiore",
     classe: "Prima Superiore",
+    annoScolastico: "Prima superiore",
     sottotitolo:
-      "Il primo anno delle superiori senza lacune: dalle basi dell'algebra alle prime grandezze fisiche, con esercizi e simulazioni di verifica ogni settimana.",
-    materie: PIEDE_GIUSTO[0].materie!,
+      "Il primo anno senza lacune: dai monomi alle disequazioni, con esercizi e simulazioni di verifica ogni settimana.",
+    programma: PIEDE_GIUSTO[0].materie![0].programma,
   },
   {
     slug: "seconda-superiore",
     classe: "Seconda Superiore",
+    annoScolastico: "Seconda superiore",
     sottotitolo:
-      "Dalle equazioni di secondo grado alla retta, dalla dinamica alla fluidostatica: un appuntamento fisso per non rincorrere mai il programma.",
-    materie: PIEDE_GIUSTO[1].materie!,
+      "Sistemi, radicali, equazioni di secondo grado e retta: un appuntamento fisso per non rincorrere mai il programma.",
+    programma: PIEDE_GIUSTO[1].materie![0].programma,
   },
   {
     slug: "terza-superiore",
     classe: "Terza Superiore",
+    annoScolastico: "Terza superiore",
     sottotitolo:
-      "Il triennio cambia passo: geometria analitica completa e la fisica di energia, urti e gravitazione, allenate verifica dopo verifica.",
-    materie: PIEDE_GIUSTO[2].materie!,
+      "Il triennio cambia passo: geometria analitica completa e studio delle funzioni, allenati verifica dopo verifica.",
+    programma: PIEDE_GIUSTO[2].materie![0].programma,
   },
   {
     slug: "quarta-superiore",
     classe: "Quarta Superiore",
+    annoScolastico: "Quarta superiore",
     sottotitolo:
-      "Esponenziali, trigonometria e probabilità in matematica; onde, ottica ed elettrostatica in fisica: l'anno più denso, affrontato con costanza.",
-    materie: PIEDE_GIUSTO[3].materie!,
+      "Esponenziali, logaritmi, trigonometria e probabilità: l'anno più denso, affrontato con costanza da ottobre.",
+    programma: PIEDE_GIUSTO[3].materie![0].programma,
   },
   {
     slug: "quinta-superiore",
     classe: "Quinta Superiore",
+    annoScolastico: "Quinta superiore",
     sottotitolo:
-      "L'anno della maturità: limiti, derivate e integrali in matematica, elettromagnetismo e fisica moderna in fisica, fino alla prova d'esame.",
-    materie: PIEDE_GIUSTO[4].materie!,
+      "L'anno della maturità: limiti, derivate, studio di funzione e integrali, fino alla seconda prova.",
+    programma: PIEDE_GIUSTO[4].materie![0].programma,
   },
 ] as const;
+
+// A ogni percorso Piede Giusto corrisponde la classe di Sempre Dritto che
+// tratta gli stessi argomenti durante l'anno: dalle pagine del corso estivo
+// (concluso) indirizziamo lì.
+export const SEMPRE_DRITTO_PER_PIEDE_GIUSTO: Record<string, string> = {
+  "dalle-medie-alla-prima-superiore": "prima-superiore",
+  "dalla-prima-alla-seconda-superiore": "seconda-superiore",
+  "dalla-seconda-alla-terza-superiore": "terza-superiore",
+  "dalla-terza-alla-quarta-superiore": "quarta-superiore",
+  "dalla-quarta-alla-quinta-superiore": "quinta-superiore",
+};
+
+// ── Corsi in arrivo ─────────────────────────────────
+// Segnaposto: i percorsi di preparazione ai test universitari sono in
+// costruzione. Le card sono visibili ma non cliccabili — si raccoglie
+// interesse via WhatsApp finché non c'è una pagina vera.
+export type CorsoInArrivo = {
+  slug: string;
+  titolo: string;
+  sottotitolo: string;
+  target: string;
+  punti: string[];
+};
+
+export const CORSI_IN_ARRIVO: CorsoInArrivo[] = [
+  {
+    slug: "semestre-filtro-medicina",
+    titolo: "Preparazione semestre filtro Medicina",
+    sottotitolo:
+      "Chimica, biologia e fisica del semestre aperto di Medicina, con esercitazioni sul formato degli esami nazionali.",
+    target: "Diplomandi e matricole di Medicina e Odontoiatria",
+    punti: [
+      "Teoria dei tre esami del semestre filtro",
+      "Batterie di quesiti ed esercitazioni a tempo",
+      "Simulazioni con correzione ragionata",
+    ],
+  },
+  {
+    slug: "test-professioni-sanitarie",
+    titolo: "Preparazione test Professioni Sanitarie",
+    sottotitolo:
+      "Il percorso completo per il test di Infermieristica, Fisioterapia e delle altre professioni sanitarie.",
+    target: "Studenti di quinta e diplomati",
+    punti: [
+      "Biologia, chimica, fisica e matematica del test",
+      "Logica e comprensione del testo",
+      "Simulazioni cronometrate con graduatoria interna",
+    ],
+  },
+  {
+    slug: "tolc-economia",
+    titolo: "Preparazione TOLC-E Economia",
+    sottotitolo:
+      "Matematica, logica e comprensione verbale per arrivare al TOLC-E con il punteggio che ti serve.",
+    target: "Chi si iscrive a Economia, Statistica o Management",
+    punti: [
+      "Matematica del TOLC-E dalle basi",
+      "Logica e comprensione verbale",
+      "Prove complete sul simulatore CISIA",
+    ],
+  },
+  {
+    slug: "tolc-ingegneria",
+    titolo: "Preparazione TOLC-I Ingegneria",
+    sottotitolo:
+      "Matematica, scienze e logica del TOLC-I, con il metodo per gestire il tempo sezione per sezione.",
+    target: "Chi si iscrive a Ingegneria o a una facoltà scientifica",
+    punti: [
+      "Matematica e scienze del TOLC-I",
+      "Logica e comprensione verbale",
+      "Simulazioni complete e analisi degli errori",
+    ],
+  },
+];
 
 // Matematica e Fisica sono due corsi separati: lo studente sceglie quale
 // seguire (o entrambi, pagando due iscrizioni distinte).
@@ -332,6 +393,17 @@ export const CLASSI_SETTEMBRE = [
 
 // Fascia oraria preferita per le lezioni del corso.
 export const PREFERENZE_ORARIO = ["Mattina", "Pomeriggio", "Entrambi"];
+
+// Giorni selezionabili nel form di Sempre Dritto: servono per incastrare i
+// gruppi, quindi ne chiediamo almeno tre.
+export const GIORNI_SETTIMANA = [
+  "Lunedì",
+  "Martedì",
+  "Mercoledì",
+  "Giovedì",
+  "Venerdì",
+];
+export const GIORNI_PREFERITI_MIN = 3;
 
 // Opzioni comuni dei form di iscrizione
 export const INDIRIZZI_SCOLASTICI = [
