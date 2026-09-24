@@ -314,17 +314,6 @@ export const SEMPRE_DRITTO_CLASSI = [
   },
 ] as const;
 
-// A ogni percorso Piede Giusto corrisponde la classe di Sempre Dritto che
-// tratta gli stessi argomenti durante l'anno: dalle pagine del corso estivo
-// (concluso) indirizziamo lì.
-export const SEMPRE_DRITTO_PER_PIEDE_GIUSTO: Record<string, string> = {
-  "dalle-medie-alla-prima-superiore": "prima-superiore",
-  "dalla-prima-alla-seconda-superiore": "seconda-superiore",
-  "dalla-seconda-alla-terza-superiore": "terza-superiore",
-  "dalla-terza-alla-quarta-superiore": "quarta-superiore",
-  "dalla-quarta-alla-quinta-superiore": "quinta-superiore",
-};
-
 // ── Corsi in arrivo ─────────────────────────────────
 // Segnaposto: i percorsi di preparazione ai test universitari sono in
 // costruzione. Le card sono visibili ma non cliccabili — si raccoglie

@@ -17,7 +17,6 @@ import {
   CORSO_CONCLUSO_CLS,
   PIEDE_GIUSTO_ISCRIZIONI_APERTE,
   PIEDE_GIUSTO_CHIUSURA,
-  SEMPRE_DRITTO_PER_PIEDE_GIUSTO,
 } from "@/lib/corsi-data";
 import { Clock, Euro, Users, ArrowLeft, ArrowRight } from "lucide-react";
 
@@ -198,7 +197,7 @@ export default async function PiedeGiustoDettaglio({
                   testo={PIEDE_GIUSTO_CHIUSURA.testo}
                   alternativa={PIEDE_GIUSTO_CHIUSURA.alternativa}
                   azione={{
-                    href: `/corsi/sempre-dritto/${SEMPRE_DRITTO_PER_PIEDE_GIUSTO[corso.slug]}`,
+                    href: "/corsi/sempre-dritto",
                     label: "Scopri Sempre Dritto",
                   }}
                 />

@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 import RevealMount from "@/components/RevealMount";
+import SempreDrittoForm from "@/components/SempreDrittoForm";
 import { SectionBlobs } from "@/components/Blobs";
-import { StatPills, TintedList, EASE } from "@/components/CorsoUI";
+import { StatPills, TintedList, FormShell, EASE } from "@/components/CorsoUI";
 import { SITE_URL } from "@/lib/constants";
 import { breadcrumbJsonLd, courseJsonLd } from "@/lib/structured-data";
 import { SEMPRE_DRITTO, SEMPRE_DRITTO_CLASSI } from "@/lib/corsi-data";
-import { Clock, Euro, Users, CalendarDays, ArrowRight, Sigma, GraduationCap, BookOpen } from "lucide-react";
+import { Clock, Euro, Users, CalendarDays, ArrowRight, Sigma, GraduationCap, ChevronDown, CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Sempre Dritto: corso annuale di matematica | Emergenza Studio Mogliano Veneto",
-  description: `Corso di matematica per tutto l'anno scolastico a Mogliano Veneto: dal ${SEMPRE_DRITTO.inizio} all'${SEMPRE_DRITTO.fine}, ${SEMPRE_DRITTO.oreSettimana} ore a settimana in gruppi da ${SEMPRE_DRITTO.gruppoMin} a ${SEMPRE_DRITTO.gruppoMax} studenti, €${SEMPRE_DRITTO.prezzoOra}/h invece di €${SEMPRE_DRITTO.prezzoOraIndividuale}. Un gruppo per ogni classe.`,
+  description: `Corso di matematica per tutto l'anno scolastico a Mogliano Veneto: dal ${SEMPRE_DRITTO.inizio} all'${SEMPRE_DRITTO.fine}, ${SEMPRE_DRITTO.oreSettimana} ore a settimana in gruppi da ${SEMPRE_DRITTO.gruppoMin} a ${SEMPRE_DRITTO.gruppoMax} studenti, €${SEMPRE_DRITTO.prezzoOra}/h invece di €${SEMPRE_DRITTO.prezzoOraIndividuale}. Un gruppo per ogni classe, dalla prima alla quinta superiore. Iscrizione online.`,
   alternates: { canonical: `${SITE_URL}/corsi/sempre-dritto/` },
 };
 
@@ -65,20 +65,12 @@ export default function SempreDrittoPage() {
           __html: JSON.stringify(courseJsonLd([
             {
               name: `${SEMPRE_DRITTO.titolo} — Corso annuale di matematica`,
-              description: SEMPRE_DRITTO.sottotitolo,
+              description: `${SEMPRE_DRITTO.sottotitolo} Un gruppo per ogni classe, dalla prima alla quinta superiore.`,
               price: String(SEMPRE_DRITTO.prezzoTotale),
               startDate: SEMPRE_DRITTO.inizioISO,
               endDate: SEMPRE_DRITTO.fineISO,
               location: "Via Francesco Barbiero 84g, Mogliano Veneto",
             },
-            ...SEMPRE_DRITTO_CLASSI.map((c) => ({
-              name: `${SEMPRE_DRITTO.titolo} — ${c.classe}`,
-              description: c.sottotitolo,
-              price: String(SEMPRE_DRITTO.prezzoTotale),
-              startDate: SEMPRE_DRITTO.inizioISO,
-              endDate: SEMPRE_DRITTO.fineISO,
-              location: "Via Francesco Barbiero 84g, Mogliano Veneto",
-            })),
           ])),
         }}
       />
@@ -115,11 +107,11 @@ export default function SempreDrittoPage() {
               />
             </div>
             <a
-              href="#scegli-anno"
+              href="#iscrizione"
               className={`inline-flex w-full sm:w-auto items-center justify-center gap-2.5 mt-7 md:mt-8 rounded-full bg-primary text-primary-foreground px-6 py-4 sm:py-3.5 text-sm font-extrabold uppercase tracking-wider shadow-[0_18px_35px_-18px_rgba(21,50,79,.7)] ${EASE} hover:-translate-y-0.5 hover:bg-navy-deep active:scale-[0.98] reveal d3`}
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Scegli il tuo corso
+              Iscriviti al corso
               <span className="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center shrink-0">
                 <ArrowRight className="w-4 h-4" />
               </span>
@@ -184,51 +176,71 @@ export default function SempreDrittoPage() {
         </div>
       </section>
 
-      {/* ── La scelta della classe è la chiamata all'azione finale: niente più
-             rimbalzo su e giù per la pagina. ── */}
-      <section id="scegli-anno" className="py-12 md:py-24 scroll-mt-24">
+      {/* ── Programmi: tutti in questa pagina, uno aperto alla volta ── */}
+      <section className="py-12 md:py-24">
         <div className="container-custom">
-          <div className="max-w-5xl mx-auto rounded-[26px] sm:rounded-[32px] bg-secondary/8 border border-secondary/15 p-5 sm:p-8 md:p-10 reveal">
-            <div className="text-center max-w-2xl mx-auto mb-6 md:mb-8">
-              <span className="inline-flex items-center gap-2 rounded-full bg-accent/12 text-accent px-3.5 py-1.5 text-[11px] font-extrabold uppercase tracking-wider mb-3.5">
-                <BookOpen className="w-3.5 h-3.5" /> Pronto a partire?
-              </span>
-              <h2 className="text-2xl md:text-4xl mb-3">
-                Scegli il tuo corso in base all&apos;anno
-              </h2>
-              <p className="text-[15px] md:text-base text-muted-foreground leading-relaxed">
-                Ogni classe ha il suo gruppo e il suo programma: apri il tuo anno,
-                guarda gli argomenti e compila il form. Ti ricontattiamo entro 24
-                ore per confermare il giorno del gruppo.
-              </p>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-              {SEMPRE_DRITTO_CLASSI.map((c, i) => (
-                <Link
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-2xl md:text-4xl mb-3 text-center reveal">
+              Il programma, anno per anno
+            </h2>
+            <p className="text-[15px] md:text-base text-muted-foreground text-center mb-7 md:mb-10 leading-relaxed reveal d1">
+              Ogni classe ha il suo gruppo e i suoi argomenti, in parallelo al
+              programma della scuola. Apri il tuo anno per vedere cosa
+              affronteremo da ottobre a maggio.
+            </p>
+            <div className="space-y-3 reveal d1">
+              {SEMPRE_DRITTO_CLASSI.map((c) => (
+                <details
                   key={c.slug}
-                  href={`/corsi/sempre-dritto/${c.slug}`}
-                  className={`group relative flex flex-col rounded-[20px] sm:rounded-[26px] bg-white border border-border p-4 sm:p-6 overflow-hidden ${EASE} hover:-translate-y-1 hover:shadow-[0_30px_50px_-30px_rgba(21,50,79,.35)] active:scale-[0.99] reveal d${(i % 3) + 1}`}
+                  className={`group rounded-[22px] sm:rounded-[26px] bg-white border border-border overflow-hidden ${EASE} hover:shadow-[0_24px_40px_-28px_rgba(21,50,79,.4)]`}
                 >
-                  <span aria-hidden className="hidden sm:block absolute -top-1 right-4 text-[56px] leading-none font-black tracking-tight select-none" style={{ color: "rgba(45,138,138,.12)" }}>
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="text-[15px] sm:text-lg mb-1.5 sm:mb-2 leading-snug sm:pr-10">
-                    {c.classe}
-                  </h3>
-                  <p className="hidden sm:block text-sm text-muted-foreground leading-relaxed mb-4">
-                    {c.sottotitolo}
-                  </p>
-                  <div className="mt-auto flex items-center justify-between gap-2 pt-2">
-                    <span className="hidden sm:inline-flex items-center gap-1 rounded-full bg-muted px-2.5 py-1 text-xs font-bold text-foreground">
-                      <Users className="w-3.5 h-3.5" /> {SEMPRE_DRITTO.gruppoMin}–{SEMPRE_DRITTO.gruppoMax} per gruppo
+                  <summary className="flex items-center gap-3 p-4 sm:p-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                    <span className="w-10 h-10 rounded-full bg-accent/12 text-accent flex items-center justify-center shrink-0">
+                      <Sigma className="w-5 h-5" />
                     </span>
-                    <span className="sm:hidden text-xs font-bold text-secondary">Iscriviti</span>
-                    <span className={`w-8 h-8 rounded-full bg-accent/12 text-accent flex items-center justify-center shrink-0 ${EASE} group-hover:bg-accent group-hover:text-accent-foreground group-hover:translate-x-1`}>
-                      <ArrowRight className="w-4 h-4" />
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-[15px] sm:text-lg font-extrabold text-primary leading-tight" style={{ fontFamily: "var(--font-display)" }}>
+                        {c.classe}
+                      </span>
+                      <span className="block text-[13px] sm:text-sm text-muted-foreground leading-snug mt-0.5">
+                        {c.sottotitolo}
+                      </span>
                     </span>
-                  </div>
-                </Link>
+                    <span className={`w-8 h-8 rounded-full bg-muted text-primary flex items-center justify-center shrink-0 ${EASE} group-open:rotate-180 group-open:bg-accent group-open:text-accent-foreground`}>
+                      <ChevronDown className="w-4 h-4" />
+                    </span>
+                  </summary>
+                  <ul className="px-4 sm:px-6 pb-5 sm:pb-6 pt-1 space-y-2.5 border-t border-border/60 mt-1">
+                    {c.programma.map((arg) => (
+                      <li key={arg} className="flex items-start gap-2.5 text-sm text-foreground leading-relaxed pt-2.5 first:pt-4">
+                        <CheckCircle className="w-4 h-4 text-accent shrink-0 mt-0.5" />
+                        <span>{arg}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Iscrizione: l'anno si sceglie qui, niente pagine separate ── */}
+      <section id="iscrizione" className="section-spacing section-tint !py-12 md:!py-24 scroll-mt-24">
+        <div className="container-custom">
+          <div className="max-w-xl mx-auto">
+            <h2 className="text-2xl md:text-4xl mb-3 text-center reveal">
+              Iscriviti a Sempre Dritto
+            </h2>
+            <p className="text-[15px] md:text-base text-muted-foreground text-center mb-7 md:mb-8 leading-relaxed reveal d1">
+              Scegli l&apos;anno di tuo figlio e indica i giorni in cui sarebbe
+              disponibile: registriamo subito l&apos;iscrizione e vi ricontattiamo
+              entro 24 ore per confermare il giorno fisso del gruppo.
+            </p>
+            <div className="reveal d2">
+              <FormShell>
+                <SempreDrittoForm corso={SEMPRE_DRITTO.titolo} corsoSlug={SEMPRE_DRITTO.slug} />
+              </FormShell>
             </div>
           </div>
         </div>

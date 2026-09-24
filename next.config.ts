@@ -48,7 +48,13 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/corsi/potenziamento-scolastico/:classe",
-        destination: "/corsi/sempre-dritto/:classe",
+        destination: "/corsi/sempre-dritto",
+        permanent: true,
+      },
+      // Sempre Dritto non ha più una pagina per anno: l'anno si sceglie nel form
+      {
+        source: "/corsi/sempre-dritto/:classe",
+        destination: "/corsi/sempre-dritto",
         permanent: true,
       },
       {

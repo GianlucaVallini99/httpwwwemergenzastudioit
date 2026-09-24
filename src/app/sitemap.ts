@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { PIEDE_GIUSTO, SEMPRE_DRITTO_CLASSI } from "@/lib/corsi-data";
+import { PIEDE_GIUSTO } from "@/lib/corsi-data";
 
 export const dynamic = "force-static";
 
@@ -25,11 +25,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/preparazione-test", priority: 0.8, changeFrequency: "monthly" as const },
     { url: "/corsi", priority: 0.8, changeFrequency: "monthly" as const },
     { url: "/corsi/sempre-dritto", priority: 0.9, changeFrequency: "weekly" as const },
-    ...SEMPRE_DRITTO_CLASSI.map((c) => ({
-      url: `/corsi/sempre-dritto/${c.slug}`,
-      priority: 0.9,
-      changeFrequency: "weekly" as const,
-    })),
     // Piede Giusto è fuori stagione: pagine online ma ferme fino a giugno.
     { url: "/corsi/piede-giusto", priority: 0.7, changeFrequency: "monthly" as const },
     ...PIEDE_GIUSTO.map((c) => ({

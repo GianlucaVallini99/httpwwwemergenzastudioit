@@ -118,14 +118,13 @@ export default function CorsiPage() {
                 per classe e per indirizzo: ti accompagniamo verifica dopo verifica,
                 a €{SEMPRE_DRITTO.prezzoOra} l&apos;ora invece di €{SEMPRE_DRITTO.prezzoOraIndividuale}.
               </p>
-              <ul className="grid sm:grid-cols-2 gap-2 max-w-xl">
+              <ul className="grid grid-cols-2 sm:grid-cols-3 gap-2 max-w-xl">
                 {SEMPRE_DRITTO_CLASSI.map((c) => (
                   <li
                     key={c.slug}
-                    className="flex items-center justify-between gap-2 rounded-2xl bg-white/10 ring-1 ring-white/10 px-4 py-2.5 text-sm font-bold text-white"
+                    className="rounded-2xl bg-white/10 ring-1 ring-white/10 px-3 py-2.5 text-[13px] sm:text-sm font-bold text-white text-center"
                   >
-                    <span>{c.classe}</span>
-                    <ArrowUpRight className="w-4 h-4 shrink-0 opacity-60" />
+                    {c.classe}
                   </li>
                 ))}
               </ul>
