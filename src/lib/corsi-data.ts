@@ -247,11 +247,25 @@ export const SEMPRE_DRITTO = {
     "Eserciziari con soluzioni per allenarti tra una lezione e l'altra",
     "Simulazioni di verifica sul modello di quelle della tua classe",
   ],
-  puntiChiave: [
-    "Un gruppo per ogni classe, dalla prima alla quinta superiore",
-    "Gruppi formati per indirizzo scolastico, quando i numeri lo permettono",
-    "Due ore fisse a settimana: la matematica non si accumula più",
-    "Materiale didattico aggiuntivo incluso nel prezzo",
+  // I punti forti del corso, mostrati come riquadri (due per riga anche sul
+  // telefono): titolo corto in evidenza e una riga di spiegazione.
+  plus: [
+    {
+      titolo: "€13,50 l'ora",
+      testo: "invece dei €25 della lezione individuale",
+    },
+    {
+      titolo: "Un gruppo per classe",
+      testo: "dalla prima alla quinta superiore",
+    },
+    {
+      titolo: "Da 3 a 6 studenti",
+      testo: "stesso indirizzo, quando i numeri lo permettono",
+    },
+    {
+      titolo: "2 ore a settimana",
+      testo: "sempre lo stesso giorno, da ottobre a maggio",
+    },
   ],
 };
 

@@ -172,7 +172,7 @@ export default function SempreDrittoForm({
           Giorni in cui saresti disponibile{" "}
           <span className="font-medium text-muted-foreground">(almeno {GIORNI_PREFERITI_MIN})</span>
         </legend>
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+        <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-2.5">
           {GIORNI_SETTIMANA.map((g) => {
             const active = giorni.includes(g);
             return (
@@ -181,13 +181,15 @@ export default function SempreDrittoForm({
                 type="button"
                 onClick={() => toggleGiorno(g)}
                 aria-pressed={active}
-                className={`inline-flex items-center justify-center rounded-2xl border px-3 py-3 text-sm font-bold transition-all duration-300 ${
+                className={`inline-flex items-center justify-center rounded-2xl border px-2 py-3.5 sm:px-3 sm:py-3 text-[13px] sm:text-sm font-bold transition-all duration-300 ${
                   active
                     ? "bg-accent text-accent-foreground border-accent shadow-[0_14px_28px_-16px_rgba(45,138,138,.8)]"
                     : "bg-muted/60 text-foreground border-border hover:border-accent/40"
                 }`}
               >
-                {g}
+                {/* Sul telefono le tre lettere bastano e stanno su una riga */}
+                <span className="sm:hidden">{g.slice(0, 3)}</span>
+                <span className="hidden sm:inline">{g}</span>
               </button>
             );
           })}

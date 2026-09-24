@@ -77,18 +77,18 @@ export default async function SempreDrittoClasse({
       <RevealMount />
       <Breadcrumb items={breadcrumbs} />
 
-      <section className="pt-8 pb-12 md:pb-16">
+      <section className="pt-6 pb-10 md:pt-8 md:pb-16">
         <SectionBlobs variant="a" />
         <div className="container-custom">
           <div className="max-w-4xl">
-            <span className="inline-block rounded-full bg-accent text-accent-foreground text-[11px] font-extrabold uppercase tracking-[0.14em] px-4 py-1.5 mb-6 reveal">
+            <span className="inline-block rounded-full bg-accent text-accent-foreground text-[11px] font-extrabold uppercase tracking-[0.14em] px-4 py-1.5 mb-5 md:mb-6 reveal">
               Sempre Dritto · Si parte il {SEMPRE_DRITTO.inizio}
             </span>
-            <h1 className="text-[clamp(32px,5vw,54px)] mb-5 reveal d1">{titolo}</h1>
-            <p className="text-lg md:text-xl text-foreground/70 mb-4 font-semibold leading-snug max-w-3xl reveal d2">
+            <h1 className="text-[clamp(28px,6.5vw,54px)] mb-4 md:mb-5 reveal d1">{titolo}</h1>
+            <p className="text-[17px] md:text-xl text-foreground/70 mb-4 font-semibold leading-snug max-w-3xl reveal d2">
               {corso.sottotitolo}
             </p>
-            <p className="text-base text-foreground/60 mb-8 leading-relaxed max-w-3xl reveal d2">
+            <p className="text-[15px] md:text-base text-foreground/60 mb-7 md:mb-8 leading-relaxed max-w-3xl reveal d2">
               {`${SEMPRE_DRITTO.oreSettimana} ore di matematica a settimana dal ${SEMPRE_DRITTO.inizio} all'${SEMPRE_DRITTO.fine}, in un gruppo di ${SEMPRE_DRITTO.gruppoMin}–${SEMPRE_DRITTO.gruppoMax} studenti di ${corso.classe.toLowerCase()}: `}
               <strong className="text-secondary">
                 {`€${SEMPRE_DRITTO.prezzoOra} l'ora invece di €${SEMPRE_DRITTO.prezzoOraIndividuale}`}
@@ -106,11 +106,11 @@ export default async function SempreDrittoClasse({
             </div>
             <a
               href="#iscrizione"
-              className={`inline-flex items-center gap-2.5 mt-8 rounded-full bg-primary text-primary-foreground px-6 py-3.5 text-sm font-extrabold uppercase tracking-wider shadow-[0_18px_35px_-18px_rgba(21,50,79,.7)] ${EASE} hover:-translate-y-0.5 hover:bg-navy-deep active:scale-[0.98] reveal d3`}
+              className={`inline-flex w-full sm:w-auto items-center justify-center gap-2.5 mt-7 md:mt-8 rounded-full bg-primary text-primary-foreground px-6 py-4 sm:py-3.5 text-sm font-extrabold uppercase tracking-wider shadow-[0_18px_35px_-18px_rgba(21,50,79,.7)] ${EASE} hover:-translate-y-0.5 hover:bg-navy-deep active:scale-[0.98] reveal d3`}
               style={{ fontFamily: "var(--font-display)" }}
             >
               Vai all&apos;iscrizione
-              <span className="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center">
+              <span className="w-7 h-7 rounded-full bg-white/15 flex items-center justify-center shrink-0">
                 <ArrowRight className="w-4 h-4" />
               </span>
             </a>
@@ -118,13 +118,13 @@ export default async function SempreDrittoClasse({
         </div>
       </section>
 
-      <section className="section-spacing section-tint !py-16 md:!py-24">
+      <section className="section-spacing section-tint !py-12 md:!py-24">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-2xl md:text-4xl mb-3 text-center reveal">
               Il programma dell&apos;anno
             </h2>
-            <p className="text-muted-foreground text-center mb-8 md:mb-10 leading-relaxed reveal d1">
+            <p className="text-[15px] md:text-base text-muted-foreground text-center mb-7 md:mb-10 leading-relaxed reveal d1">
               Gli argomenti che affronteremo in {corso.classe.toLowerCase()}, seguendo
               il ritmo del programma della tua scuola: ogni lezione arriva in parallelo
               a quello che state facendo in classe.
@@ -139,8 +139,8 @@ export default async function SempreDrittoClasse({
             <div className="reveal d2">
               <TintedList title="Materiale didattico incluso" items={SEMPRE_DRITTO.materiale} />
             </div>
-            <div className="mt-5 rounded-[26px] bg-white border border-border p-5 sm:p-6 flex items-start gap-3 reveal d3">
-              <span className="w-10 h-10 rounded-full bg-accent/12 text-accent flex items-center justify-center shrink-0">
+            <div className="mt-3.5 sm:mt-5 rounded-[22px] sm:rounded-[26px] bg-white border border-border p-5 sm:p-6 flex items-start gap-3 reveal d3">
+              <span className="w-10 h-10 rounded-full bg-accent/12 text-accent items-center justify-center shrink-0 hidden sm:flex">
                 <CalendarDays className="w-5 h-5" />
               </span>
               <p className="text-sm text-foreground leading-relaxed [font-variant-numeric:tabular-nums]">
@@ -156,13 +156,13 @@ export default async function SempreDrittoClasse({
         </div>
       </section>
 
-      <section id="iscrizione" className="py-16 md:py-24">
+      <section id="iscrizione" className="py-12 md:py-24 scroll-mt-24">
         <div className="container-custom">
           <div className="max-w-xl mx-auto">
             <h2 className="text-2xl md:text-3xl mb-4 text-center reveal">
               Iscriviti per la {corso.classe}
             </h2>
-            <p className="text-muted-foreground text-center mb-8 leading-relaxed reveal d1">
+            <p className="text-[15px] md:text-base text-muted-foreground text-center mb-7 md:mb-8 leading-relaxed reveal d1">
               Compila il form indicando i giorni in cui saresti disponibile:
               registriamo subito la tua iscrizione e ti ricontattiamo entro 24 ore
               per confermare il giorno fisso del gruppo.
