@@ -21,6 +21,7 @@ type Payload = {
   scuola?: string;
   classeSettembre?: string;
   preferenzaOrario?: string;
+  noteOrario?: string;
   email?: string;
   giorniPreferiti?: string[] | string;
 };
@@ -94,6 +95,7 @@ export async function POST(request: Request) {
     scuola: clean(body.scuola, 200) || null,
     classe_settembre: clean(body.classeSettembre, 50) || null,
     preferenza_orario: clean(body.preferenzaOrario, 30) || null,
+    note_orario: clean(body.noteOrario, 300) || null,
   };
 
   const res = await fetch(`${SUPABASE_URL}/rest/v1/iscrizioni_corsi`, {

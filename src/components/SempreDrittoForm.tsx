@@ -26,6 +26,7 @@ const EMPTY = {
   indirizzoAccademico: "",
   telefono: "",
   email: "",
+  noteOrario: "",
 };
 
 export default function SempreDrittoForm({
@@ -43,7 +44,7 @@ export default function SempreDrittoForm({
   const [error, setError] = useState("");
 
   const set = (field: keyof typeof EMPTY) => (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => setData({ ...data, [field]: e.target.value });
 
   // L'ordine dei giorni scelti non conta: li rimettiamo sempre da lunedì a
@@ -64,6 +65,7 @@ export default function SempreDrittoForm({
       `Telefono: ${data.telefono}`,
       `Giorni preferiti: ${giorniOrdinati.join(", ")}`,
       ...(data.email ? [`Email: ${data.email}`] : []),
+      ...(data.noteOrario ? [`Note su orari: ${data.noteOrario}`] : []),
     ];
     return `https://wa.me/${PHONE_INTL.replace("+", "")}?text=${encodeURIComponent(lines.join("\n"))}`;
   };
@@ -93,6 +95,7 @@ export default function SempreDrittoForm({
           classeSettembre: data.annoScolastico,
           indirizzoScolastico: data.indirizzoAccademico,
           giorniPreferiti: giorniOrdinati,
+          noteOrario: data.noteOrario,
         }),
       });
       if (!res.ok) {
@@ -200,6 +203,20 @@ export default function SempreDrittoForm({
             : `${giorni.length} giorni selezionati. Il corso è di ${SEMPRE_DRITTO.oreSettimana} ore a settimana: sceglieremo noi il giorno fisso tra quelli che hai indicato.`}
         </p>
       </fieldset>
+
+      <div>
+        <label htmlFor="noteOrario" className={labelCls}>
+          Note sulle preferenze di orario <span className="font-medium text-muted-foreground">(facoltative)</span>
+        </label>
+        <textarea
+          id="noteOrario"
+          rows={3}
+          value={data.noteOrario}
+          onChange={set("noteOrario")}
+          className={inputCls}
+          placeholder="Es. solo dopo le 17, oppure mai il primo pomeriggio"
+        />
+      </div>
 
       <div>
         <label htmlFor="email" className={labelCls}>
