@@ -12,8 +12,9 @@ const EVENTO = {
   luogo: "Via Francesco Barbiero 84g, Mogliano Veneto (TV)",
 };
 
+// Prenotazioni raccolte con il Google Form dell'evento
 const PRENOTA_URL =
-  "https://wa.me/393534017905?text=Ciao!%20Vorrei%20prenotare%20il%20posto%20a%20Emergenza%20Universit%C3%A0%20del%2021%20novembre";
+  "https://docs.google.com/forms/d/e/1FAIpQLSezGRt3kyGV59RysM-DZJpe1GgSwuuD2RiJVbgO4NIHLEKmzQ/viewform";
 
 const VOCI = [
   {
