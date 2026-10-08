@@ -159,31 +159,3 @@ export function courseJsonLd(
       : {}),
   }));
 }
-
-// ── Article ─────────────────────────────────────────
-export function articleJsonLd(article: {
-  title: string;
-  description: string;
-  url: string;
-  datePublished: string;
-  image?: string;
-}) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: article.title,
-    description: article.description,
-    url: article.url,
-    datePublished: article.datePublished,
-    author: {
-      "@type": "Organization",
-      name: SITE_NAME,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
-    },
-    ...(article.image ? { image: article.image } : {}),
-  };
-}

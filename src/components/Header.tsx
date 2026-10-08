@@ -3,12 +3,20 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS, WHATSAPP_URL } from "@/lib/constants";
+
+// Stato attivo solo per la linea Emergenza Futuro (colori terracotta del suo
+// brand): le altre voci restano com'erano.
+const LINEA_FUTURO = "/futuro";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const isFuturo = (href: string) =>
+    href === LINEA_FUTURO && (pathname === href || pathname?.startsWith(`${href}/`));
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -47,9 +55,18 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="px-3.5 py-2.5 rounded-full text-sm font-bold text-primary hover:bg-accent/12 hover:text-teal-deep transition-colors"
+              aria-current={isFuturo(link.href) ? "page" : undefined}
+              className={`px-3.5 py-2.5 rounded-full text-sm font-bold whitespace-nowrap transition-colors ${
+                isFuturo(link.href)
+                  ? "text-[#804B2C] hover:bg-[#F1E5DA]"
+                  : "text-primary hover:bg-accent/12 hover:text-teal-deep"
+              }`}
             >
-              {link.label}
+              {isFuturo(link.href) ? (
+                <span className="py-1.5 border-b-2 border-[#B0714A]">{link.label}</span>
+              ) : (
+                link.label
+              )}
             </Link>
           ))}
           <a
@@ -82,7 +99,10 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="py-3 text-lg font-bold text-primary"
+                aria-current={isFuturo(link.href) ? "page" : undefined}
+                className={`py-3 text-lg font-bold ${
+                  isFuturo(link.href) ? "text-[#804B2C]" : "text-primary"
+                }`}
               >
                 {link.label}
               </Link>

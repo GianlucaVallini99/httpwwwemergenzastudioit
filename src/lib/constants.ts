@@ -26,10 +26,8 @@ export const WHATSAPP_URL = `https://wa.me/${PHONE_INTL.replace("+", "")}?text=$
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Servizi", href: "/servizi" },
-  { label: "Materie", href: "/materie" },
   { label: "Corsi", href: "/corsi" },
-  { label: "Chi Siamo", href: "/chi-siamo" },
-  { label: "Blog", href: "/blog" },
+  { label: "Emergenza Futuro", href: "/futuro" },
   { label: "Contatti", href: "/contatti" },
 ];
 

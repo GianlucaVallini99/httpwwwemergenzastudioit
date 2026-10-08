@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Emergenza Studio//Emergenza Futuro//IT
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:emergenza-universita-2026@emergenza.studio
+DTSTAMP:20261007T000000Z
+DTSTART:20261121T150000Z
+DTEND:20261121T180000Z
+SUMMARY:Emergenza Università · Emergenza Futuro
+LOCATION:Via Francesco Barbiero 84g\, Mogliano Veneto (TV)
+DESCRIPTION:Info: 353 401 7905
+URL:https://www.emergenza.studio/futuro/
+END:VEVENT
+END:VCALENDAR

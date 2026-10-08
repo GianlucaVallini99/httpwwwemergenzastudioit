@@ -152,6 +152,46 @@ section > .container-custom { position: relative; z-index: 1; }
 .reveal.d3 { transition-delay: .24s; }
 .reveal.d4 { transition-delay: .32s; }
 
+/* ─── Entrata al caricamento (hero) ────────────────────────────
+   Per gli elementi già visibili all'apertura: .reveal non scatta perché
+   non c'è scroll, quindi usiamo un'animazione con ritardo a scalare. */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pop-in {
+  from { opacity: 0; transform: scale(.86) rotate(-4deg); }
+  to   { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+.rise-in { animation: rise-in .9s cubic-bezier(.2,.8,.2,1) both; }
+.pop-in  { animation: pop-in 1.1s cubic-bezier(.2,.8,.2,1) both; }
+.rise-in.r1, .pop-in.r1 { animation-delay: .1s; }
+.rise-in.r2, .pop-in.r2 { animation-delay: .22s; }
+.rise-in.r3, .pop-in.r3 { animation-delay: .34s; }
+.rise-in.r4, .pop-in.r4 { animation-delay: .46s; }
+.rise-in.r5, .pop-in.r5 { animation-delay: .58s; }
+
+/* Evidenziatore che si "disegna" sotto la parola d'accento del titolo */
+@keyframes draw-x {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.draw-x { transform-origin: left center; animation: draw-x .9s cubic-bezier(.65,0,.35,1) .75s both; }
+
+/* Freccia dei bottoni che avanza al passaggio del mouse */
+.nudge-arrow { display: inline-block; transition: transform .25s ease; }
+:hover > .nudge-arrow { transform: translateX(4px); }
+
+/* Chi ha chiesto meno movimento al sistema vede tutto subito, fermo */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal, .reveal.in { opacity: 1; transform: none; transition: none; }
+  .rise-in, .pop-in, .draw-x,
+  .animate-floaty, .b-drift-1, .b-drift-2, .b-drift-3,
+  .pulse-dot, .pulse-whatsapp { animation: none; }
+  .nudge-arrow { transition: none; }
+}
+
 /* ─── Corsi conclusi ─────────────────────────────────────────── */
 /* Restano consultabili ma in sordina, così non competono con i corsi
    attivi. Serve una classe dedicata: le utility opacity-* di Tailwind

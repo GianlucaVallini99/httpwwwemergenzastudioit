@@ -24,7 +24,7 @@ export default function CtaBand() {
             rel="noopener noreferrer"
             className="relative z-10 inline-flex items-center gap-2.5 rounded-full px-7 py-3.5 bg-secondary text-secondary-foreground font-extrabold shadow-[0_14px_28px_-14px_rgba(0,0,0,0.5)] hover:-translate-y-0.5 transition-transform whitespace-nowrap"
           >
-            Scrivici su WhatsApp <span aria-hidden>→</span>
+            Scrivici su WhatsApp <span aria-hidden className="nudge-arrow">→</span>
           </a>
         </div>
       </div>

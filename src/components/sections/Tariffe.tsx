@@ -30,7 +30,7 @@ export default function Tariffe() {
               href="/contatti"
               className="inline-flex items-center gap-2.5 rounded-full px-7 py-3.5 bg-primary text-primary-foreground font-extrabold shadow-[0_14px_28px_-14px_rgba(21,50,79,0.6)] hover:-translate-y-0.5 transition-transform"
             >
-              Richiedi un preventivo <span aria-hidden>→</span>
+              Richiedi un preventivo <span aria-hidden className="nudge-arrow">→</span>
             </Link>
           </div>
 

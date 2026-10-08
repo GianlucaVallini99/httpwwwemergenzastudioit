@@ -51,8 +51,12 @@ export default function Detrazione() {
               </span>
             </div>
             <div className="grid gap-4">
-              {PUNTI.map((p) => (
-                <div key={p.title} className="flex items-start gap-4 bg-white/10 backdrop-blur rounded-2xl p-5">
+              {PUNTI.map((p, i) => (
+                <div
+                  key={p.title}
+                  className="flex items-start gap-4 bg-white/10 backdrop-blur rounded-2xl p-5 reveal"
+                  style={{ transitionDelay: `${150 + i * 110}ms` }}
+                >
                   <div className="w-11 h-11 rounded-xl bg-accent/30 text-primary-foreground grid place-items-center shrink-0">
                     <p.Icon className="w-5 h-5" />
                   </div>

@@ -12,6 +12,25 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Pagina Chi Siamo nascosta finché non viene rifatta: il sorgente è in
+      // src/app/_chi-siamo (cartella privata, non genera route). Redirect
+      // temporaneo, così quando torna online i browser non lo hanno in cache.
+      {
+        source: "/chi-siamo",
+        destination: "/#chi-siamo",
+        permanent: false,
+      },
+      // Blog e pagine Materie rimossi a ottobre 2026
+      {
+        source: "/materie/:path*",
+        destination: "/servizi",
+        permanent: true,
+      },
+      {
+        source: "/blog/:path*",
+        destination: "/",
+        permanent: true,
+      },
       {
         source: "/corsi-serali",
         destination: "/corsi",

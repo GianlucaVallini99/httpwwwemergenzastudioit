@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { WHATSAPP_URL } from "@/lib/constants";
 import { HeroBlobs } from "@/components/Blobs";
+import CountUp from "@/components/CountUp";
 
 export default function Hero() {
   return (
@@ -10,34 +11,34 @@ export default function Hero() {
       <div className="container-custom relative z-10">
         <div className="grid gap-10 md:gap-16 md:grid-cols-[1.15fr_0.85fr] items-center">
           <div>
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-accent/12 text-teal-deep rounded-full text-[13px] font-extrabold tracking-wide mb-7 reveal in">
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-accent/12 text-teal-deep rounded-full text-[13px] font-extrabold tracking-wide mb-7 rise-in">
               <span className="w-2 h-2 rounded-full bg-accent pulse-dot" />
               Ripetizioni a Mogliano Veneto
             </span>
-            <h1 className="text-[clamp(44px,6.2vw,84px)] leading-[0.95] mb-6 reveal in d1">
+            <h1 className="text-[clamp(44px,6.2vw,84px)] leading-[0.95] mb-6 rise-in r1">
               Ripetizioni{" "}
               <em className="not-italic text-secondary relative inline-block">
                 per ogni
                 <span
-                  className="absolute -left-[2%] -right-[2%] bottom-1 h-3.5 rounded-full -z-10"
+                  className="absolute -left-[2%] -right-[2%] bottom-1 h-3.5 rounded-full -z-10 draw-x"
                   style={{ background: "rgba(45, 138, 138, .22)" }}
                 />
               </em>{" "}
               materia.
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-xl mb-9 reveal in d2">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-xl mb-9 rise-in r2">
               Da Emergenza Studio diamo una mano agli studenti a migliorare i propri voti
               e a crearsi un metodo di studio duraturo nel tempo. Lezioni individuali,
               di gruppo e corsi di potenziamento.
             </p>
-            <div className="flex flex-wrap gap-3.5 mb-9 reveal in d3">
+            <div className="flex flex-wrap gap-3.5 mb-9 rise-in r3">
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2.5 rounded-full px-7 py-3.5 bg-primary text-primary-foreground font-extrabold shadow-[0_14px_28px_-14px_rgba(21,50,79,0.6)] hover:-translate-y-0.5 transition-transform"
               >
-                Prenota una lezione <span aria-hidden>→</span>
+                Prenota una lezione <span aria-hidden className="nudge-arrow">→</span>
               </a>
               <Link
                 href="/corsi"
@@ -46,22 +47,22 @@ export default function Hero() {
                 Scopri i corsi
               </Link>
             </div>
-            <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm text-muted-foreground font-semibold reveal in d4">
+            <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm text-muted-foreground font-semibold rise-in r4">
               <div>
-                <strong className="block text-2xl text-primary font-extrabold">100+</strong>
+                <strong className="block text-2xl text-primary font-extrabold"><CountUp value="100+" /></strong>
                 studenti aiutati
               </div>
               <div>
-                <strong className="block text-2xl text-primary font-extrabold">15+</strong>
+                <strong className="block text-2xl text-primary font-extrabold"><CountUp value="15+" /></strong>
                 materie coperte
               </div>
               <div>
-                <strong className="block text-2xl text-primary font-extrabold">4.9★</strong>
+                <strong className="block text-2xl text-primary font-extrabold"><CountUp value="4.9★" /></strong>
                 recensioni Google
               </div>
             </div>
           </div>
-          <div className="relative aspect-square w-full max-w-[154px] sm:max-w-[210px] md:max-w-[322px] mx-auto md:ml-auto reveal in d2">
+          <div className="relative aspect-square w-full max-w-[154px] sm:max-w-[210px] md:max-w-[322px] mx-auto md:ml-auto pop-in r2">
             <Image
               src="/logo-circle.png"
               alt="Logo Emergenza Studio"
