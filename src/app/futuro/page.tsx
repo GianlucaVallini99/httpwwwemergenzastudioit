@@ -109,8 +109,13 @@ export default function FuturoPage() {
           </h1>
           <p className={`${styles.lead} rise-in r2`}>
             Emergenza Futuro è l&apos;area dedicata alle scelte: quale università, quale
-            percorso, quale lavoro. Ti aiutiamo a guardare le opzioni con calma e a
-            scegliere con una bussola, non a caso.
+            percorso, quale lavoro. Ti aiutiamo a guardare le opzioni con calma e a fare
+            la scelta migliore per il tuo{" "}
+            <em className={styles.leadAccent}>
+              futuro
+              <span aria-hidden className={`${styles.highlight} draw-x`} />
+            </em>
+            .
           </p>
           <div className={styles.voci}>
             {VOCI.map((v, i) => (

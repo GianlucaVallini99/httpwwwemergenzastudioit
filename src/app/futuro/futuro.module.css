@@ -88,6 +88,15 @@
   text-wrap: pretty;
 }
 
+/* "futuro" nel testo introduttivo: stesso accento terracotta dei titoli */
+.leadAccent {
+  position: relative;
+  display: inline-block;
+  font-style: normal;
+  font-weight: 800;
+  color: var(--em-futuro-ink);
+}
+
 .voci {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
