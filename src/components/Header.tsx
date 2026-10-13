@@ -15,8 +15,9 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const isFuturo = (href: string) =>
-    href === LINEA_FUTURO && (pathname === href || pathname?.startsWith(`${href}/`));
+  // Sulle pagine della linea Futuro anche il logo diventa verde
+  const inFuturo = pathname === LINEA_FUTURO || !!pathname?.startsWith(`${LINEA_FUTURO}/`);
+  const isFuturo = (href: string) => href === LINEA_FUTURO && inFuturo;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -37,14 +38,18 @@ export default function Header() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="/logo-mark.png"
+            src={inFuturo ? "/logo-mark-futuro.png" : "/logo-mark.png"}
             alt="Emergenza Studio"
             width={42}
             height={42}
-            className="rounded-full shadow-[0_8px_18px_-8px_rgba(40,74,110,0.55)]"
+            className={`rounded-full ${
+              inFuturo
+                ? "shadow-[0_8px_18px_-8px_rgba(0,84,43,0.55)]"
+                : "shadow-[0_8px_18px_-8px_rgba(40,74,110,0.55)]"
+            }`}
             priority
           />
-          <span className="font-extrabold text-lg tracking-tight text-primary hidden sm:inline">
+          <span className={`font-extrabold text-lg tracking-tight hidden sm:inline ${inFuturo ? "text-[#007A3F]" : "text-primary"}`}>
             Emergenza Studio
           </span>
         </Link>
@@ -73,7 +78,11 @@ export default function Header() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-2 inline-flex items-center gap-2 rounded-full px-6 py-2.5 bg-primary text-primary-foreground text-sm font-extrabold shadow-[0_14px_28px_-14px_rgba(21,50,79,0.6)] hover:-translate-y-0.5 transition-transform"
+            className={`ml-2 inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-extrabold hover:-translate-y-0.5 transition-transform ${
+              inFuturo
+                ? "bg-[#007A3F] text-white shadow-[0_14px_28px_-14px_rgba(0,84,43,0.6)]"
+                : "bg-primary text-primary-foreground shadow-[0_14px_28px_-14px_rgba(21,50,79,0.6)]"
+            }`}
           >
             Prenota <span aria-hidden>→</span>
           </a>
@@ -82,7 +91,7 @@ export default function Header() {
         {/* Mobile hamburger */}
         <button
           onClick={() => setOpen(!open)}
-          className="lg:hidden p-2 text-primary"
+          className={`lg:hidden p-2 ${inFuturo ? "text-[#007A3F]" : "text-primary"}`}
           aria-label={open ? "Chiudi menu" : "Apri menu"}
           aria-expanded={open}
         >
@@ -112,7 +121,9 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="mt-2 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 bg-primary text-primary-foreground text-base font-extrabold"
+              className={`mt-2 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-base font-extrabold ${
+                inFuturo ? "bg-[#007A3F] text-white" : "bg-primary text-primary-foreground"
+              }`}
             >
               Prenota una lezione
             </a>
