@@ -1,16 +1,31 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import {
   ADDRESS_FULL, PHONE, PHONE_INTL, EMAIL, PIVA, NAV_LINKS,
 } from "@/lib/constants";
 
 export default function Footer() {
+  // Sulla linea Emergenza Futuro il fondo pagina passa al verde, come l'header
+  const pathname = usePathname();
+  const inFuturo = pathname === "/futuro" || !!pathname?.startsWith("/futuro/");
+
   return (
-    <footer className="bg-navy-deep text-white/70 pt-16 pb-9 text-sm">
+    <footer
+      className={`${inFuturo ? "bg-[#00401F]" : "bg-navy-deep"} text-white/70 pt-16 pb-9 text-sm`}
+    >
       <div className="container-custom grid gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
         <div>
           <Link href="/" className="flex items-center gap-3 mb-3 text-white">
-            <Image src="/logo-mark.png" alt="Emergenza Studio" width={38} height={38} className="rounded-full" />
+            <Image
+              src={inFuturo ? "/logo-mark-futuro.png" : "/logo-mark.png"}
+              alt="Emergenza Studio"
+              width={38}
+              height={38}
+              className="rounded-full"
+            />
             <span className="font-extrabold text-base">Emergenza Studio</span>
           </Link>
           <p className="max-w-sm text-white/65">
