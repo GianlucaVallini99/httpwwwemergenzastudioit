@@ -19,7 +19,7 @@ const PRENOTA_URL =
 const VOCI = [
   {
     titolo: "Orientamento",
-    testo: "Superiori e università.",
+    testo: "Dalle medie alle superiori e dalle superiori all'università.",
   },
   {
     titolo: "Mentorship",
