@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS, WHATSAPP_URL } from "@/lib/constants";
 
-// Stato attivo solo per la linea Emergenza Futuro (colori terracotta del suo
+// Stato attivo solo per la linea Emergenza Futuro (colori verdi del suo
 // brand): le altre voci restano com'erano.
 const LINEA_FUTURO = "/futuro";
 
@@ -58,12 +58,12 @@ export default function Header() {
               aria-current={isFuturo(link.href) ? "page" : undefined}
               className={`px-3.5 py-2.5 rounded-full text-sm font-bold whitespace-nowrap transition-colors ${
                 isFuturo(link.href)
-                  ? "text-[#804B2C] hover:bg-[#F1E5DA]"
+                  ? "text-[#007A3F] hover:bg-[#E0F0E7]"
                   : "text-primary hover:bg-accent/12 hover:text-teal-deep"
               }`}
             >
               {isFuturo(link.href) ? (
-                <span className="py-1.5 border-b-2 border-[#B0714A]">{link.label}</span>
+                <span className="py-1.5 border-b-2 border-[#007A3F]">{link.label}</span>
               ) : (
                 link.label
               )}
@@ -101,7 +101,7 @@ export default function Header() {
                 onClick={() => setOpen(false)}
                 aria-current={isFuturo(link.href) ? "page" : undefined}
                 className={`py-3 text-lg font-bold ${
-                  isFuturo(link.href) ? "text-[#804B2C]" : "text-primary"
+                  isFuturo(link.href) ? "text-[#007A3F]" : "text-primary"
                 }`}
               >
                 {link.label}

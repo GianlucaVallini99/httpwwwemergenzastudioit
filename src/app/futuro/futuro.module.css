@@ -3,17 +3,18 @@
    con la parola d'accento dei titoli colorata e non in corsivo, come nella
    home. */
 .page {
-  --em-carta: #f3eee4;
-  --em-panna: #fbf8f1;
-  --em-sabbia: #e7e0d3;
-  --em-greige: #cdc4b4;
-  --em-fango: #5c5546;
-  --em-inchiostro: #2a2620;
-  --em-futuro: #b0714a;
-  --em-futuro-hover: #c4865f;
-  --em-futuro-tint: #f1e5da;
-  --em-futuro-ink: #804b2c;
-  --em-futuro-on-dark: #d9a27e;
+  /* Palette verde costruita attorno a #007a3f */
+  --em-carta: #f2f5f1;          /* fondo pagina */
+  --em-panna: #fafcf9;          /* testo chiaro sul banner */
+  --em-sabbia: #dde7e0;
+  --em-greige: #b9c9be;
+  --em-fango: #4d5a51;          /* testo corpo */
+  --em-inchiostro: #13261c;     /* titoli e fondo del banner */
+  --em-futuro: #007a3f;         /* verde principale */
+  --em-futuro-hover: #008f4a;
+  --em-futuro-tint: #e0f0e7;
+  --em-futuro-ink: #007a3f;     /* accento sui fondi chiari (contrasto AA) */
+  --em-futuro-on-dark: #6fd39f; /* accento sul fondo scuro del banner */
 
   /* Sopra lo sfondo atmosferico fisso del body */
   position: relative;
@@ -88,7 +89,7 @@
   text-wrap: pretty;
 }
 
-/* "futuro" nel testo introduttivo: stesso accento terracotta dei titoli */
+/* "futuro" nel testo introduttivo: stesso accento verde dei titoli */
 .leadAccent {
   position: relative;
   display: inline-block;
@@ -266,14 +267,19 @@
   transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
 }
 
+/* In un inline-flex lo spazio prima della freccia sparisce: lo rimettiamo */
+.btn :global(.nudge-arrow) {
+  margin-left: 0.4em;
+}
+
 .btnPrimary {
   background: var(--em-futuro);
-  color: var(--em-inchiostro);
+  color: #fff;
 }
 
 .btnPrimary:hover {
   background: var(--em-futuro-hover);
-  color: var(--em-inchiostro);
+  color: #fff;
   transform: translateY(-1px);
 }
 
@@ -288,7 +294,7 @@
 }
 
 /* ─── Animazioni ──────────────────────────────────────── */
-/* Evidenziatore terracotta sotto "scegliere", come quello della home */
+/* Evidenziatore verde sotto "scegliere", come quello della home */
 .highlight {
   position: absolute;
   left: -2%;
@@ -296,11 +302,11 @@
   bottom: 0.08em;
   height: 0.22em;
   border-radius: 999px;
-  background: rgba(176, 113, 74, 0.22);
+  background: rgba(0, 122, 63, 0.18);
   z-index: -1;
 }
 
-/* Trattino terracotta sopra ogni voce che si allunga quando entra */
+/* Trattino verde sopra ogni voce che si allunga quando entra */
 .voce::before {
   content: "";
   width: 32px;
@@ -330,8 +336,8 @@
   animation: live-pulse 2s ease-in-out infinite;
 }
 @keyframes live-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(217, 162, 126, 0.55); }
-  50%      { box-shadow: 0 0 0 7px rgba(217, 162, 126, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(111, 211, 159, 0.55); }
+  50%      { box-shadow: 0 0 0 7px rgba(111, 211, 159, 0); }
 }
 
 /* Cifre del countdown che scendono al loro posto quando cambiano */
