@@ -6,7 +6,7 @@ import Countdown from "./Countdown";
 import styles from "./futuro.module.css";
 
 const EVENTO = {
-  nome: "Emergenza Università",
+  nome: "Scegliere il futuro",
   inizio: "2026-11-21T16:00:00+01:00",
   fine: "2026-11-21T19:00:00+01:00",
   luogo: "Via Francesco Barbiero 84g, Mogliano Veneto (TV)",
@@ -34,12 +34,12 @@ const VOCI = [
 export const metadata: Metadata = {
   title: "Orientamento universitario a Mogliano Veneto | Emergenza Futuro",
   description:
-    "Orientamento universitario e mentorship a Mogliano Veneto. Sabato 21 novembre alle 16:00 l'evento Emergenza Università: facoltà, test di ingresso e scadenze.",
+    "Orientamento universitario e mentorship a Mogliano Veneto. Sabato 21 novembre alle 16:00 l'evento «Scegliere il futuro»: facoltà, test di ingresso e scadenze.",
   alternates: { canonical: `${SITE_URL}/futuro/` },
   openGraph: {
     title: "Emergenza Futuro · Orientamento universitario a Mogliano Veneto",
     description:
-      "Sabato 21 novembre alle 16:00: Emergenza Università, un pomeriggio per orientarti tra facoltà, test di ingresso e scadenze.",
+      "Sabato 21 novembre alle 16:00: «Scegliere il futuro», un pomeriggio per orientarti tra facoltà, test di ingresso e scadenze.",
     url: `${SITE_URL}/futuro/`,
   },
 };
@@ -138,7 +138,7 @@ export default function FuturoPage() {
             <div className={styles.bannerTitle}>
               <span className={styles.overline}>Prossimo evento · Emergenza Futuro</span>
               <h2 className={`${styles.serif} ${styles.h2}`}>
-                Emergenza <em>Università</em>
+                Scegliere il <em>futuro</em>
               </h2>
               <p className={styles.bannerSub}>
                 Un pomeriggio per orientarti tra facoltà, test di ingresso e scadenze.

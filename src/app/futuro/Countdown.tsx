@@ -27,7 +27,7 @@ export default function Countdown({ target }: { target: string }) {
     return (
       <div className={styles.countdown}>
         <span className={`${styles.overline} ${styles.overlineMuted}`}>
-          Emergenza Università
+          Scegliere il futuro
         </span>
         <div className={`${styles.serif} ${styles.done}`}>
           {ended

@@ -127,7 +127,7 @@
   color: var(--em-fango);
 }
 
-/* ─── Banner Emergenza Università ──────────────────────── */
+/* ─── Banner evento «Scegliere il futuro» ──────────────────────── */
 .bannerSection {
   padding: 0 clamp(20px, 4vw, 32px) clamp(80px, 9vw, 120px);
   scroll-margin-top: 90px;
