@@ -12,7 +12,7 @@ import { InstagramIcon, FacebookIcon } from "@/components/SocialIcons";
 export const metadata: Metadata = {
   title: "Contatti | Emergenza Studio - Via Barbiero 84g, Mogliano Veneto",
   description:
-    "Contatta Emergenza Studio per prenotare una lezione di prova. WhatsApp: 340 510 6467. Via Francesco Barbiero 84g, Mogliano Veneto (TV).",
+    `Contatta Emergenza Studio per prenotare una lezione di prova. WhatsApp: ${PHONE}. Via Francesco Barbiero 84g, Mogliano Veneto (TV).`,
   alternates: { canonical: `${SITE_URL}/contatti/` },
 };
 
