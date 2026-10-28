@@ -26,6 +26,43 @@ const bottone =
 const chiudi =
   "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-primary hover:bg-muted focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent/40";
 
+/**
+ * Se lo spazio degli elementi fissi è più grande della parte visibile dello schermo (contenuto più
+ * largo dello schermo, o zoom), aggancia l'elemento alla parte visibile (visualViewport): «basso» per
+ * il banner, «pieno» per il pannello delle preferenze. Restituisce la funzione di pulizia.
+ */
+function agganciaAllaParteVisibile(el: HTMLElement, modo: "basso" | "pieno"): () => void {
+  const vv = window.visualViewport;
+  if (!vv) return () => {};
+  const chiavi = ["left", "right", "top", "bottom", "width", "height"] as const;
+  const aggiorna = () => {
+    const allargata = window.innerWidth > vv.width + 1 || window.innerHeight > vv.height + 1;
+    if (!allargata) {
+      for (const k of chiavi) el.style[k] = "";
+      return;
+    }
+    el.style.right = "auto";
+    el.style.bottom = "auto";
+    if (modo === "pieno") {
+      el.style.left = `${vv.offsetLeft}px`;
+      el.style.top = `${vv.offsetTop}px`;
+      el.style.width = `${vv.width}px`;
+      el.style.height = `${vv.height}px`;
+      return;
+    }
+    el.style.width = `${Math.min(vv.width - 24, 440)}px`;
+    el.style.left = `${vv.offsetLeft + 12}px`;
+    el.style.top = `${vv.offsetTop + vv.height - el.offsetHeight - 12}px`;
+  };
+  aggiorna();
+  vv.addEventListener("resize", aggiorna);
+  vv.addEventListener("scroll", aggiorna);
+  return () => {
+    vv.removeEventListener("resize", aggiorna);
+    vv.removeEventListener("scroll", aggiorna);
+  };
+}
+
 export default function CookieConsent() {
   // undefined = non ancora letto (lato server e primo render): niente banner.
   const [consenso, setConsenso] = useState<Consenso | null | undefined>(undefined);
@@ -73,6 +110,14 @@ export default function CookieConsent() {
       ro.disconnect();
       document.documentElement.style.removeProperty("--altezza-banner-cookie");
     };
+  }, [mostraBanner]);
+
+  // Su alcune pagine (es. la home sui telefoni) il contenuto è più largo dello schermo e Chrome
+  // allarga lo spazio degli elementi fissi oltre la parte visibile: vedi agganciaAllaParteVisibile.
+  useEffect(() => {
+    const el = bannerRef.current;
+    if (!mostraBanner || !el) return;
+    return agganciaAllaParteVisibile(el, "basso");
   }, [mostraBanner]);
 
   const scegli = useCallback((statistiche: boolean) => {
@@ -156,6 +201,9 @@ function PannelloPreferenze({
 }) {
   const [statistiche, setStatistiche] = useState(statisticheIniziali);
   const ref = useRef<HTMLDivElement>(null);
+  const fondo = useRef<HTMLDivElement>(null);
+
+  useEffect(() => (fondo.current ? agganciaAllaParteVisibile(fondo.current, "pieno") : undefined), []);
 
   useEffect(() => {
     const el = ref.current;
@@ -184,7 +232,7 @@ function PannelloPreferenze({
   }, [onChiudi]);
 
   return (
-    <div className="fixed inset-0 z-[70] flex items-end justify-center bg-navy-deep/50 p-0 sm:items-center sm:p-6" onClick={onChiudi}>
+    <div ref={fondo} className="fixed inset-0 z-[70] flex items-end justify-center bg-navy-deep/50 p-0 sm:items-center sm:p-6" onClick={onChiudi}>
       <div
         ref={ref}
         role="dialog"
@@ -192,7 +240,7 @@ function PannelloPreferenze({
         aria-labelledby="preferenze-titolo"
         data-testid="preferenze-cookie"
         onClick={(e) => e.stopPropagation()}
-        className="max-h-[88vh] w-full overflow-y-auto rounded-t-3xl border border-border bg-card p-5 text-card-foreground shadow-[0_30px_60px_-20px_rgba(21,50,79,0.45)] sm:max-w-lg sm:rounded-3xl sm:p-7"
+        className="max-h-[92%] w-full overflow-y-auto rounded-t-3xl border border-border bg-card p-5 text-card-foreground shadow-[0_30px_60px_-20px_rgba(21,50,79,0.45)] sm:max-w-lg sm:rounded-3xl sm:p-7"
       >
         <div className="flex items-start gap-2">
           <h2 id="preferenze-titolo" tabIndex={-1} className="flex-1 pt-2 text-xl outline-none">
