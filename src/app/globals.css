@@ -68,6 +68,16 @@ body {
   position: relative;
 }
 
+/* Sul telefono le decorazioni che escono dal bordo (cerchi della home) allargavano la pagina:
+   Chrome allargava anche lo spazio degli elementi fissi e pulsante WhatsApp, menu e banner dei
+   cookie finivano in parte fuori dallo schermo. clip taglia senza creare una zona di scorrimento. */
+@supports (overflow-x: clip) {
+  html,
+  body {
+    overflow-x: clip;
+  }
+}
+
 /* Continuous atmospheric background that flows between sections */
 body::before {
   content: "";

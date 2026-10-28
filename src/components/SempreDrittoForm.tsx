@@ -10,6 +10,7 @@ import {
   SEMPRE_DRITTO,
 } from "@/lib/corsi-data";
 import { CheckCircle, Loader2, Send } from "lucide-react";
+import { tracciaLead } from "@/lib/analytics";
 
 const inputCls =
   "w-full rounded-2xl border border-border bg-muted/60 px-4 py-3.5 text-base font-semibold text-foreground placeholder:font-medium placeholder:text-muted-foreground/60 transition-all duration-300 focus:outline-none focus:bg-white focus:border-accent/40 focus:ring-4 focus:ring-accent/15";
@@ -103,6 +104,8 @@ export default function SempreDrittoForm({
         throw new Error(body?.error || "Invio non riuscito");
       }
       setStatus("sent");
+      // Solo il nome del modulo, mai i dati inseriti (e solo con il consenso ai cookie statistici)
+      tracciaLead("iscrizione-sempre-dritto", { corso: corsoSlug });
     } catch (err) {
       setStatus("error");
       setError(err instanceof Error ? err.message : "Invio non riuscito");
@@ -242,7 +245,13 @@ export default function SempreDrittoForm({
 
       {status === "error" && (
         <a
-          href={whatsappFallbackUrl()}
+          // L'href resta senza testo: il messaggio contiene i dati del modulo e
+          // non deve finire nelle statistiche (clic in uscita di GA4).
+          href={`https://wa.me/${PHONE_INTL.replace("+", "")}`}
+          onClick={(e) => {
+            e.preventDefault();
+            window.open(whatsappFallbackUrl(), "_blank", "noopener,noreferrer");
+          }}
           target="_blank"
           rel="noopener noreferrer"
           className="w-full inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 border-2 border-accent text-accent font-bold transition-all duration-300 hover:bg-accent/10 active:scale-[0.98]"

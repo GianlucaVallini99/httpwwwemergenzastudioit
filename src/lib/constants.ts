@@ -50,3 +50,7 @@ export const PRICING = [
 // Detrazione fiscale lezioni (19% fino al massimale annuo per studente)
 export const DETRAZIONE_ALIQUOTA = 0.19;
 export const DETRAZIONE_MASSIMALE = 800;
+
+// Google Analytics 4 (proprietà «Emergenza Studio»): si carica solo dopo il
+// consenso ai cookie statistici, vedi src/lib/analytics.ts e /cookie-policy.
+export const GA4_MEASUREMENT_ID = "G-FK7LJF7LXH";

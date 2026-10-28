@@ -22,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     { url: "/futuro", priority: 0.8, changeFrequency: "weekly" as const },
     { url: "/contatti", priority: 0.6, changeFrequency: "monthly" as const },
+    { url: "/cookie-policy", priority: 0.2, changeFrequency: "yearly" as const },
   ];
 
   return pages.map((p) => {

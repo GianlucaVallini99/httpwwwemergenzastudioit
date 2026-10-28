@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import CookieConsent from "@/components/CookieConsent";
 import { localBusinessJsonLd } from "@/lib/structured-data";
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
 
@@ -62,6 +63,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <WhatsAppButton />
+        <CookieConsent />
       </body>
     </html>
   );

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import {
   ADDRESS_FULL, PHONE, PHONE_INTL, EMAIL, PIVA, NAV_LINKS,
 } from "@/lib/constants";
+import { EVENTO_APRI_PREFERENZE } from "@/lib/analytics";
 
 export default function Footer() {
   // Sulla linea Emergenza Futuro il fondo pagina passa al verde, come l'header
@@ -59,6 +60,18 @@ export default function Footer() {
       </div>
       <div className="container-custom mt-12 pt-6 border-t border-white/10 text-center text-xs text-white/50">
         © {new Date().getFullYear()} Emergenza Studio · Tutti i diritti riservati
+        <span className="mx-2" aria-hidden>·</span>
+        <Link href="/cookie-policy" className="underline underline-offset-2 hover:text-white">
+          Cookie policy
+        </Link>
+        <span className="mx-2" aria-hidden>·</span>
+        <button
+          type="button"
+          onClick={() => window.dispatchEvent(new Event(EVENTO_APRI_PREFERENZE))}
+          className="underline underline-offset-2 hover:text-white"
+        >
+          Preferenze cookie
+        </button>
       </div>
     </footer>
   );
