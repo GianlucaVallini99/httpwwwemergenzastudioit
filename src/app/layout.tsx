@@ -47,8 +47,6 @@ export default function RootLayout({
     <html lang="it">
       <head>
         <link rel="alternate" hrefLang="it" href={`${SITE_URL}/`} />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/favicon.png" type="image/png" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <script
           type="application/ld+json"
