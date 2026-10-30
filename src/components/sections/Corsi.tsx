@@ -3,26 +3,13 @@ import { SectionBlobs } from "@/components/Blobs";
 import {
   CORSO_CONCLUSO_CLS,
   PIEDE_GIUSTO_CHIUSURA,
-  SEMPRE_DRITTO,
 } from "@/lib/corsi-data";
 
 const CORSI = [
   {
-    tag: `Si parte il ${SEMPRE_DRITTO.inizio}`,
-    num: "01",
-    title: "Sempre Dritto",
-    lede: "Il corso di matematica che ti accompagna per tutto l'anno: due ore a settimana in piccolo gruppo, da ottobre a maggio.",
-    bullets: [
-      "Un gruppo per ogni classe, dalla prima alla quinta",
-      `${SEMPRE_DRITTO.oreSettimana} ore a settimana · ${SEMPRE_DRITTO.oreTotali} ore nell'anno`,
-      `€${SEMPRE_DRITTO.prezzoOra}/h invece di €${SEMPRE_DRITTO.prezzoOraIndividuale}`,
-    ],
-    href: "/corsi/sempre-dritto",
-  },
-  {
     tag: PIEDE_GIUSTO_CHIUSURA.badge,
     concluso: true,
-    num: "02",
+    num: "01",
     title: "Piede Giusto",
     lede: "Il corso estivo di matematica e fisica per iniziare l'anno al meglio: un percorso per ogni passaggio di classe.",
     bullets: ["5 percorsi: dalle medie alla quinta", "Matematica e Fisica separate", `Si riparte a ${PIEDE_GIUSTO_CHIUSURA.riapertura}`],
@@ -31,7 +18,7 @@ const CORSI = [
   {
     tag: "In arrivo",
     inArrivo: true,
-    num: "03",
+    num: "02",
     title: "Preparazione test universitari",
     lede: "I percorsi per il semestre filtro di Medicina, le Professioni Sanitarie e i TOLC di Economia e Ingegneria.",
     bullets: ["Teoria mirata sulle materie del test", "Logica e comprensione del testo", "Simulazioni a tempo con correzione"],
@@ -52,7 +39,7 @@ export default function Corsi() {
             combinarli con le ripetizioni individuali.
           </p>
         </div>
-        <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 max-w-4xl mx-auto">
           {CORSI.map((c, i) => (
             <Link
               key={c.num}

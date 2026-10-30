@@ -6,8 +6,6 @@ import { WHATSAPP_URL } from "@/lib/constants";
 import { breadcrumbJsonLd, courseJsonLd } from "@/lib/structured-data";
 import {
   PIEDE_GIUSTO,
-  SEMPRE_DRITTO,
-  SEMPRE_DRITTO_CLASSI,
   CORSI_IN_ARRIVO,
   GRUPPO_MIN,
   GRUPPO_MAX,
@@ -15,7 +13,7 @@ import {
   PIEDE_GIUSTO_ISCRIZIONI_APERTE,
   PIEDE_GIUSTO_CHIUSURA,
 } from "@/lib/corsi-data";
-import { ArrowRight, ArrowUpRight, Clock, Euro, Users, CalendarDays, BookOpen, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Clock, Euro, Users, CalendarDays, Sparkles } from "lucide-react";
 
 const breadcrumbs = [{ label: "Corsi", href: "/corsi" }];
 
@@ -57,13 +55,6 @@ export default function CorsiPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(courseJsonLd([
-            {
-              name: `${SEMPRE_DRITTO.titolo} — Corso annuale di matematica`,
-              description: SEMPRE_DRITTO.sottotitolo,
-              price: String(SEMPRE_DRITTO.prezzoTotale),
-              startDate: SEMPRE_DRITTO.inizioISO,
-              endDate: SEMPRE_DRITTO.fineISO,
-            },
             ...PIEDE_GIUSTO.map((c) => ({
               name: c.titolo,
               description: c.sottotitolo,
@@ -95,66 +86,10 @@ export default function CorsiPage() {
 
       <section className="pb-16 md:pb-24">
         <div className="container-custom">
-          {/* ── Sempre Dritto: il corso dell'anno in corso ── */}
-          <Link
-            href="/corsi/sempre-dritto"
-            className={`group relative flex flex-col md:flex-row md:items-center gap-6 md:gap-10 rounded-[32px] p-7 sm:p-10 mb-5 overflow-hidden text-primary-foreground ${EASE} ${CARD_SHADOW} hover:-translate-y-1.5 reveal`}
-            style={{ background: "linear-gradient(115deg, #15324f 0%, #0d4a52 78%, #1d6b6b 100%)" }}
-          >
-            <span aria-hidden className="absolute -top-3 right-6 text-[96px] leading-none font-black tracking-tight select-none text-white/[0.07]">
-              01
-            </span>
-            <div className="md:flex-1">
-              <span className="inline-block bg-white/12 text-white px-3 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-wider mb-5 ring-1 ring-white/20">
-                Si parte il {SEMPRE_DRITTO.inizio} · Iscrizioni aperte
-              </span>
-              <h2 className="text-2xl sm:text-3xl mb-3 !text-white">
-                Sempre Dritto: matematica tutto l&apos;anno
-              </h2>
-              <p className="text-white/75 text-[15px] leading-relaxed max-w-xl mb-5">
-                {SEMPRE_DRITTO.oreSettimana} ore di matematica a settimana dal{" "}
-                {SEMPRE_DRITTO.inizio} all&apos;{SEMPRE_DRITTO.fine}, in gruppi da{" "}
-                {SEMPRE_DRITTO.gruppoMin} a {SEMPRE_DRITTO.gruppoMax} studenti divisi
-                per classe e per indirizzo: ti accompagniamo verifica dopo verifica,
-                a €{SEMPRE_DRITTO.prezzoOra} l&apos;ora invece di €{SEMPRE_DRITTO.prezzoOraIndividuale}.
-              </p>
-              <ul className="grid grid-cols-2 sm:grid-cols-3 gap-2 max-w-xl">
-                {SEMPRE_DRITTO_CLASSI.map((c) => (
-                  <li
-                    key={c.slug}
-                    className="rounded-2xl bg-white/10 ring-1 ring-white/10 px-3 py-2.5 text-[13px] sm:text-sm font-bold text-white text-center"
-                  >
-                    {c.classe}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="shrink-0 flex flex-col gap-4 md:items-end">
-              <div className="flex flex-wrap gap-2">
-                {[
-                  { icon: <Euro className="w-3.5 h-3.5" />, label: `€${SEMPRE_DRITTO.prezzoOra}/h · ${SEMPRE_DRITTO.rate} rate da €${SEMPRE_DRITTO.importoRata}` },
-                  { icon: <Clock className="w-3.5 h-3.5" />, label: `${SEMPRE_DRITTO.oreTotali} ore in ${SEMPRE_DRITTO.settimane} settimane` },
-                  { icon: <Users className="w-3.5 h-3.5" />, label: `Gruppi da ${SEMPRE_DRITTO.gruppoMin} a ${SEMPRE_DRITTO.gruppoMax}` },
-                  { icon: <BookOpen className="w-3.5 h-3.5" />, label: "Materiale incluso" },
-                ].map((s) => (
-                  <span key={s.label} className="inline-flex items-center gap-1.5 rounded-full bg-white/10 ring-1 ring-white/15 px-3 py-1.5 text-xs font-bold text-white">
-                    {s.icon} {s.label}
-                  </span>
-                ))}
-              </div>
-              <span className="inline-flex items-center gap-2.5 font-extrabold text-sm text-white">
-                Scopri il corso
-                <span className={`w-8 h-8 rounded-full bg-accent text-accent-foreground flex items-center justify-center ${EASE} group-hover:translate-x-1 group-hover:scale-105`}>
-                  <ArrowRight className="w-4 h-4" />
-                </span>
-              </span>
-            </div>
-          </Link>
-
           {/* ── Piede Giusto: edizione conclusa, resta consultabile ── */}
           <div className={`group relative flex flex-col bg-card rounded-[32px] p-7 sm:p-10 border border-border overflow-hidden ${EASE} ${CARD_SHADOW} hover:-translate-y-1.5 reveal d1 ${CORSO_CONCLUSO_CLS}`}>
             <span aria-hidden className="absolute -top-2 right-6 text-[96px] leading-none font-black tracking-tight select-none" style={{ color: "rgba(45,138,138,.14)" }}>
-              02
+              01
             </span>
             <span className="inline-block w-max px-3 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-wider mb-5 bg-muted text-muted-foreground border border-border">
               {PIEDE_GIUSTO_CHIUSURA.badge} · si riparte a {PIEDE_GIUSTO_CHIUSURA.riapertura}

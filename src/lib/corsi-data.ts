@@ -43,7 +43,7 @@ export const PIEDE_GIUSTO_CHIUSURA = {
   testo:
     "L'edizione 2026 si è chiusa: il Piede Giusto si tiene nelle settimane prima dell'inizio della scuola. Le pagine restano online per consultare i programmi; riapriamo le iscrizioni a giugno 2027.",
   alternativa:
-    "Adesso che la scuola è iniziata il corso attivo è Sempre Dritto: due ore di matematica a settimana, da ottobre a maggio, sugli stessi argomenti.",
+    "Durante l'anno scolastico puoi continuare con le ripetizioni individuali di matematica e fisica, in sede o online.",
   riapertura: "giugno 2027",
 };
 
@@ -216,104 +216,6 @@ export const PIEDE_GIUSTO: SottoCorso[] = [
   },
 ];
 
-// ── Sempre Dritto ───────────────────────────────────
-// Il corso annuale di matematica: parte il 12 ottobre e arriva all'ultima
-// settimana di maggio, 2 ore a settimana. Le settimane effettive sono circa 30
-// (tolte le vacanze di Natale e di Pasqua): da lì escono ore totali e prezzo.
-export const SEMPRE_DRITTO = {
-  slug: "sempre-dritto",
-  titolo: "Sempre Dritto",
-  sottotitolo:
-    "Il corso di matematica che ti accompagna per tutto l'anno: due ore a settimana in piccolo gruppo, da ottobre a maggio.",
-  materia: "Matematica",
-  inizio: "12 ottobre 2026",
-  inizioISO: "2026-10-12",
-  fine: "ultima settimana di maggio 2027",
-  fineISO: "2027-05-28",
-  oreSettimana: 2,
-  settimane: 30,
-  oreTotali: 60,
-  // €13,50 l'ora invece dei €25 della lezione individuale delle superiori.
-  prezzoOra: "13,50",
-  prezzoOraIndividuale: 25,
-  scontoPercentuale: 46,
-  prezzoTotale: 810,
-  rate: 4,
-  importoRata: "202,50",
-  gruppoMin: 3,
-  gruppoMax: 6,
-  materiale: [
-    "Dispense di teoria schematizzate, argomento per argomento",
-    "Eserciziari con soluzioni per allenarti tra una lezione e l'altra",
-    "Simulazioni di verifica sul modello di quelle della tua classe",
-  ],
-  // I punti forti del corso, mostrati come riquadri (due per riga anche sul
-  // telefono): titolo corto in evidenza e una riga di spiegazione.
-  plus: [
-    {
-      titolo: "€13,50 l'ora",
-      testo: "invece dei €25 della lezione individuale",
-    },
-    {
-      titolo: "Un gruppo per classe",
-      testo: "dalla prima alla quinta superiore",
-    },
-    {
-      titolo: "Da 3 a 6 studenti",
-      testo: "stesso indirizzo, quando i numeri lo permettono",
-    },
-    {
-      titolo: "2 ore a settimana",
-      testo: "sempre lo stesso giorno, da ottobre a maggio",
-    },
-  ],
-};
-
-// I cinque gruppi di Sempre Dritto: il programma annuale di ogni classe
-// coincide con gli argomenti di matematica del corrispondente Piede Giusto.
-export const SEMPRE_DRITTO_CLASSI = [
-  {
-    slug: "prima-superiore",
-    classe: "Prima Superiore",
-    annoScolastico: "Prima superiore",
-    sottotitolo:
-      "Il primo anno senza lacune: dai monomi alle disequazioni, con esercizi e simulazioni di verifica ogni settimana.",
-    programma: PIEDE_GIUSTO[0].materie![0].programma,
-  },
-  {
-    slug: "seconda-superiore",
-    classe: "Seconda Superiore",
-    annoScolastico: "Seconda superiore",
-    sottotitolo:
-      "Sistemi, radicali, equazioni di secondo grado e retta: un appuntamento fisso per non rincorrere mai il programma.",
-    programma: PIEDE_GIUSTO[1].materie![0].programma,
-  },
-  {
-    slug: "terza-superiore",
-    classe: "Terza Superiore",
-    annoScolastico: "Terza superiore",
-    sottotitolo:
-      "Il triennio cambia passo: geometria analitica completa e studio delle funzioni, allenati verifica dopo verifica.",
-    programma: PIEDE_GIUSTO[2].materie![0].programma,
-  },
-  {
-    slug: "quarta-superiore",
-    classe: "Quarta Superiore",
-    annoScolastico: "Quarta superiore",
-    sottotitolo:
-      "Esponenziali, logaritmi, trigonometria e probabilità: l'anno più denso, affrontato con costanza da ottobre.",
-    programma: PIEDE_GIUSTO[3].materie![0].programma,
-  },
-  {
-    slug: "quinta-superiore",
-    classe: "Quinta Superiore",
-    annoScolastico: "Quinta superiore",
-    sottotitolo:
-      "L'anno della maturità: limiti, derivate, studio di funzione e integrali, fino alla seconda prova.",
-    programma: PIEDE_GIUSTO[4].materie![0].programma,
-  },
-] as const;
-
 // ── Corsi in arrivo ─────────────────────────────────
 // Segnaposto: i percorsi di preparazione ai test universitari sono in
 // costruzione. Le card sono visibili ma non cliccabili — si raccoglie
@@ -396,17 +298,6 @@ export const CLASSI_SETTEMBRE = [
 
 // Fascia oraria preferita per le lezioni del corso.
 export const PREFERENZE_ORARIO = ["Mattina", "Pomeriggio", "Entrambi"];
-
-// Giorni selezionabili nel form di Sempre Dritto: servono per incastrare i
-// gruppi, quindi ne chiediamo almeno tre.
-export const GIORNI_SETTIMANA = [
-  "Lunedì",
-  "Martedì",
-  "Mercoledì",
-  "Giovedì",
-  "Venerdì",
-];
-export const GIORNI_PREFERITI_MIN = 3;
 
 // Opzioni comuni dei form di iscrizione
 export const INDIRIZZI_SCOLASTICI = [

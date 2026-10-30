@@ -113,8 +113,8 @@ export default function PiedeGiustoPage() {
                 testo={PIEDE_GIUSTO_CHIUSURA.testo}
                 alternativa={PIEDE_GIUSTO_CHIUSURA.alternativa}
                 azione={{
-                  href: "/corsi/sempre-dritto",
-                  label: "Scopri Sempre Dritto",
+                  href: "/servizi",
+                  label: "Scopri le ripetizioni",
                 }}
               />
             </div>

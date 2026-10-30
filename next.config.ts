@@ -54,26 +54,24 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/corsi/corso-estivo-matematica/:path*",
-        destination: "/corsi/sempre-dritto",
+        destination: "/corsi",
         permanent: true,
       },
-      // Corsi chiusi a settembre 2026: il Potenziamento Scolastico è stato
-      // sostituito da Sempre Dritto (stesse classi, stessi slug), l'English
-      // Speaking Club non viene più offerto.
+      // Corsi chiusi: Potenziamento Scolastico e English Speaking Club
+      // (settembre 2026), Sempre Dritto (ottobre 2026).
       {
         source: "/corsi/potenziamento-scolastico",
-        destination: "/corsi/sempre-dritto",
+        destination: "/corsi",
         permanent: true,
       },
       {
         source: "/corsi/potenziamento-scolastico/:classe",
-        destination: "/corsi/sempre-dritto",
+        destination: "/corsi",
         permanent: true,
       },
-      // Sempre Dritto non ha più una pagina per anno: l'anno si sceglie nel form
       {
-        source: "/corsi/sempre-dritto/:classe",
-        destination: "/corsi/sempre-dritto",
+        source: "/corsi/sempre-dritto/:path*",
+        destination: "/corsi",
         permanent: true,
       },
       {

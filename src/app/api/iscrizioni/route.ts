@@ -50,8 +50,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Compila tutti i campi obbligatori" }, { status: 400 });
   }
 
-  // Residenza e codice fiscale li chiede solo il form completo (Piede Giusto):
-  // Sempre Dritto raccoglie i dati minimi e il resto si prende al telefono.
+  // Residenza e codice fiscale sono facoltativi: se mancano si prendono al telefono.
   const indirizzoResidenza = clean(body.indirizzoResidenza, 300);
   const codiceFiscale = clean(body.codiceFiscale, 16).toUpperCase();
   if (codiceFiscale && !CF_REGEX.test(codiceFiscale)) {

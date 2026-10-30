@@ -12,7 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "/detrazione-lezioni", priority: 0.8, changeFrequency: "monthly" as const },
     { url: "/preparazione-test", priority: 0.8, changeFrequency: "monthly" as const },
     { url: "/corsi", priority: 0.8, changeFrequency: "monthly" as const },
-    { url: "/corsi/sempre-dritto", priority: 0.9, changeFrequency: "weekly" as const },
     // Piede Giusto è fuori stagione: pagine online ma ferme fino a giugno.
     { url: "/corsi/piede-giusto", priority: 0.7, changeFrequency: "monthly" as const },
     ...PIEDE_GIUSTO.map((c) => ({
